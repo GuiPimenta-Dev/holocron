@@ -135,9 +135,7 @@ def fetch_pages(titles: list[str], skip_cached: bool = True) -> int:
     written = 0
     for i in range(0, len(titles), BATCH):
         batch = titles[i : i + BATCH]
-        pages, redirects = _query_pages(
-            _PROP_PARAMS | {"titles": "|".join(batch), "redirects": 1}
-        )
+        pages, redirects = _query_pages(_PROP_PARAMS | {"titles": "|".join(batch), "redirects": 1})
         _save_redirects(redirects)
         written += _write_cache(pages)
         print(f"  fetched {min(i + BATCH, len(titles))}/{len(titles)} (+{written} new)")

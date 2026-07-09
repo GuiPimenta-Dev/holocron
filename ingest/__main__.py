@@ -1,11 +1,11 @@
 """Ingestion CLI.
 
-  uv run python -m ingest crawl [--cap 5000]   fetch corpus from Wookieepedia
-  uv run python -m ingest lock                 pin cache -> corpus.lock (ADR-0002)
-  uv run python -m ingest rebuild              corpus.lock -> refetch cache at pinned revids
-  uv run python -m ingest parse                cache -> entities.jsonl + chunks.jsonl
-  uv run python -m ingest graph                entities -> Neo4j
-  uv run python -m ingest embed                chunks -> LanceDB
+uv run python -m ingest crawl [--cap 5000]   fetch corpus from Wookieepedia
+uv run python -m ingest lock                 pin cache -> corpus.lock (ADR-0002)
+uv run python -m ingest rebuild              corpus.lock -> refetch cache at pinned revids
+uv run python -m ingest parse                cache -> entities.jsonl + chunks.jsonl
+uv run python -m ingest graph                entities -> Neo4j
+uv run python -m ingest embed                chunks -> LanceDB
 """
 
 from __future__ import annotations
