@@ -1,0 +1,8 @@
+# data/ = cached wikitext + LanceDB + Neo4j volume — rebuilt via ingest, never committed
+data/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
