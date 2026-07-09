@@ -67,6 +67,7 @@ def test_real_world_page_is_skipped():
 
 def test_concept_page_without_infobox_becomes_topic():
     blaster = load("Blaster")
+    assert blaster is not None
     assert blaster.type == "Topic"
     assert blaster.fields == {}
     assert len(blaster.chunks) > 3  # text still indexed for vector search
