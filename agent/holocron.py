@@ -32,6 +32,9 @@ Rules:
 - Every fact belongs to a continuity: `canon` or `legends`. When your sources
   conflict across continuities, answer per continuity ("In canon, ... In
   Legends, ...") instead of blending them.
+- Strategy: start with get_entity to locate the subject; use get_relations for
+  relational facts and path_between for multi-hop connections; use run_cypher
+  only when the typed tools cannot express the question.
 - Keep answers concise and name the entities you drew from.
 {continuity_note}"""
 
@@ -88,10 +91,9 @@ class HolocronAgent:
     ) -> AsyncIterator[dict[str, Any]]:
         citations: list[dict[str, Any]] = []
 
-        # Per-request tool closure: applies the continuity filter and collects
+        # Per-request tool closures: apply the continuity filter and collect
         # citations without any shared mutable state between requests.
-        def get_entity(name: str) -> list[dict[str, Any]]:
-            results = tools.get_entity(name)
+        def cite(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if continuity:
                 results = [r for r in results if r["continuity"] == continuity]
             citations.extend(
@@ -100,8 +102,22 @@ class HolocronAgent:
             )
             return results
 
-        get_entity.__doc__ = tools.get_entity.__doc__  # the LLM routes by this docstring
-        graph = self._build_graph([lc_tool(get_entity)])
+        def get_entity(name: str) -> list[dict[str, Any]]:
+            return cite(tools.get_entity(name))
+
+        def get_relations(name: str) -> list[dict[str, Any]]:
+            return cite(tools.get_relations(name))
+
+        def path_between(a: str, b: str, max_hops: int = 4) -> list[dict[str, Any]]:
+            return tools.path_between(a, b, max_hops)
+
+        def run_cypher(query: str) -> list[dict[str, Any]] | dict[str, str]:
+            return tools.run_cypher(query)
+
+        wrappers = [get_entity, get_relations, path_between, run_cypher]
+        for w in wrappers:
+            w.__doc__ = getattr(tools, w.__name__).__doc__  # the LLM routes by these docstrings
+        graph = self._build_graph([lc_tool(w) for w in wrappers])
 
         note = f"- The user restricted this question to {continuity} only." if continuity else ""
         inputs = {

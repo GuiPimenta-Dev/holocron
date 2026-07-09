@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from ingest.graph import _edge_name, _resolve
+from ingest.graph import _edge_name, _resolve, _target_ok
 from ingest.parse import parse_page
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -78,6 +78,15 @@ def test_edge_names():
     assert _edge_name("birth") is None  # property, not relation
     assert _edge_name("some weird-field") == "SOME_WEIRD_FIELD"
     assert _edge_name("commanders1") == "COMMANDERS"  # battle infoboxes number these
+
+
+def test_edge_target_compatibility_matrix():
+    assert _target_ok("TRAINED_BY", "Character")
+    assert not _target_ok("TRAINED_BY", "Titleorposition")  # "Jedi Master" is not a person
+    assert not _target_ok("MEMBER_OF", "Character")  # affiliation naming a person is junk
+    assert _target_ok("MEMBER_OF", "Organization")
+    assert not _target_ok("LED_BY", "Year")  # dates link Year pages
+    assert _target_ok("RELATED", "Year")  # uncurated tail stays untouched (decision #28)
 
 
 def test_resolve_prefers_same_continuity():
