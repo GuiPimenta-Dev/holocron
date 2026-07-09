@@ -59,6 +59,12 @@ def cached_revids(raw_dir: Path = RAW_DIR) -> dict[str, int | None]:
     return out
 
 
+def build_lock(revids: dict[str, int | None]) -> str:
+    """Serialize (title, revid) pairs into the canonical corpus.lock text."""
+    lock = {t: r for t, r in sorted(revids.items()) if r is not None}
+    return json.dumps(lock, indent=1, sort_keys=True) + "\n"
+
+
 def load_redirects() -> dict[str, str]:
     if REDIRECTS_FILE.exists():
         return json.loads(REDIRECTS_FILE.read_text())

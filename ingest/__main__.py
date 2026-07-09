@@ -70,9 +70,8 @@ def cmd_lock() -> None:
     dropped = sorted(t for t, r in revids.items() if r is None)
     for t in dropped:
         print(f"  WARNING: no revid for {t!r} (page moved or deleted) — left out of the lock")
-    lock = {t: r for t, r in sorted(revids.items()) if r is not None}
-    LOCK_FILE.write_text(json.dumps(lock, indent=1, sort_keys=True) + "\n")
-    print(f"{LOCK_FILE}: {len(lock)} pages pinned")
+    LOCK_FILE.write_text(wiki.build_lock(revids))
+    print(f"{LOCK_FILE}: {len(revids) - len(dropped)} pages pinned")
 
 
 def cmd_rebuild() -> None:

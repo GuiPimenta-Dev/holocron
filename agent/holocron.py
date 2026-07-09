@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from collections.abc import AsyncIterator
 from typing import Any
 
@@ -71,6 +72,11 @@ class HolocronAgent:
             from langfuse.langchain import CallbackHandler
 
             self._callbacks = [CallbackHandler()]
+        else:
+            # "No trace, no merge" — degrade loudly, not silently.
+            print(
+                "WARNING: LANGFUSE_* keys not set; agent runs will NOT be traced", file=sys.stderr
+            )
 
     def _build_graph(self, question_tools: list[Any]) -> Any:
         llm = self._llm.bind_tools(question_tools)
@@ -91,9 +97,10 @@ class HolocronAgent:
     ) -> AsyncIterator[dict[str, Any]]:
         citations: list[dict[str, Any]] = []
 
-        # Per-request tool closures: apply the continuity filter and collect
-        # citations without any shared mutable state between requests.
-        def cite(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        # Per-request tool closures: filter by continuity and collect citations
+        # without shared mutable state between requests. path_between/run_cypher
+        # bind directly; their citation story is the #7 synthesis slice.
+        def filter_and_cite(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if continuity:
                 results = [r for r in results if r["continuity"] == continuity]
             citations.extend(
@@ -103,23 +110,24 @@ class HolocronAgent:
             return results
 
         def get_entity(name: str) -> list[dict[str, Any]]:
-            return cite(tools.get_entity(name))
+            return filter_and_cite(tools.get_entity(name))
 
         def get_relations(name: str) -> list[dict[str, Any]]:
-            return cite(tools.get_relations(name))
+            return filter_and_cite(tools.get_relations(name))
 
-        def path_between(a: str, b: str, max_hops: int = 4) -> list[dict[str, Any]]:
-            return tools.path_between(a, b, max_hops)
-
-        def run_cypher(query: str) -> list[dict[str, Any]] | dict[str, str]:
-            return tools.run_cypher(query)
-
-        wrappers = [get_entity, get_relations, path_between, run_cypher]
-        for w in wrappers:
+        for w in (get_entity, get_relations):
             w.__doc__ = getattr(tools, w.__name__).__doc__  # the LLM routes by these docstrings
-        graph = self._build_graph([lc_tool(w) for w in wrappers])
+        graph = self._build_graph(
+            [lc_tool(f) for f in (get_entity, get_relations, tools.path_between, tools.run_cypher)]
+        )
 
-        note = f"- The user restricted this question to {continuity} only." if continuity else ""
+        note = (
+            f"- The user restricted this question to {continuity} only: answer solely "
+            f"from {continuity} sources and discard results from the other continuity, "
+            f"including anything surfaced by path_between or run_cypher."
+            if continuity
+            else ""
+        )
         inputs = {
             "messages": [
                 ("system", SYSTEM_PROMPT.format(continuity_note=note)),

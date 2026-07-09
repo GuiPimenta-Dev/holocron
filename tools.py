@@ -19,6 +19,11 @@ _driver: Driver | None = None
 CORE_KEYS = ("title", "name", "type", "continuity")
 
 
+def _name_match(var: str, param: str) -> str:
+    """Cypher fragment: case-insensitive match on an entity's name or exact title."""
+    return f"(toLower({var}.name) = toLower(${param}) OR toLower({var}.title) = toLower(${param}))"
+
+
 def _get_driver() -> Driver:
     global _driver
     if _driver is None:
@@ -52,9 +57,10 @@ def get_entity(name: str) -> list[dict[str, Any]]:
     """
     with _get_driver().session() as session:
         records = session.run(
-            "MATCH (e:Entity) "
-            "WHERE toLower(e.name) = toLower($q) OR toLower(e.title) = toLower($q) "
-            "RETURN e ORDER BY e.continuity",
+            cast(
+                LiteralString,
+                f"MATCH (e:Entity) WHERE {_name_match('e', 'q')} RETURN e ORDER BY e.continuity",
+            ),
             q=name,
         )
         return [_entity_dict(r["e"]) for r in records]
@@ -122,10 +128,9 @@ def path_between(a: str, b: str, max_hops: int = 4) -> list[dict[str, Any]]:
     with _get_driver().session() as session:
         records = session.run(
             cast(
-                LiteralString,  # safe: hops is a clamped int, the only interpolation
+                LiteralString,  # safe: hops is a clamped int; fragments are static
                 f"MATCH (a:Entity), (b:Entity) "
-                f"WHERE (toLower(a.name) = toLower($a) OR toLower(a.title) = toLower($a)) "
-                f"AND (toLower(b.name) = toLower($b) OR toLower(b.title) = toLower($b)) "
+                f"WHERE {_name_match('a', 'a')} AND {_name_match('b', 'b')} "
                 f"MATCH p = allShortestPaths((a)-[*..{hops}]-(b)) "
                 f"RETURN p LIMIT 5",
             ),

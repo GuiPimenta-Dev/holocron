@@ -21,7 +21,7 @@ A tool is the agent's API. It never lands without a test and eval coverage.
 3. **Test it**: pytest in `tests/` with real fixtures (actual graph data /
    saved wikitext), covering the happy path and the not-found case. Empty
    results return empty structures, never raise.
-4. **Register** in `agent.py`. Check the system prompt: does it enumerate tools
+4. **Register** in `agent/holocron.py`. Check the system prompt: does it enumerate tools
    or describe strategy? Update if the new tool changes when the agent should
    pick graph vs vector.
 5. **Cover in eval**: add at least one golden-set question that is best answered
