@@ -14,21 +14,56 @@ from mwparserfromhell.wikicode import Wikicode
 
 # Templates that look like infoboxes (many named params) but aren't.
 NON_INFOBOX = {
-    "top", "otheruses", "youmay", "multipleissues", "quote", "dialogue",
-    "redirect", "about", "correct title", "shortstory", "update", "more",
-    "expand", "image", "citation", "cite", "eras", "title", "conjecture",
-    "disambig", "nocanon", "noncanon", "interlang", "cn", "storycite", "legoweb",
+    "top",
+    "otheruses",
+    "youmay",
+    "multipleissues",
+    "quote",
+    "dialogue",
+    "redirect",
+    "about",
+    "correct title",
+    "shortstory",
+    "update",
+    "more",
+    "expand",
+    "image",
+    "citation",
+    "cite",
+    "eras",
+    "title",
+    "conjecture",
+    "disambig",
+    "nocanon",
+    "noncanon",
+    "interlang",
+    "cn",
+    "storycite",
+    "legoweb",
 }
 
 # Infobox params that are page furniture, never lore.
 SKIP_PARAMS = {
-    "image", "image2", "image3", "imagesize", "caption", "option1", "option2",
-    "option3", "name", "hide",
+    "image",
+    "image2",
+    "image3",
+    "imagesize",
+    "caption",
+    "option1",
+    "option2",
+    "option3",
+    "name",
+    "hide",
 }
 
 SKIP_SECTIONS = {
-    "appearances", "sources", "notes and references", "external links",
-    "non-canon appearances", "real-world similarities", "bibliography",
+    "appearances",
+    "sources",
+    "notes and references",
+    "external links",
+    "non-canon appearances",
+    "real-world similarities",
+    "bibliography",
 }
 
 CHUNK_MAX = 1500

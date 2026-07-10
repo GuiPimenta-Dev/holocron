@@ -1,9 +1,11 @@
 """Ingestion CLI.
 
-  uv run python -m ingest crawl [--cap 5000]   fetch corpus from Wookieepedia
-  uv run python -m ingest parse                cache -> entities.jsonl + chunks.jsonl
-  uv run python -m ingest graph                entities -> Neo4j
-  uv run python -m ingest embed                chunks -> LanceDB
+uv run python -m ingest crawl [--cap 5000]   fetch corpus from Wookieepedia
+uv run python -m ingest lock                 pin cache -> corpus.lock (ADR-0002)
+uv run python -m ingest rebuild              corpus.lock -> refetch cache at pinned revids
+uv run python -m ingest parse                cache -> entities.jsonl + chunks.jsonl
+uv run python -m ingest graph                entities -> Neo4j
+uv run python -m ingest embed                chunks -> LanceDB
 """
 
 from __future__ import annotations
@@ -35,6 +37,7 @@ SEEDS = [
 
 ENTITIES_FILE = Path("data/entities.jsonl")
 CHUNKS_FILE = Path("data/chunks.jsonl")
+LOCK_FILE = Path("corpus.lock")
 
 
 def cmd_crawl(cap: int) -> None:
@@ -55,6 +58,29 @@ def cmd_crawl(cap: int) -> None:
     print(f"probing {len(legends)} /Legends variants")
     wiki.fetch_pages(legends)
     print(f"cache now has {len(wiki.cached_titles())} pages")
+
+
+def cmd_lock() -> None:
+    """Pin every cached page to its revid and write corpus.lock (ADR-0002)."""
+    missing = sorted(t for t, r in wiki.cached_revids().items() if r is None)
+    if missing:
+        print(f"refetching {len(missing)} pages cached before revid tracking")
+        wiki.fetch_pages(missing, skip_cached=False)
+    revids = wiki.cached_revids()
+    dropped = sorted(t for t, r in revids.items() if r is None)
+    for t in dropped:
+        print(f"  WARNING: no revid for {t!r} (page moved or deleted) — left out of the lock")
+    LOCK_FILE.write_text(wiki.build_lock(revids))
+    print(f"{LOCK_FILE}: {len(revids) - len(dropped)} pages pinned")
+
+
+def cmd_rebuild() -> None:
+    """Refetch the raw cache at the exact revids pinned in corpus.lock."""
+    lock: dict[str, int] = json.loads(LOCK_FILE.read_text())
+    have = wiki.cached_revids()
+    todo = sorted(r for t, r in lock.items() if have.get(t) != r)
+    print(f"rebuilding {len(todo)}/{len(lock)} pages from {LOCK_FILE}")
+    wiki.fetch_by_revids(todo)
 
 
 def _load_entities() -> list[parse_mod.Entity]:
@@ -120,14 +146,19 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     crawl = sub.add_parser("crawl")
     crawl.add_argument("--cap", type=int, default=5000)
-    sub.add_parser("parse")
-    sub.add_parser("graph")
-    sub.add_parser("embed")
+    for name in ("lock", "rebuild", "parse", "graph", "embed"):
+        sub.add_parser(name)
     args = ap.parse_args()
     if args.cmd == "crawl":
         cmd_crawl(args.cap)
     else:
-        {"parse": cmd_parse, "graph": cmd_graph, "embed": cmd_embed}[args.cmd]()
+        {
+            "lock": cmd_lock,
+            "rebuild": cmd_rebuild,
+            "parse": cmd_parse,
+            "graph": cmd_graph,
+            "embed": cmd_embed,
+        }[args.cmd]()
 
 
 if __name__ == "__main__":

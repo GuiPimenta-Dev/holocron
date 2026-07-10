@@ -35,18 +35,65 @@ FIELD_TO_EDGE = {
 # Fields that are properties of the entity, not relations — even if they
 # happen to contain wikilinks (dates link to year pages, etc.).
 PROP_FIELDS = {
-    "birth", "death", "gender", "pronouns", "height", "mass", "hair", "eyes",
-    "skin", "cyber", "era", "type", "class", "length", "width", "population",
-    "language", "currency", "atmosphere", "climate", "terrain", "gravity",
-    "diameter", "rotation", "orbit", "moons", "suns", "grid",
+    "birth",
+    "death",
+    "gender",
+    "pronouns",
+    "height",
+    "mass",
+    "hair",
+    "eyes",
+    "skin",
+    "cyber",
+    "era",
+    "type",
+    "class",
+    "length",
+    "width",
+    "population",
+    "language",
+    "currency",
+    "atmosphere",
+    "climate",
+    "terrain",
+    "gravity",
+    "diameter",
+    "rotation",
+    "orbit",
+    "moons",
+    "suns",
+    "grid",
 }
 
 SAFE_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
-# Edges that only make sense pointing at a person (infoboxes also list
-# titles like "Jedi Master" in the masters field).
-CHARACTER_ONLY_EDGES = {"TRAINED_BY", "TRAINED"}
+# Target-type compatibility matrix (decision #28) — CURATED edges only; the
+# uncurated tail is pruned only with eval evidence, never for aesthetics.
+# ONLY: the edge may point at these types exclusively (infobox `masters`
+# fields also list titles like "Jedi Master"). NEVER: known-junk targets
+# (dates link Year pages, affiliation sometimes names a person).
+EDGE_TARGET_ONLY = {
+    "TRAINED_BY": {"Character"},
+    "TRAINED": {"Character"},
+    "HOMEWORLD": {"Celestialbody"},
+    "IN_REGION": {"Region"},
+    "IN_SECTOR": {"Sector"},
+    "IN_SYSTEM": {"System"},
+}
+EDGE_TARGET_NEVER = {
+    "MEMBER_OF": {"Character"},
+    "LED_BY": {"Year", "War"},
+    "HAS_CAPITAL": {"Year", "Successionbox"},
+    "HEADQUARTERED_IN": {"Year"},
+    "SPECIES": {"Device", "Organization", "Celestialbody"},
+}
+
+
+def _target_ok(rel: str, target_type: str) -> bool:
+    if rel in EDGE_TARGET_ONLY and target_type not in EDGE_TARGET_ONLY[rel]:
+        return False
+    return target_type not in EDGE_TARGET_NEVER.get(rel, ())
 
 
 def _edge_name(fieldname: str) -> str | None:
@@ -85,9 +132,7 @@ def load(entities: list[Entity], redirects: dict[str, str]) -> dict[str, int]:
             "name": e.name,
             "type": e.type,
             "continuity": e.continuity,
-            "props": {
-                k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]
-            },
+            "props": {k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]},
         }
         for e in entities
     ]
@@ -102,18 +147,21 @@ def load(entities: list[Entity], redirects: dict[str, str]) -> dict[str, int]:
                 target = _resolve(link, e.continuity, corpus, redirects)
                 if target is None or target == e.title:
                     continue
-                if rel in CHARACTER_ONLY_EDGES and types[target] != "Character":
+                if not _target_ok(rel, types[target]):
                     continue
                 edges.setdefault(rel, []).append({"src": e.title, "dst": target})
 
     with driver() as drv, drv.session() as session:
         session.run("MATCH (n) DETACH DELETE n")  # load() rebuilds from scratch
-        session.run("CREATE CONSTRAINT entity_title IF NOT EXISTS "
-                    "FOR (e:Entity) REQUIRE e.title IS UNIQUE")
         session.run(
+            "CREATE CONSTRAINT entity_title IF NOT EXISTS FOR (e:Entity) REQUIRE e.title IS UNIQUE"
+        )
+        session.run(
+            # props first, core fields last: infobox fields like "type"
+            # ("Jedi", "Terrestrial") must not shadow the entity type.
             "UNWIND $nodes AS n "
             "MERGE (e:Entity {title: n.title}) "
-            "SET e.name = n.name, e.type = n.type, e.continuity = n.continuity, e += n.props",
+            "SET e += n.props, e.name = n.name, e.type = n.type, e.continuity = n.continuity",
             nodes=nodes,
         )
         # Second pass: type-specific labels (dynamic labels need per-type queries).
