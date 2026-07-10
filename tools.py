@@ -11,6 +11,7 @@ import os
 import re
 from typing import Any, LiteralString, cast
 
+import httpx
 from neo4j import READ_ACCESS, Driver, GraphDatabase
 from neo4j.exceptions import Neo4jError
 
@@ -153,6 +154,57 @@ def path_between(a: str, b: str, max_hops: int = 4) -> list[dict[str, Any]]:
                 }
             )
     return paths
+
+
+LANCEDB_DIR = "data/lancedb"
+CHUNKS_TABLE = "chunks"
+
+
+def _embed_query(text: str) -> list[float]:
+    # Mirrors ingest/embed.py's provider choice; duplicated because the
+    # serving side never imports ingest/ (CLAUDE.md boundary rule).
+    if os.environ.get("OPENAI_API_KEY"):
+        url = "https://api.openai.com/v1/embeddings"
+        key, model = os.environ["OPENAI_API_KEY"], "text-embedding-3-small"
+    elif os.environ.get("VOYAGE_API_KEY"):
+        url = "https://api.voyageai.com/v1/embeddings"
+        key, model = os.environ["VOYAGE_API_KEY"], "voyage-3-lite"
+    else:
+        raise RuntimeError("no OPENAI_API_KEY or VOYAGE_API_KEY set — see .env.example")
+    r = httpx.post(
+        url,
+        headers={"Authorization": f"Bearer {key}"},
+        json={"model": model, "input": [text]},
+        timeout=30,
+    )
+    r.raise_for_status()
+    return r.json()["data"][0]["embedding"]
+
+
+def search_chunks(query: str, continuity: str | None = None, k: int = 8) -> list[dict[str, Any]]:
+    """Semantic search over the wiki's prose, returning the best-matching text chunks.
+
+    Use this for descriptive or narrative questions ("describe Order 66",
+    "what happened at the Battle of Endor?") and whenever the graph tools
+    can't answer — the graph only holds infobox facts, the chunks hold the
+    full article text. Each result carries the source entity `title`, the
+    article `section`, its `continuity` (canon | legends) and the `text`.
+    Optionally restrict to one continuity. Returns at most `k` chunks.
+
+    Example: search_chunks("execution of Order 66", continuity="canon") ->
+    [{"title": "Order 66", "section": "Introduction", "continuity": "canon",
+    "text": "Order 66, also known as..."}, ...]
+    """
+    import lancedb  # deferred: only tool that needs it, and it's slow to import
+
+    table = lancedb.connect(LANCEDB_DIR).open_table(CHUNKS_TABLE)
+    search = table.search(_embed_query(query)).limit(max(1, min(int(k), 20)))
+    if continuity in ("canon", "legends"):  # LLM-controlled arg: junk never reaches the filter
+        search = search.where(f"continuity = '{continuity}'", prefilter=True)
+    return [
+        {key: row[key] for key in ("title", "name", "section", "continuity", "text")}
+        for row in search.to_list()
+    ]
 
 
 _WRITE_KEYWORDS = re.compile(

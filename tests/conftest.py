@@ -6,9 +6,13 @@ so we seed it from the saved wikitext fixtures. Never wipes a non-empty graph.
 """
 
 import json
+import os
 from pathlib import Path
 
 import pytest
+from dotenv import load_dotenv
+
+load_dotenv()  # local runs pick up Neo4j creds + embedding keys; CI has neither
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -41,3 +45,12 @@ def graph():
     except (ServiceUnavailable, OSError):
         pytest.skip("Neo4j not reachable — start it with `docker compose up -d neo4j`")
     yield
+
+
+@pytest.fixture(scope="session")
+def vector_index():
+    """Skips unless the real LanceDB index and an embedding key are available."""
+    if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("VOYAGE_API_KEY")):
+        pytest.skip("no embedding API key — search_chunks embeds the query")
+    if not Path("data/lancedb/chunks.lance").exists():
+        pytest.skip("LanceDB index not built — run `uv run python -m ingest embed`")

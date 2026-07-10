@@ -34,8 +34,9 @@ Rules:
   conflict across continuities, answer per continuity ("In canon, ... In
   Legends, ...") instead of blending them.
 - Strategy: start with get_entity to locate the subject; use get_relations for
-  relational facts and path_between for multi-hop connections; use run_cypher
-  only when the typed tools cannot express the question.
+  relational facts and path_between for multi-hop connections; use
+  search_chunks for descriptive/narrative questions answered by article prose;
+  use run_cypher only when the typed tools cannot express the question.
 - Keep answers concise and name the entities you drew from.
 {continuity_note}"""
 
@@ -70,8 +71,10 @@ class HolocronAgent:
         # langchain-anthropic 1.4.x drops the thinking field when echoing the
         # assistant turn back after a tool round-trip (API 400). Re-enable once
         # the serialization bug is fixed upstream.
-        self._llm = ChatAnthropic(  # pyright: ignore[reportCallIssue]
-            model=model, max_tokens=1024, thinking={"type": "disabled"}
+        self._llm = ChatAnthropic(
+            model=model,  # pyright: ignore[reportCallIssue]
+            max_tokens=1024,  # pyright: ignore[reportCallIssue]
+            thinking={"type": "disabled"},
         )
         self._callbacks: list[Any] = []
         if os.environ.get("LANGFUSE_PUBLIC_KEY"):
@@ -111,6 +114,7 @@ class HolocronAgent:
                 results = [r for r in results if r["continuity"] == continuity]
             citations.extend(
                 {"title": r["title"], "name": r["name"], "continuity": r["continuity"]}
+                | ({"section": r["section"]} if "section" in r else {})
                 for r in results
             )
             return results
@@ -121,10 +125,25 @@ class HolocronAgent:
         def get_relations(name: str) -> list[dict[str, Any]]:
             return filter_and_cite(tools.get_relations(name))
 
-        for w in (get_entity, get_relations):
+        user_continuity = continuity
+
+        def search_chunks(query: str, continuity: str | None = None, k: int = 8):
+            # a user-pinned continuity overrides whatever the LLM passes
+            return filter_and_cite(tools.search_chunks(query, user_continuity or continuity, k))
+
+        for w in (get_entity, get_relations, search_chunks):
             w.__doc__ = getattr(tools, w.__name__).__doc__  # the LLM routes by these docstrings
         graph = self._build_graph(
-            [lc_tool(f) for f in (get_entity, get_relations, tools.path_between, tools.run_cypher)]
+            [
+                lc_tool(f)
+                for f in (
+                    get_entity,
+                    get_relations,
+                    search_chunks,
+                    tools.path_between,
+                    tools.run_cypher,
+                )
+            ]
         )
 
         note = (
