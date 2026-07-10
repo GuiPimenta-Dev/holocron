@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly lists the Galactic Empire and Alliance to Restore the Republic across both continuities without blending them, and omitting the Legends-only New Republic is not a fault since unmentioned facts are presumed corpus-grounded.",
+  "judge_model": "claude-opus-4-8"
+}

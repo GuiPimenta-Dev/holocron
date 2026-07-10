@@ -1,0 +1,51 @@
+{
+  "id": "multi-hop-boba-fett-donor-species",
+  "category": "multi-hop",
+  "question": "What species was the genetic donor Boba Fett was cloned from?",
+  "answer": "Boba Fett was cloned from **Jango Fett**, a Human bounty hunter. This holds true in both continuities:\n\n- **Canon**: Jango Fett, a human bounty hunter, was recruited by Darth Tyranus (Count Dooku) to serve as the genetic template for the Grand Army of the Republic. As part of his payment, Jango requested an unaltered clone of himself, grown without the acceleration and behavioral modifications given to the standard clone troopers. That clone was raised by Jango as his son and named Boba Fett.\n\n- **Legends**: Likewise, Jango Fett was the genetic template used by the Kaminoans, and he requested an unmodified clone of himself, which he named Boba Fett and raised as his son and heir. (Notably, in a later Legends twist, it's revealed that some subsequent clones Boba Fett made were secretly derived from Boba's own DNA rather than Jango's, at the direction of Darth Vader — but Boba Fett himself was cloned from Jango Fett.)\n\nSo in both canon and Legends, the genetic donor's species was **Human**, specifically the bounty hunter Jango Fett.",
+  "citations": [
+    {
+      "title": "Cloning",
+      "name": "Cloning",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Cloning/Legends",
+      "name": "Cloning",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Jango Fett",
+      "name": "Jango Fett",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Clone trooper",
+      "name": "Clone trooper",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Clone template",
+      "name": "Clone template",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jango Fett/Legends",
+      "name": "Jango Fett",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "01d1f3ccd228369c44eb04d71bf8e04b"
+}

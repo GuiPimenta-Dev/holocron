@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Luke Skywalker as the Jedi Master trainer, Tatooine as his homeworld) and correctly connects the chain by excluding Snoke and Sidious as non-Jedi-Master trainers.",
+  "judge_model": "claude-opus-4-8"
+}

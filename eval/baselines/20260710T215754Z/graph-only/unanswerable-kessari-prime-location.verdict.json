@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no corpus entry exists for Kessari Prime and declines to name a sector, asserting no lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

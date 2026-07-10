@@ -1,0 +1,45 @@
+{
+  "id": "single-hop-chewbacca-homeworld",
+  "category": "single-hop",
+  "question": "What is Chewbacca's homeworld?",
+  "answer": "Chewbacca's homeworld is **Kashyyyk** — the wroshyr tree-covered forest planet that serves as the Wookiees' homeworld — in both continuities:\n\n- **Canon**: Kashyyyk is described as \"the homeworld of the Wookiee species,\" located in the southwestern quadrant of the galaxy. Chewbacca lived there, fought in the Battle of Kashyyyk during the Clone Wars, and later settled there with his family.\n- **Legends**: Kashyyyk (also known as Wookiee Planet C, Edean, or G5-623) is likewise recorded as \"the lush, wroshyr tree-filled homeworld of the Wookiees,\" where Chewbacca fought in the Battle of Kashyyyk at Kachirho.",
+  "citations": [
+    {
+      "title": "Kashyyyk",
+      "name": "Kashyyyk",
+      "continuity": "canon",
+      "section": "Behind the scenes"
+    },
+    {
+      "title": "New Republic",
+      "name": "New Republic",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Kashyyyk/Legends",
+      "name": "Kashyyyk",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Chewbacca",
+      "name": "Chewbacca",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Battle of Kashyyyk/Legends",
+      "name": "Battle of Kashyyyk",
+      "continuity": "legends",
+      "section": "The battle"
+    },
+    {
+      "title": "Chewbacca/Legends",
+      "name": "Chewbacca",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "b3053e2df6e8d318cd3daf18c1c4a484"
+}

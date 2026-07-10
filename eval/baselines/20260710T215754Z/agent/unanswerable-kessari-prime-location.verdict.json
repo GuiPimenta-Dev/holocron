@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating it has no record of Kessari Prime and declining to name a sector, asserting no lore facts about the fabricated subject.",
+  "judge_model": "claude-opus-4-8"
+}

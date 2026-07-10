@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-luke-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Luke Skywalker?",
+  "answer": "In canon, Luke Skywalker was trained primarily by two Jedi Masters:\n\n- **Obi-Wan Kenobi** — Luke's first teacher, who began his instruction in lightsaber basics and the ways of the Force on the journey to Alderaan, and later guided him (even after death, as a Force spirit) toward Yoda.\n- **Yoda** — the Grand Master on Dagobah who completed Luke's formal Jedi training, though he considered Luke's final trial to be confronting Darth Vader.\n\nLuke also received supplementary combat experience from figures like the \"Gamemaster\" (a servant of Grakkus the Hutt), though this was informal lightsaber practice rather than true Jedi training.\n\nLater, as an adult, Luke largely trained himself further while trying to rebuild the Jedi Order, before going on to train his own students — including his sister **Leia Organa** and his nephew **Ben Solo** — but that reflects Luke as teacher, not student.",
+  "citations": [
+    {
+      "title": "Ki-Adi-Mundi/Legends",
+      "name": "Ki-Adi-Mundi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi training",
+      "name": "Jedi training",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Dagobah",
+      "name": "Dagobah",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi Order",
+      "name": "Jedi Order",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "7b7d696ee871c7a29120e76f3cc7fcbf"
+}

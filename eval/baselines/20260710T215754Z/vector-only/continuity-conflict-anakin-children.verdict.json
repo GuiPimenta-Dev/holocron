@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly identifies Luke and Leia as canon children, matching expected facts, and does not blend continuities in a way that contradicts the expected behavior for canon.",
+  "judge_model": "claude-opus-4-8"
+}

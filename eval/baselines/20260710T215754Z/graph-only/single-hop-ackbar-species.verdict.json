@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Mon Calamari) and correctly notes it holds in both continuities, with citations to both the canon and Legends pages.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The expected chain is Rey -> father Dathan -> Human, but the answer fabricates an unstated 'Strand-Cast'/clone-of-Sidious link not among the expected facts and not covered by the cited titles, injecting an incorrect chain even though the final species (Human) is right.",
+  "judge_model": "claude-opus-4-8"
+}

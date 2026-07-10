@@ -1,0 +1,24 @@
+{
+  "id": "multi-hop-ben-solo-jedi-trainer-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of the Jedi Master who trained Ben Solo?",
+  "answer": "Ben Solo's Jedi training came from Luke Skywalker (his other trainers, Snoke and Darth Sidious, were not Jedi Masters).In canon, Ben Solo was trained as a Jedi by Luke Skywalker, whose homeworld is **Tatooine**.",
+  "citations": [
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "b526e8cfb7d57d0b1c88efd160a2edf6"
+}

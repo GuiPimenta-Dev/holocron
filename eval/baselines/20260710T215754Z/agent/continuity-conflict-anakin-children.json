@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-anakin-children",
+  "category": "continuity-conflict",
+  "question": "Who are Anakin Skywalker's children?",
+  "answer": "In canon, Anakin Skywalker's children are **Luke Skywalker** and **Leia Skywalker Organa Solo**, born to him and Padmé Amidala Naberrie.\n\nIn Legends, the corpus records only **Luke Skywalker** as his listed child in this relation (Leia is not listed under the CHILDREN relation for Anakin in the Legends records).",
+  "citations": [
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "fbb802e4fcc596d4cde26aaa47ddba1e"
+}

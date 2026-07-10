@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly attributes Obi-Wan and Qui-Gon to both continuities without blending them, and omitting Ki-Adi-Mundi is not a fault under the rubric.",
+  "judge_model": "claude-opus-4-8"
+}

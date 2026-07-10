@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Bail Organa, Alderaan) and makes the full chain explicit\u2014Leia \u2192 adoptive father Bail Organa \u2192 homeworld Alderaan\u2014grounded in the cited Bail Organa titles.",
+  "judge_model": "claude-opus-4-8"
+}

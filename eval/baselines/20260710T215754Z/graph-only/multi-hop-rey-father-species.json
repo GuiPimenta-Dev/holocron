@@ -1,0 +1,19 @@
+{
+  "id": "multi-hop-rey-father-species",
+  "category": "multi-hop",
+  "question": "What species was Rey's father?",
+  "answer": "Rey's father is Dathan.In canon, Rey's father was Dathan, and per the corpus his species was **Human**.",
+  "citations": [
+    {
+      "title": "Rey Skywalker",
+      "name": "Rey Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dathan",
+      "name": "Dathan",
+      "continuity": "canon"
+    }
+  ],
+  "trace_id": "329eb11642e44edb2354e252dad55242"
+}

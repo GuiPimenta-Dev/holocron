@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-ackbar-species",
+  "category": "single-hop",
+  "question": "What species is Admiral Gial Ackbar?",
+  "answer": "The infobox doesn't list species directly, so let me check his relations to confirm.Admiral Gial Ackbar is a **Mon Calamari**, in both continuities — canon and Legends alike.",
+  "citations": [
+    {
+      "title": "Gial Ackbar",
+      "name": "Gial Ackbar",
+      "continuity": "canon"
+    },
+    {
+      "title": "Gial Ackbar/Legends",
+      "name": "Gial Ackbar",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "cde599962a174d89f8c9e4d9993c5010"
+}

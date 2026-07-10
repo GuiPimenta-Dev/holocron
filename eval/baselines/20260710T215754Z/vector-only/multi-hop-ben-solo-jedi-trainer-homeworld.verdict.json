@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Luke Skywalker as the Jedi Master trainer, Tatooine as his homeworld) and connects the multi-hop chain explicitly, with the extra Leia/Alderaan detail being grounded and non-contradictory.",
+  "judge_model": "claude-opus-4-8"
+}

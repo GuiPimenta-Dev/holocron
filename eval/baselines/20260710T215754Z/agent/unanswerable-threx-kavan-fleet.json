@@ -1,0 +1,51 @@
+{
+  "id": "unanswerable-threx-kavan-fleet",
+  "category": "unanswerable",
+  "question": "Which fleet did Admiral Threx Kavan command?",
+  "answer": "I found no record of an \"Admiral Threx Kavan\" in the corpus. This name doesn't appear in any entity lookups or search results — the Star Wars entities I found (fleets, admirals, vice admirals, etc.) are unrelated to this figure.\n\nI don't have any information on Admiral Threx Kavan in the corpus, so I can't say what fleet they commanded.",
+  "citations": [
+    {
+      "title": "Death Squadron/Legends",
+      "name": "Death Squadron",
+      "continuity": "legends",
+      "section": "Known officers"
+    },
+    {
+      "title": "Vice Admiral",
+      "name": "Vice Admiral",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Plo Koon/Legends",
+      "name": "Plo Koon",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Galactic Empire",
+      "name": "Galactic Empire",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi General/Legends",
+      "name": "Jedi General",
+      "continuity": "legends",
+      "section": "Jedi Generals during the Mandalorian Wars"
+    },
+    {
+      "title": "Secret mission to Tatooine",
+      "name": "Secret mission to Tatooine",
+      "continuity": "canon",
+      "section": "The battle"
+    },
+    {
+      "title": "Starfighter combat/Legends",
+      "name": "Starfighter combat",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "bff9dd297aafcec7b8fe32e6bf0da65d"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates the continuities, listing Coruscant for canon and both Coruscant and the DS-1 Orbital Battle Station for Legends, matching the expected behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

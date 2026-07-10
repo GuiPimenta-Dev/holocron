@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Rey's father as Dathan and states his species was Human, making the Rey -> Dathan -> Human chain explicit and grounded in the cited pages.",
+  "judge_model": "claude-opus-4-8"
+}

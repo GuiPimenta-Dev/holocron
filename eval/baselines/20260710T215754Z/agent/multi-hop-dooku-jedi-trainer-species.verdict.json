@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts and makes the multi-hop chain explicit: Dooku was trained by Yoda, whose species is recorded as 'Yoda's species' in both continuities.",
+  "judge_model": "claude-opus-4-8"
+}

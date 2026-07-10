@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Aayla Secura is a Twi'lek and cites appropriate pages covering the subject.",
+  "judge_model": "claude-opus-4-8"
+}

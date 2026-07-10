@@ -1,0 +1,33 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "Greedo is a **Rodian** — in both canon and Legends, he's a male Rodian bounty hunter from the planet Rodia who grew up in Mos Espa on Tatooine.",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Rodian",
+      "name": "Rodian",
+      "continuity": "canon",
+      "section": "Rodians in the galaxy"
+    },
+    {
+      "title": "Rodian/Legends",
+      "name": "Rodian",
+      "continuity": "legends",
+      "section": "Biology and appearance"
+    }
+  ],
+  "trace_id": "f4530457410f18642f9a95fda08f8bce"
+}

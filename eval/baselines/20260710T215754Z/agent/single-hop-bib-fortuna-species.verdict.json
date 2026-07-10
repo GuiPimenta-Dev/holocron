@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Bib Fortuna is a Twi'lek, matching the expected fact, with citations to the relevant canon and Legends pages.",
+  "judge_model": "claude-opus-4-8"
+}

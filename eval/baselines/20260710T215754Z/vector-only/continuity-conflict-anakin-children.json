@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-anakin-children",
+  "category": "continuity-conflict",
+  "question": "Who are Anakin Skywalker's children?",
+  "answer": "In both canon and Legends, Anakin Skywalker had twin children with Padmé Amidala:\n\n- **Luke Skywalker**\n- **Leia Organa** (born Leia Amidala Skywalker)\n\nThey were born in 19 BBY at the secret Polis Massa base, shortly before Padmé's death. To protect them from the Sith, the twins were separated — Luke was raised on Tatooine by his step-uncle and aunt, Owen and Beru Lars, while Leia was raised on Alderaan by the royal House of Organa.",
+  "citations": [
+    {
+      "title": "Skywalker family/Legends",
+      "name": "Skywalker family",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Naberrie family",
+      "name": "Naberrie family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Force-sensitive",
+      "name": "Force-sensitive",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Jedi Order/Legends",
+      "name": "Jedi Order",
+      "continuity": "legends",
+      "section": "History of the Jedi Order"
+    }
+  ],
+  "trace_id": "00e0f45276ead4fce7c16a316ca520ba"
+}

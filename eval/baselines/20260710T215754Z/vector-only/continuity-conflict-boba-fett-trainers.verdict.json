@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer names Jango Fett and Cad Bane as trainers in canon and Jango Fett in Legends, contradicting the expected behavior (Aurra Sing in both, plus Bossk in canon only) and failing to distinguish the continuities as specified.",
+  "judge_model": "claude-opus-4-8"
+}

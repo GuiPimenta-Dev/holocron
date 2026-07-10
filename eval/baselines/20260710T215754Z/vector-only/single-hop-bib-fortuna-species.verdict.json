@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact that Bib Fortuna is a Twi'lek, and the extra detail about being from Ryloth and serving Jabba does not contradict the expected facts.",
+  "judge_model": "claude-opus-4-8"
+}

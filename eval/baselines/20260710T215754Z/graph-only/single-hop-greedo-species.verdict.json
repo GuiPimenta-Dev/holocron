@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states Greedo is a Rodian in both continuities, matching the expected fact, and cites both the Greedo and Greedo/Legends pages.",
+  "judge_model": "claude-opus-4-8"
+}

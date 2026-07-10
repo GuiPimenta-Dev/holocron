@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates canon (Luminara Unduli, with additional corpus facts) from Legends (Luminara Unduli) without blending; Anakin's absence is not a fault since unmentioned facts are presumed corpus-grounded and only blending or contradicting expected behavior fails.",
+  "judge_model": "claude-opus-4-8"
+}

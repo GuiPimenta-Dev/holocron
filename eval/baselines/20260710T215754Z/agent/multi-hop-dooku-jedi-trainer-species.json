@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Let me find who trained Dooku first.Dooku was trained by Yoda as a Jedi (in both canon and Legends; he was also trained by Darth Sidious/Palpatine as a Sith, but that's a separate relation). Let me get Yoda's species.Interesting — the infobox doesn't list a species name directly. Let me check the relations for species.Dooku's Jedi training came from **Yoda** (both in canon and Legends), whose species is recorded in the corpus as **\"Yoda's species\"** — that is the name the wiki uses for it, in both continuities (as \"Yoda's species\" in canon and \"Yoda's species/Legends\" in Legends).",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends"
+    },
+    {
+      "title": "Yoda",
+      "name": "Yoda",
+      "continuity": "canon"
+    },
+    {
+      "title": "Yoda/Legends",
+      "name": "Yoda",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "d47ea8250704d5dda0a6619b7fc4e07f"
+}

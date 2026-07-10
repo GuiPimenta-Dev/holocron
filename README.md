@@ -9,35 +9,40 @@ decisions in [DECISIONS.md](DECISIONS.md) and [docs/adr/](docs/adr/).
 
 Does the agent's runtime choice between vector search and graph traversal beat
 either strategy alone? LLM-Judge pass rate per category (30-question Golden Set,
-run `20260710T181909Z`, corpus.lock `c82411f2`, judge: Opus, rubric pinned):
+run `20260710T215754Z`, corpus.lock `c82411f2`, judge: Opus, rubric pinned;
+deltas vs the first baseline `20260710T181909Z`):
 
 | Category | vector-only | graph-only | agent |
 |---|---|---|---|
 | single-hop | 100% (8/8) | 100% (8/8) | 100% (8/8) |
-| multi-hop | 87% (7/8) | 87% (7/8) | 87% (7/8) |
-| **continuity-conflict** | **28% (2/7)** | **71% (5/7)** | **85% (6/7)** |
-| unanswerable (refusal) | 100% (7/7) | 100% (7/7) | 85% (6/7) |
+| multi-hop | 87% (7/8) | 100% (8/8) +13pp | 87% (7/8) |
+| **continuity-conflict** | **85% (6/7) +57pp** | **100% (7/7) +29pp** | **100% (7/7) +15pp** |
+| unanswerable (refusal) | 100% (7/7) | 100% (7/7) | 100% (7/7) +15pp |
 
-The story is in **continuity-conflict**: without the graph's per-continuity
-edges, vector-only blends canon and Legends chunks into one answer (it told us
-Luke's training was "consistent in both continuities" — Legends adds Palpatine).
-The agent beats graph-only by falling back to prose when relations alone can't
-carry the answer. Its one unanswerable miss: refusing while name-dropping real
-Kessel lore — flagged by the Judge as a hallucination, exactly what that
-category exists to catch. The deterministic citation check agrees directionally
-(vector-only 85% on continuity-conflict; every question it grades elsewhere
-passes; unanswerable is refusal-graded by the Judge only).
+Two baselines tell the story. The **first run** exposed the failure mode the
+graph exists to prevent — vector-only scored **28%** on continuity-conflict,
+blending canon and Legends into one answer — and its dominant *agent* failure
+was subtler: report the corpus correctly, then "correct" it from the model's
+own memory ("Leia is also traditionally his daughter in Legends"). The **second
+baseline** is the eval loop paying off: three prompt rules derived directly
+from failing traces (the corpus outranks the model's memory — no reconciling
+asides; refuse only after retrying name variants; answer with the corpus's own
+names, even awkward ones like the page "Yoda's species") lifted the agent to
+**29/30** and graph-only to **30/30**, with zero category regressions. The gap
+that remains is retrieval, not prompting: vector-only still misses the one
+continuity-conflict question whose answer lives only in the graph's edges.
 
 One full run costs **~US$3 / ~1.5h**: 90 Sonnet answer runs (the only paid
 part; wall time inflated by org-tier rate limits) + 90 free Opus verdicts via
 the `claude` CLI (~25 min). Re-judging is free; single-category iteration
 costs cents.
 
-Full report — every failing question with its Langfuse trace id — lives in
-[`eval/baselines/20260710T181909Z/report.md`](eval/baselines/20260710T181909Z/report.md);
+Full report — every failing question and every baseline-flip with its Langfuse
+trace id — lives in
+[`eval/baselines/20260710T215754Z/report.md`](eval/baselines/20260710T215754Z/report.md);
 open the trace ids in the local Langfuse UI (<http://localhost:3001>) to debug.
 Reproduce with the [eval commands](#eval) below — deltas are always reported
-against this Baseline.
+against the latest Baseline.
 
 ## Setup
 

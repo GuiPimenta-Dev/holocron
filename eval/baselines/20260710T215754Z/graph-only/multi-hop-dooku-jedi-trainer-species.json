@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Dooku was trained by Yoda in both continuities.Yoda's species isn't listed directly in his infobox properties here — the corpus doesn't give a named species entry for him in either continuity. Both his `canon` and `legends` entries lack a `SPECIES` field, unlike Dooku's own entry (which lists \"Human\"/\"Serennian\").\n\nSo: Dooku's trainer was **Yoda**, but the corpus does not record a named species for Yoda in either continuity — his species is simply not specified in these records, so I can't state one. If you'd like, I can check for a dedicated \"Yoda's species\" page instead.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends"
+    },
+    {
+      "title": "Yoda",
+      "name": "Yoda",
+      "continuity": "canon"
+    },
+    {
+      "title": "Yoda/Legends",
+      "name": "Yoda",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "177616778894f0e44a14d5a080a6c335"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no corpus results for Threx Kavan and explicitly says 'I don't know' without asserting any lore facts about the admiral or a fleet.",
+  "judge_model": "claude-opus-4-8"
+}

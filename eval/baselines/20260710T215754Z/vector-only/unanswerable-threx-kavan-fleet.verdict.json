@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no record of the subject exists in the corpus and asserts no lore facts about Threx Kavan, matching the expected refusal behavior.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer separates canon (Alliance, Empire) from Legends (Alliance, Empire, New Republic) exactly as the expected continuity behavior requires, without blending.",
+  "judge_model": "claude-opus-4-8"
+}

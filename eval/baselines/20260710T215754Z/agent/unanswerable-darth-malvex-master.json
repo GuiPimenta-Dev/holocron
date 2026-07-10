@@ -1,0 +1,39 @@
+{
+  "id": "unanswerable-darth-malvex-master",
+  "category": "unanswerable",
+  "question": "Who was Darth Malvex's Sith master?",
+  "answer": "Both lookups returned nothing — the corpus has no entry for \"Darth Malvex.\"I don't have any record of \"Darth Malvex\" in the corpus — my searches for that name (direct lookup, relations, and text search) returned nothing relevant. I can't confirm who this figure's Sith master was, or that this entity exists in the pinned corpus at all.",
+  "citations": [
+    {
+      "title": "Sith/Legends",
+      "name": "Sith",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Dark side of the Force/Legends",
+      "name": "Dark side of the Force",
+      "continuity": "legends",
+      "section": "Definition"
+    },
+    {
+      "title": "Jedi Order/Legends",
+      "name": "Jedi Order",
+      "continuity": "legends",
+      "section": "History of the Jedi Order"
+    },
+    {
+      "title": "Darth/Legends",
+      "name": "Darth",
+      "continuity": "legends",
+      "section": "Overview"
+    },
+    {
+      "title": "Dathomirian/Legends",
+      "name": "Dathomirian",
+      "continuity": "legends",
+      "section": "Dathomirians in the galaxy"
+    }
+  ],
+  "trace_id": "50db0f0e60d3867aacc3b157d3e17a45"
+}

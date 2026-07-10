@@ -1,0 +1,19 @@
+{
+  "id": "multi-hop-leia-adoptive-father-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Leia's adoptive father?",
+  "answer": "Let me check the exact naming used in the corpus.Both queries returned empty. Let me retry with alternate names to be sure before concluding.Found Bail Prestor Organa, Leia's adoptive father. Now let's get his homeworld relation.Leia's adoptive father is Bail Prestor Organa, and in both continuities his homeworld is **Alderaan**.\n\n- In canon: Bail Prestor Organa's homeworld is Alderaan.\n- In Legends: Bail Prestor Organa's homeworld is Alderaan/Legends.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "0b2de16c754221cce9d62c04a7d1c34b"
+}

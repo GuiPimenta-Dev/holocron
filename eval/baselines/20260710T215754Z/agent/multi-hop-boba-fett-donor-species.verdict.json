@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (donor Jango Fett, species Human) and explicitly connects them across both continuities, matching the expected multi-hop chain and continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

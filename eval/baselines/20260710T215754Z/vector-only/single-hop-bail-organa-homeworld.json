@@ -1,0 +1,45 @@
+{
+  "id": "single-hop-bail-organa-homeworld",
+  "category": "single-hop",
+  "question": "What is Bail Organa's homeworld?",
+  "answer": "Bail Organa's homeworld is **Alderaan**. This holds true in both continuities: in canon, he is described as \"Bail Prestor Organa of the planet Alderaan,\" an Alderaanian statesman who represented it in the Senate; in Legends, he is likewise a native of Alderaan, born into its royal House of Organa.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Alderaan",
+      "name": "Alderaan",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Alderaan sector",
+      "name": "Alderaan sector",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "18e8110c7c238bb4b4805330ec7872dc"
+}

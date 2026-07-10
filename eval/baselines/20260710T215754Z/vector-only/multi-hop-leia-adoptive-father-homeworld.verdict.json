@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Bail Organa as Leia's adoptive father and states his homeworld is Alderaan, making the full multi-hop chain explicit and matching both expected facts.",
+  "judge_model": "claude-opus-4-8"
+}

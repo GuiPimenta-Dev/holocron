@@ -1,0 +1,31 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "The infobox doesn't list a species field directly, so let me confirm from relations/text.Greedo is a **Rodian** — this holds true in both continuities: in canon, he's a Rodian bounty hunter/mercenary from Tatooine, and in Legends, he's likewise a Rodian bounty hunter born on Rodia to the Tetsu Clan.",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends"
+    },
+    {
+      "title": "Rodian/Legends",
+      "name": "Rodian",
+      "continuity": "legends",
+      "section": "Biology and appearance"
+    },
+    {
+      "title": "Rodian",
+      "name": "Rodian",
+      "continuity": "canon",
+      "section": "Rodians in the galaxy"
+    }
+  ],
+  "trace_id": "bb0652a555b6c332051b54bffbbe97c4"
+}

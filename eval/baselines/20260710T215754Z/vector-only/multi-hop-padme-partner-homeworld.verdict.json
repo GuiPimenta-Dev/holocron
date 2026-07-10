@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Anakin Skywalker as Padm\u00e9's husband and correctly gives his homeworld as Tatooine, making the multi-hop chain explicit with no contradicting links.",
+  "judge_model": "claude-opus-4-8"
+}

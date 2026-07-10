@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating Darth Malvex has no entry in the corpus and declines to assert any facts about the subject or its Sith master.",
+  "judge_model": "claude-opus-4-8"
+}

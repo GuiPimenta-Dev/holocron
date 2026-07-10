@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer restricts itself to canon, correctly lists Obi-Wan Kenobi and Yoda as Luke's trainers, and does not blend in Palpatine (a Legends-only trainer), consistent with the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

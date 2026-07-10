@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-kessari-prime-location",
+  "category": "unanswerable",
+  "question": "In which sector is the planet Kessari Prime located?",
+  "answer": "I found nothing in the corpus about a planet called \"Kessari Prime\" — my search only returned results for the similarly-named planet Kessel, which is a distinct world. I don't have any record of \"Kessari Prime\" in this corpus, so I can't say what sector it's in.",
+  "citations": [
+    {
+      "title": "Kessel",
+      "name": "Kessel",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Colonies",
+      "name": "Colonies",
+      "continuity": "canon",
+      "section": "Astrography"
+    },
+    {
+      "title": "Mid Rim Territories",
+      "name": "Mid Rim Territories",
+      "continuity": "canon",
+      "section": "Astrography"
+    },
+    {
+      "title": "Kessel/Legends",
+      "name": "Kessel",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Expansion Region",
+      "name": "Expansion Region",
+      "continuity": "canon",
+      "section": "Astrography"
+    },
+    {
+      "title": "Colonies/Legends",
+      "name": "Colonies",
+      "continuity": "legends",
+      "section": "Astrography"
+    }
+  ],
+  "trace_id": "b07fd3f2b01992361d438f7d96abf560"
+}

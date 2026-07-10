@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-bib-fortuna-species",
+  "category": "single-hop",
+  "question": "What species is Bib Fortuna?",
+  "answer": "The infobox properties don't list species directly, so let me check relations for both continuities.Bib Fortuna is a **Twi'lek** — confirmed in both continuities: in canon he's linked to the species \"Twi'lek,\" and in Legends to \"Twi'lek/Legends.\"",
+  "citations": [
+    {
+      "title": "Bib Fortuna",
+      "name": "Bib Fortuna",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bib Fortuna/Legends",
+      "name": "Bib Fortuna",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "40bf91cbddd879d482b3d1f229442be1"
+}
