@@ -58,6 +58,8 @@ def main() -> None:
         Toolset("graph-only", TOOL_NAMES - {"search_chunks"}),
         Toolset("agent", None),
     )
+    if {t.name for t in toolsets} != set(STRATEGY_NAMES):
+        raise RuntimeError("STRATEGY_NAMES drifted from the toolsets built here — --strategy would run nothing")
     strategies = {
         t.name: HolocronAgent(graph=graph, index=index, traced=traced, toolset=t)
         for t in toolsets

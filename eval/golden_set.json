@@ -37,6 +37,6 @@
     "question": "What species is Jedi Master Vela Korr?",
     "expected_facts": [],
     "expected_citations": [],
-    "expected_continuity": "Refuse: Vela Korr is fabricated — zero corpus presence by construction, so any answer is a hallucination. (Replaced the Grogu question: 116 corpus chunks mention Grogu, making it answerable from prose.)"
+    "expected_continuity": "Refuse: Vela Korr is fabricated — zero corpus presence by construction, so any answer is a hallucination."
   }
 ]
