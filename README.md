@@ -26,11 +26,16 @@ The corpus is pinned by [`corpus.lock`](corpus.lock) (page title → revision id
 ADR-0002), so the raw cache is reproducible from the repository:
 
 ```sh
-uv run python -m ingest rebuild   # fetch every page at its pinned revision (~40 min)
-uv run python -m ingest parse     # cache -> entities.jsonl + chunks.jsonl
-uv run python -m ingest graph     # entities -> Neo4j
-uv run python -m ingest embed     # chunks -> LanceDB (needs an embedding key)
+uv run python -m ingest rebuild   # fetch every page at its pinned revision (~15 min)
+uv run python -m ingest parse     # cache -> entities.jsonl + chunks.jsonl (~2 min)
+uv run python -m ingest graph     # entities -> Neo4j (~1 min)
+uv run python -m ingest embed     # chunks -> LanceDB (~10 min, needs an embedding key)
 ```
+
+Expected costs: the embed run is one-time ~US$0.20 on OpenAI
+(`text-embedding-3-small`) or free within Voyage's quota (`voyage-3-lite`,
+requires a payment method on file for usable rate limits). Questions cost a
+few cents each (Claude Sonnet + one query embedding).
 
 ## Ask a question
 
