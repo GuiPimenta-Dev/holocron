@@ -16,13 +16,9 @@ from dotenv import load_dotenv
 
 from eval.golden import Category, GoldenSet
 
-# The three Retrieval Strategies (CONTEXT.md): same agent, same LLM, same
-# synthesis prompt — only the toolset differs. None = all tools.
-TOOLSETS: dict[str, frozenset[str] | None] = {
-    "vector-only": frozenset({"search_chunks"}),
-    "graph-only": frozenset({"get_entity", "get_relations", "path_between", "run_cypher"}),
-    "agent": None,
-}
+# The three Retrieval Strategies (CONTEXT.md); toolsets are built in main()
+# after the (heavy) agent import — same agent, same LLM, only the tools differ.
+STRATEGY_NAMES = ("vector-only", "graph-only", "agent")
 
 
 def main() -> None:
@@ -31,13 +27,13 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     answer = sub.add_parser("answer", help="run the Retrieval Strategies over the Golden Set and persist a run dir")
     answer.add_argument("--category", choices=[str(c) for c in Category], help="run one category only")
-    answer.add_argument("--strategy", choices=list(TOOLSETS), help="run one strategy only (default: all three)")
+    answer.add_argument("--strategy", choices=STRATEGY_NAMES, help="run one strategy only (default: all three)")
     args = parser.parse_args()
 
     import lancedb
     from neo4j import GraphDatabase
 
-    from agent.holocron import HolocronAgent
+    from agent.holocron import TOOL_NAMES, HolocronAgent, Toolset
     from core.embeddings import provider_from_env
     from eval.answer import AnswerRunner, RunWriter
     from retrieval import KnowledgeGraph, VectorIndex
@@ -57,10 +53,15 @@ def main() -> None:
     graph = KnowledgeGraph(driver)
     index = VectorIndex(provider_from_env(dict(os.environ)), chunks)
     traced = bool(os.environ.get("LANGFUSE_PUBLIC_KEY"))
+    toolsets = (
+        Toolset("vector-only", frozenset({"search_chunks"})),
+        Toolset("graph-only", TOOL_NAMES - {"search_chunks"}),
+        Toolset("agent", None),
+    )
     strategies = {
-        name: HolocronAgent(graph=graph, index=index, traced=traced, toolset=toolset, tags=(f"strategy:{name}",))
-        for name, toolset in TOOLSETS.items()
-        if args.strategy is None or name == args.strategy
+        t.name: HolocronAgent(graph=graph, index=index, traced=traced, toolset=t)
+        for t in toolsets
+        if args.strategy is None or t.name == args.strategy
     }
     writer = RunWriter(
         runs_root=root / "runs",

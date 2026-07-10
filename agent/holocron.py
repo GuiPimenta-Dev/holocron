@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import sys
 from collections.abc import AsyncIterator
+from dataclasses import dataclass
 from typing import Any, Protocol
 
 from langchain_anthropic import ChatAnthropic
@@ -24,6 +25,19 @@ from retrieval import KnowledgeGraph, VectorIndex
 MODEL = "claude-sonnet-5"
 
 TOOL_NAMES = frozenset({"get_entity", "get_relations", "search_chunks", "path_between", "run_cypher"})
+
+
+@dataclass(frozen=True)
+class Toolset:
+    """A named restriction of the agent's tools — the eval's Retrieval Strategy seam.
+
+    The name tags every Langfuse trace (`strategy:<name>`); `tools=None` means
+    all tools (used to tag the unrestricted agent strategy).
+    """
+
+    name: str
+    tools: frozenset[str] | None
+
 
 SYSTEM_PROMPT = """\
 You are Holocron, a Star Wars lore assistant answering strictly from a pinned
@@ -88,13 +102,12 @@ class HolocronAgent:
         index: VectorIndex,
         traced: bool,
         model: str = MODEL,
-        toolset: frozenset[str] | None = None,  # None = all tools (the production default)
-        tags: tuple[str, ...] = (),  # Langfuse trace tags (the eval tags per Retrieval Strategy)
+        toolset: Toolset | None = None,  # None = all tools, untagged (the production default)
     ):
-        if toolset is not None and (unknown := toolset - TOOL_NAMES):
+        if toolset and toolset.tools is not None and (unknown := toolset.tools - TOOL_NAMES):
             raise ValueError(f"unknown tool(s) {sorted(unknown)}; available: {sorted(TOOL_NAMES)}")
         self._toolset = toolset
-        self._tags = tags
+        self._tags = (f"strategy:{toolset.name}",) if toolset else ()
         self._graph = graph
         self._index = index
         # ponytail: thinking disabled — Sonnet 5 defaults to adaptive thinking, but
@@ -191,9 +204,10 @@ class HolocronAgent:
         }
         for wrapper, method in sources.items():
             wrapper.__doc__ = method.__doc__
-        wrappers = [w for w in sources if self._toolset is None or w.__name__ in self._toolset]
-        if self._toolset is not None and len(wrappers) != len(self._toolset):
-            raise RuntimeError(f"TOOL_NAMES drifted from the tools bound here: {sorted(self._toolset)}")
+        wanted = self._toolset.tools if self._toolset else None
+        wrappers = [w for w in sources if wanted is None or w.__name__ in wanted]
+        if wanted is not None and (missing := wanted - {w.__name__ for w in wrappers}):
+            raise RuntimeError(f"TOOL_NAMES drifted from the tools bound here; not bound: {sorted(missing)}")
         return [lc_tool(w) for w in wrappers]
 
     def _build_graph(self, tools: list[Any]) -> Any:
