@@ -38,7 +38,7 @@ def main() -> None:
         config={"callbacks": [CallbackHandler()]},
     )
     get_client().flush()
-    print(f"answer: {reply.text()}")
+    print(f"answer: {reply.text}")
     print(f"trace:  {os.environ['LANGFUSE_HOST']} -> Holocron project -> Tracing")
 
 

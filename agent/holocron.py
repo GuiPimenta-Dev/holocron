@@ -66,7 +66,13 @@ class HolocronAgent:
     """Streams plain-dict events; the API layer maps them 1:1 onto SSE."""
 
     def __init__(self, model: str = MODEL):
-        self._llm = ChatAnthropic(model=model, max_tokens=1024)  # pyright: ignore[reportCallIssue]
+        # ponytail: thinking disabled — Sonnet 5 defaults to adaptive thinking, but
+        # langchain-anthropic 1.4.x drops the thinking field when echoing the
+        # assistant turn back after a tool round-trip (API 400). Re-enable once
+        # the serialization bug is fixed upstream.
+        self._llm = ChatAnthropic(  # pyright: ignore[reportCallIssue]
+            model=model, max_tokens=1024, thinking={"type": "disabled"}
+        )
         self._callbacks: list[Any] = []
         if os.environ.get("LANGFUSE_PUBLIC_KEY"):
             from langfuse.langchain import CallbackHandler
