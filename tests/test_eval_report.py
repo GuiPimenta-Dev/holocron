@@ -25,8 +25,12 @@ def golden() -> GoldenSet:
     return GoldenSet.load(Path("eval/golden_set.json"))
 
 
+def _answer_path(run: Path, strategy: str) -> Path:
+    return next(p for p in (run / strategy).glob("*.json") if not p.name.endswith(".verdict.json"))
+
+
 def _record(run: Path, strategy: str) -> AnswerRecord:
-    return AnswerRecord.from_json(json.loads(next((run / strategy).glob("*.json")).read_text()))
+    return AnswerRecord.from_json(json.loads(_answer_path(run, strategy).read_text()))
 
 
 def _flipped(grade: QuestionGrade) -> QuestionGrade:
@@ -97,7 +101,7 @@ def test_incomplete_run_is_a_hard_error(golden, tmp_path):
 def test_missing_artifact_is_a_hard_error(golden, tmp_path):
     broken = tmp_path / "broken"
     shutil.copytree(MULTI_HOP_RUN, broken)
-    next((broken / "graph-only").glob("*.json")).unlink()
+    _answer_path(broken, "graph-only").unlink()
     with pytest.raises(ValueError, match="missing artifact"):
         PersistedRun.load(broken, golden)
 
@@ -153,7 +157,7 @@ def test_render_without_baseline(golden):
 def test_render_with_baseline_shows_deltas_and_flips(golden, tmp_path):
     baseline_dir = tmp_path / "baseline"
     shutil.copytree(MULTI_HOP_RUN, baseline_dir)
-    artifact_path = next((baseline_dir / "agent").glob("*.json"))
+    artifact_path = _answer_path(baseline_dir, "agent")
     artifact = json.loads(artifact_path.read_text())
     artifact["citations"] = []  # baseline agent missed its citations
     artifact_path.write_text(json.dumps(artifact))

@@ -60,6 +60,18 @@ Tool tests run against the real Neo4j (they skip if it's down, and seed an
 empty graph from `tests/fixtures/`). Agent behavior is measured only by the
 eval harness — never mocked.
 
+## Eval
+
+```sh
+uv run python -m eval answer   # run the three strategies over the golden set (~US$ cents/question)
+uv run python -m eval judge    # grade answers via the local `claude` CLI (free on subscription)
+uv run python -m eval report   # citation check + judge scores vs the Baseline
+```
+
+The Judge runs through a **logged-in Claude Code CLI** (`claude login`), pinned
+to Opus — stronger than the Sonnet system under test, zero marginal cost. The
+eval is local-only and manual; CI never runs it.
+
 ## Attribution
 
 Lore content is sourced from [Wookieepedia](https://starwars.fandom.com/) and
