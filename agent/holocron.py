@@ -99,13 +99,9 @@ class HolocronAgent:
             self._callbacks = [CallbackHandler()]
         else:
             # "No trace, no merge" — degrade loudly, not silently.
-            print(
-                "WARNING: LANGFUSE_* keys not set; agent runs will NOT be traced", file=sys.stderr
-            )
+            print("WARNING: LANGFUSE_* keys not set; agent runs will NOT be traced", file=sys.stderr)
 
-    async def astream(
-        self, question: str, continuity: str | None = None
-    ) -> AsyncIterator[dict[str, Any]]:
+    async def astream(self, question: str, continuity: str | None = None) -> AsyncIterator[dict[str, Any]]:
         restrict = Continuity.parse(continuity)
         citations = Citations(restrict)
         graph = self._build_graph(self._bind_tools(citations, restrict))
@@ -123,9 +119,7 @@ class HolocronAgent:
                 ("user", question),
             ]
         }
-        async for ev in graph.astream_events(
-            inputs, config={"callbacks": self._callbacks}, version="v2"
-        ):
+        async for ev in graph.astream_events(inputs, config={"callbacks": self._callbacks}, version="v2"):
             kind = ev["event"]
             if kind == "on_chat_model_stream":
                 if text := _text(ev["data"]["chunk"].content):
@@ -154,9 +148,7 @@ class HolocronAgent:
         def get_relations(name: str) -> list[dict[str, Any]]:
             return [r.as_dict() for r in citations.record(self._graph.get_relations(name))]
 
-        def search_chunks(
-            query: str, continuity: str | None = None, k: int = 8
-        ) -> list[dict[str, Any]]:
+        def search_chunks(query: str, continuity: str | None = None, k: int = 8) -> list[dict[str, Any]]:
             # a user-pinned continuity overrides whatever the LLM passes
             wanted = str(restrict) if restrict else continuity
             return [c.as_dict() for c in citations.record(self._index.search(query, wanted, k))]
@@ -198,9 +190,7 @@ def _text(content: Any) -> str:
     if isinstance(content, str):
         return content
     if isinstance(content, list):
-        return "".join(
-            b.get("text", "") for b in content if isinstance(b, dict) and b.get("type") == "text"
-        )
+        return "".join(b.get("text", "") for b in content if isinstance(b, dict) and b.get("type") == "text")
     return ""
 
 

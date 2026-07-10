@@ -66,9 +66,7 @@ def provider_from_env(env: dict[str, str], retries: int = 2) -> EmbeddingProvide
     raise RuntimeError("no OPENAI_API_KEY or VOYAGE_API_KEY set — see .env.example")
 
 
-def _post_with_retry(
-    url: str, api_key: str, payload: dict[str, Any], retries: int
-) -> dict[str, Any]:
+def _post_with_retry(url: str, api_key: str, payload: dict[str, Any], retries: int) -> dict[str, Any]:
     for attempt in range(retries + 1):
         r = httpx.post(
             url,

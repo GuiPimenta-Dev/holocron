@@ -26,9 +26,7 @@ from pydantic import BaseModel, Field
 
 
 class Agent(Protocol):
-    def astream(
-        self, question: str, continuity: str | None = None
-    ) -> AsyncIterator[dict[str, Any]]: ...
+    def astream(self, question: str, continuity: str | None = None) -> AsyncIterator[dict[str, Any]]: ...
 
 
 class AskRequest(BaseModel):

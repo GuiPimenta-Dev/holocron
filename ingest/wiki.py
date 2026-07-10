@@ -56,9 +56,7 @@ class WikiClient:
         written = 0
         for i in range(0, len(titles), BATCH):
             batch = titles[i : i + BATCH]
-            pages, redirects = self._query_pages(
-                _PROP_PARAMS | {"titles": "|".join(batch), "redirects": 1}
-            )
+            pages, redirects = self._query_pages(_PROP_PARAMS | {"titles": "|".join(batch), "redirects": 1})
             self._save_redirects(redirects)
             written += self._write_cache(pages)
             print(f"  fetched {min(i + BATCH, len(titles))}/{len(titles)} (+{written} new)")
@@ -142,9 +140,7 @@ class WikiClient:
                 time.sleep(0.2)  # ponytail: fixed polite delay, tune if Fandom throttles
         raise AssertionError("unreachable")
 
-    def _query_pages(
-        self, params: dict[str, Any]
-    ) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
+    def _query_pages(self, params: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
         """Run one prop=revisions|categories query to completion (continuations)."""
         pages: dict[str, dict[str, Any]] = {}
         redirects: dict[str, str] = {}

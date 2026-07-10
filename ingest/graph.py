@@ -78,9 +78,7 @@ def _edge_name(fieldname: str) -> str | None:
     return name if SAFE_NAME.match(name) else None
 
 
-def _resolve(
-    target: str, continuity: str, corpus: set[str], redirects: dict[str, str]
-) -> str | None:
+def _resolve(target: str, continuity: str, corpus: set[str], redirects: dict[str, str]) -> str | None:
     """Resolve a wikilink to a corpus entity title, preferring same continuity."""
     target = redirects.get(target, target)
     if continuity == "legends" and f"{target}/Legends" in corpus:
@@ -99,10 +97,7 @@ class GraphLoader:
         edges = self._edges(entities, redirects)
         with self._driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")  # load() rebuilds from scratch
-            session.run(
-                "CREATE CONSTRAINT entity_title IF NOT EXISTS "
-                "FOR (e:Entity) REQUIRE e.title IS UNIQUE"
-            )
+            session.run("CREATE CONSTRAINT entity_title IF NOT EXISTS FOR (e:Entity) REQUIRE e.title IS UNIQUE")
             session.run(
                 # props first, core fields last: infobox fields like "type"
                 # ("Jedi", "Terrestrial") must not shadow the entity type.
@@ -142,9 +137,7 @@ class GraphLoader:
                 "name": e.name,
                 "type": e.type,
                 "continuity": e.continuity,
-                "props": {
-                    k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]
-                },
+                "props": {k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]},
             }
             for e in entities
         ]

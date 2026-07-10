@@ -38,9 +38,7 @@ def neo4j_driver():
             if count == 0:
                 _seed_from_fixtures(driver)
             else:
-                have = session.run("MATCH (e:Entity {name: 'Kit Fisto'}) RETURN count(e)").single(
-                    strict=True
-                )[0]
+                have = session.run("MATCH (e:Entity {name: 'Kit Fisto'}) RETURN count(e)").single(strict=True)[0]
                 if have == 0:
                     pytest.skip("Neo4j graph is populated but lacks the fixture entities")
     except (ServiceUnavailable, OSError):

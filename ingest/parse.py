@@ -60,9 +60,7 @@ def _top_flags(code: Wikicode) -> set[str]:
     """Positional flags of the {{Top}} status template (real, rwp, rwm, leg...)."""
     for tpl in code.filter_templates(recursive=False):
         if str(tpl.name).strip().lower() == "top":
-            return {
-                str(p.value).strip().lower() for p in tpl.params if str(p.name).strip().isdigit()
-            }
+            return {str(p.value).strip().lower() for p in tpl.params if str(p.name).strip().isdigit()}
     return set()
 
 
@@ -139,19 +137,13 @@ class PageParser:
         if infobox is None and not code.filter_headings():
             return None  # redirect or stub, nothing to index
 
-        continuity = (
-            "legends"
-            if title.endswith("/Legends") or "Category:Legends articles" in categories
-            else "canon"
-        )
+        continuity = "legends" if title.endswith("/Legends") or "Category:Legends articles" in categories else "canon"
         entity = Entity(
             title=title,
             name=title.removesuffix("/Legends"),
             type="Topic"
             if infobox is None
-            else "".join(
-                w.capitalize() for w in re.split(r"[^A-Za-z0-9]+", str(infobox.name)) if w
-            ),
+            else "".join(w.capitalize() for w in re.split(r"[^A-Za-z0-9]+", str(infobox.name)) if w),
             continuity=continuity,
         )
 

@@ -106,10 +106,7 @@ def _cmd_parse() -> None:
         n_chunks = 0
         for e in entities:
             for c in e.chunks:
-                f.write(
-                    json.dumps({"title": e.title, "name": e.name, "continuity": e.continuity, **c})
-                    + "\n"
-                )
+                f.write(json.dumps({"title": e.title, "name": e.name, "continuity": e.continuity, **c}) + "\n")
                 n_chunks += 1
     print(f"{n_pages} pages -> {len(entities)} entities, {n_chunks} chunks")
     types: dict[str, int] = {}

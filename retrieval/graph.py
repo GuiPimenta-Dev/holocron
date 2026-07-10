@@ -19,9 +19,7 @@ INCOMING_CAP = 50  # popular nodes (Tatooine...) have hundreds of incoming edges
 ROW_CAP = 50
 
 _CORE_KEYS = ("title", "name", "type", "continuity")
-_WRITE_KEYWORDS = re.compile(
-    r"\b(create|merge|delete|detach|set|remove|drop|call|load|foreach)\b", re.IGNORECASE
-)
+_WRITE_KEYWORDS = re.compile(r"\b(create|merge|delete|detach|set|remove|drop|call|load|foreach)\b", re.IGNORECASE)
 
 
 def _name_match(var: str, param: str) -> str:
@@ -52,8 +50,7 @@ class KnowledgeGraph:
             records = session.run(
                 cast(
                     LiteralString,
-                    f"MATCH (e:Entity) WHERE {_name_match('e', 'q')} "
-                    f"RETURN e ORDER BY e.continuity",
+                    f"MATCH (e:Entity) WHERE {_name_match('e', 'q')} RETURN e ORDER BY e.continuity",
                 ),
                 q=name,
             )
