@@ -1,8 +1,10 @@
-"""Shared fixtures. Tools tests run against a real Neo4j (testing doctrine: no mocks).
+"""Shared fixtures — the tests' composition root (ADR-0004).
 
-Locally the full corpus graph is already loaded — tests assert on entities that are
-both in the corpus and in tests/fixtures. In CI the service container starts empty,
-so we seed it from the saved wikitext fixtures. Never wipes a non-empty graph.
+Retrieval tests run against a real Neo4j + LanceDB (testing doctrine: no
+mocks). Locally the full corpus is already loaded — tests assert on entities
+that are both in the corpus and in tests/fixtures. In CI the Neo4j service
+starts empty, so we seed it from the saved wikitext fixtures; the vector tests
+skip (no index, no embedding key). Never wipes a non-empty graph.
 """
 
 import json
@@ -18,39 +20,66 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 @pytest.fixture(scope="session")
-def graph():
-    """Yields nothing; guarantees a Neo4j with the fixture entities, or skips."""
+def neo4j_driver():
+    """A live Neo4j driver over a graph containing the fixture entities, or skip."""
+    from neo4j import GraphDatabase
     from neo4j.exceptions import ServiceUnavailable
 
-    import ingest.graph as graph_mod
-    from ingest.parse import parse_page
-
+    driver = GraphDatabase.driver(
+        os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+        auth=(
+            os.environ.get("NEO4J_USER", "neo4j"),
+            os.environ.get("NEO4J_PASSWORD", "holocron123"),
+        ),
+    )
     try:
-        with graph_mod.driver() as drv, drv.session() as session:
+        with driver.session() as session:
             count = session.run("MATCH (e:Entity) RETURN count(e)").single(strict=True)[0]
             if count == 0:
-                entities = []
-                for p in sorted(FIXTURES.glob("*.json")):
-                    page = json.loads(p.read_text())
-                    e = parse_page(page["title"], page["wikitext"], page["categories"])
-                    if e:
-                        entities.append(e)
-                graph_mod.load(entities, {})
+                _seed_from_fixtures(driver)
             else:
-                have = session.run("MATCH (e:Entity {name: 'Kit Fisto'}) RETURN count(e)").single(
-                    strict=True
-                )[0]
+                have = session.run("MATCH (e:Entity {name: 'Kit Fisto'}) RETURN count(e)").single(strict=True)[0]
                 if have == 0:
                     pytest.skip("Neo4j graph is populated but lacks the fixture entities")
     except (ServiceUnavailable, OSError):
         pytest.skip("Neo4j not reachable — start it with `docker compose up -d neo4j`")
-    yield
+    yield driver
+    driver.close()
+
+
+def _seed_from_fixtures(driver) -> None:
+    from ingest.graph import GraphLoader
+    from ingest.parse import PageParser
+
+    parser = PageParser()
+    entities = []
+    for p in sorted(FIXTURES.glob("*.json")):
+        page = json.loads(p.read_text())
+        e = parser.parse(page["title"], page["wikitext"], page["categories"])
+        if e:
+            entities.append(e)
+    GraphLoader(driver).load(entities, {})
+
+
+@pytest.fixture(scope="session")
+def knowledge_graph(neo4j_driver):
+    from retrieval import KnowledgeGraph
+
+    return KnowledgeGraph(neo4j_driver)
 
 
 @pytest.fixture(scope="session")
 def vector_index():
-    """Skips unless the real LanceDB index and an embedding key are available."""
+    """A VectorIndex over the real chunk index, or skip when it can't exist."""
+    from core.embeddings import provider_from_env
+
     if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("VOYAGE_API_KEY")):
-        pytest.skip("no embedding API key — search_chunks embeds the query")
+        pytest.skip("no embedding API key — VectorIndex embeds the query")
     if not Path("data/lancedb/chunks.lance").exists():
         pytest.skip("LanceDB index not built — run `uv run python -m ingest embed`")
+    import lancedb
+
+    from retrieval import VectorIndex
+
+    table = lancedb.connect("data/lancedb").open_table("chunks")
+    return VectorIndex(provider_from_env(dict(os.environ)), table)

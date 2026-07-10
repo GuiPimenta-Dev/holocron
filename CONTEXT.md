@@ -35,6 +35,11 @@ The versioned manifest of (page title, revision id) that makes the corpus
 reproducible. Two eval runs are comparable only under the same corpus lock.
 _Avoid_: snapshot, dump
 
+**Citation**:
+A pointer from an answer back to its source — an entity or chunk title plus
+its continuity (and section, for chunks). Every answer carries its citations.
+_Avoid_: reference, source link
+
 ### Evaluation
 
 **Golden Set**:

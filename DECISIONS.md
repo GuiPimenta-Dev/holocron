@@ -69,6 +69,17 @@
 | 29 | Processo | Main só via branch+PR+CI+self-review; conventional commits; mini-PRD pra features grandes; golden set e runs como datasets no Langfuse | "Tratar como empresa": história auditável no GitHub e workflow de eval real |
 | 30 | Glossário | CONTEXT.md criado (Continuity, Entity, Topic, Chunk, Corpus Lock, Golden Set, Retrieval Strategy, Judge, Baseline); ADRs passam a registrar decisões duras | Vocabulário canônico pro código, docs e eval usarem as mesmas palavras |
 
+## Sessão 4 — estilo OO (2026-07-10, /grill-with-docs)
+
+| # | Galho | Decisão | Racional |
+|---|---|---|---|
+| 31 | Sequência | Refactor como PR próprio pós-merge da fase 2, 100% preservador de comportamento | Diff de estética separado de diff de comportamento; bisect limpo |
+| 32 | Estilo de código | Regras no CLAUDE.md ("Code style") + [ADR-0004](docs/adr/0004-oo-style.md): público=classe/método; injeção estrita com composition root; herança proibida (Protocol; carve-out exceções); polimorfismo só p/ switch repetido; tipos de domínio congelados; ≤4 params | Preferência explícita do dono por OO/composição; sem clean-arch completa (overengineering nesta escala) |
+| 33 | Docstrings | Duas classes: LLM-facing (tools de retrieval — obrigatórias, longas, intocáveis) vs internas (mínimas) | As docstrings das tools são prompt engineering — o agente roteia por elas |
+| 34 | Polimorfismo | Um único ponto: `EmbeddingProvider` (Protocol) em `core/embeddings.py` | Único type-switch repetido (ingest + query); centralizar mata bug latente de dimensão índice≠query. Rejeitados: Tool objects, estratégias polimórficas (fase 4), reescrever ifs de validação |
+| 35 | Pastas | `core/` (folha neutra: domain + embeddings) e `retrieval/` (substitui `tools.py`) | `retrieval` vem do glossário (Retrieval Strategy); `core/` resolve a fronteira ingest↔serving sem arquivos soltos na raiz |
+| 36 | Governança | Sem skill nova (decisão #13); skill `add-tool` atualizada para o novo layout | Estilo é restrição permanente (CLAUDE.md), não ritual |
+
 ## Risco nº 1
 
 Parse de infobox é mais chato do que parece (templates aninhados, variantes). Se a fase 1 travar: **cortar categorias de artigo, não qualidade do parse** — grafo sujo mata o eval.

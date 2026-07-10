@@ -11,9 +11,10 @@ A tool is the agent's API. It never lands without a test and eval coverage.
 
 1. **Justify**: can an existing tool answer this with different arguments? If
    yes, stop — extend or document the existing one instead.
-2. **Write the function** in `tools.py`:
-   - Fully typed signature, plain-data params and return (str/int/list/dict —
-     no ORM objects, no framework types).
+2. **Write the method** on the owning class in `retrieval/` (`KnowledgeGraph`
+   for Neo4j, `VectorIndex` for LanceDB):
+   - Fully typed signature; params and return are `core/domain.py` types +
+     primitives (no ORM objects, no framework types). Style per ADR-0004.
    - Docstring written FOR THE LLM: what it does, when to use it vs the other
      tools, one concrete example call. This docstring is prompt engineering —
      the agent chooses tools by reading it.
@@ -32,7 +33,7 @@ A tool is the agent's API. It never lands without a test and eval coverage.
 
 ## Rules
 
-- Read-only. Tools never mutate the graph or the index.
+- Read-only. Retrieval methods never mutate the graph or the index.
 - `run_cypher` escape hatch stays read-only (reject non-MATCH queries).
 - If the tool count exceeds ~6, stop and consolidate — too many similar tools
   degrades the agent's routing more than it helps.
