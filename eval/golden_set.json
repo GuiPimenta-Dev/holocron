@@ -75,7 +75,7 @@
     "id": "multi-hop-dooku-jedi-trainer-species",
     "category": "multi-hop",
     "question": "What species is the Jedi who trained Dooku?",
-    "expected_facts": ["Yoda"],
+    "expected_facts": ["Yoda", "Yoda's species"],
     "expected_citations": ["Dooku", "Yoda"],
     "expected_continuity": "Same chain in both continuities: Dooku's Jedi trainer is Yoda, of Yoda's (unnamed) species."
   },

@@ -2,16 +2,21 @@
 
 History lives where the traces live: dataset items are upserted by question id,
 and each graded question pushes its scores onto the Langfuse trace of the answer
-that produced it. Not unit-tested (external service, no mocks — doctrine);
-verified by real pushes against the local Langfuse.
+that produced it. Dataset run-items (linking traces into the dataset's Runs view)
+are deliberately skipped — scores-on-traces is the #11 contract; revisit if the
+Runs view earns its keep. The score mapping is unit-tested with a fake client;
+the real API surface is verified by real pushes against the local Langfuse.
 """
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING
 
 from eval.golden import GoldenSet
 from eval.report import PersistedRun
+
+if TYPE_CHECKING:
+    from langfuse import Langfuse
 
 DATASET_NAME = "holocron-golden-set"
 
@@ -19,7 +24,7 @@ DATASET_NAME = "holocron-golden-set"
 class LangfuseSync:
     """Client injected by the composition root; this class only maps domain -> Langfuse calls."""
 
-    def __init__(self, client: Any):
+    def __init__(self, client: Langfuse):
         self._client = client
 
     def register_golden_set(self, golden: GoldenSet) -> int:
