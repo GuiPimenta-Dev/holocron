@@ -13,7 +13,15 @@ import pytest
 
 from core.domain import Citation, Continuity
 from eval.golden import Category, GoldenSet
-from eval.report import AnswerRecord, CitationChecker, PersistedRun, QuestionGrade, ReportRenderer, ScoreBoard
+from eval.report import (
+    AnswerRecord,
+    BaselineStore,
+    CitationChecker,
+    PersistedRun,
+    QuestionGrade,
+    ReportRenderer,
+    ScoreBoard,
+)
 
 FIXTURE_RUNS = Path(__file__).parent / "fixtures" / "eval_runs"
 MULTI_HOP_RUN = FIXTURE_RUNS / "20260710T164433Z"
@@ -141,6 +149,38 @@ def test_regressions_are_detected_and_listed_first(golden):
     flips = ScoreBoard(current_grades).flips_against(ScoreBoard(baseline_grades))
     assert [f.direction for f in flips] == ["regressed", "fixed"]
     assert flips[0].strategy == "agent"  # passed in baseline, fails now
+
+
+# --- baseline store ---
+
+
+def test_promote_and_latest(tmp_path):
+    store = BaselineStore(tmp_path / "baselines")
+    assert store.latest() is None
+    dest = store.promote(MULTI_HOP_RUN)
+    assert store.latest() == dest
+    assert (dest / "run.json").exists()
+    assert (dest / "agent" / "multi-hop-boba-fett-donor-species.json").exists()
+
+
+def test_promote_rejects_incomplete_run(tmp_path):
+    broken = tmp_path / "broken"
+    shutil.copytree(MULTI_HOP_RUN, broken)
+    (broken / "run.json").unlink()
+    with pytest.raises(ValueError, match="incomplete"):
+        BaselineStore(tmp_path / "baselines").promote(broken)
+
+
+def test_promote_rejects_double_promotion(tmp_path):
+    store = BaselineStore(tmp_path / "baselines")
+    store.promote(MULTI_HOP_RUN)
+    with pytest.raises(ValueError, match="already"):
+        store.promote(MULTI_HOP_RUN)
+
+
+def test_grades_carry_the_trace_id(golden):
+    run = PersistedRun.load(MULTI_HOP_RUN, golden)
+    assert all(g.trace_id for g in run.grades)  # every fixture answer was traced
 
 
 # --- rendering ---

@@ -16,7 +16,8 @@ means nothing alone; the delta is the result.
 2. **Run**: `uv run python -m eval answer` (all three Retrieval Strategies:
    vector-only, graph-only, agent). One strategy: `--strategy X`; one category:
    `--category Y`. Then `uv run python -m eval judge` (free; existing verdicts
-   kept — delete `*.verdict.json` to re-judge).
+   kept — delete `*.verdict.json` to re-judge). Then `uv run python -m eval push`
+   to register the Golden Set dataset and attach the run's scores in Langfuse.
 3. **Compare**: `uv run python -m eval report` — reads the latest run and the
    latest Baseline from `eval/baselines/`, renders citation-check + Judge tables
    (rows = 4 categories: single-hop, multi-hop, continuity-conflict,
@@ -27,8 +28,9 @@ means nothing alone; the delta is the result.
      that flipped from pass to fail (read them from the run output).
    - Unanswerable category dropped = hallucination increase. Flag loudly.
    - Only then mention improvements.
-5. **Persist**: on user confirmation that this run is the new reference, save it
-   to `eval/baselines/` (timestamped) and update the results table in README.md.
+5. **Persist**: on user confirmation that this run is the new reference, promote
+   it — `uv run python -m eval promote <run-id>` (copies it into `eval/baselines/`,
+   which is versioned; commit it) — and update the results table in README.md.
 
 ## Rules
 

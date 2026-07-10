@@ -10,6 +10,7 @@ refusal is the Judge's call (#15).
 from __future__ import annotations
 
 import json
+import shutil
 from collections.abc import Iterable
 from dataclasses import dataclass, replace
 from pathlib import Path
@@ -26,6 +27,7 @@ class AnswerRecord:
     question_id: str
     answer: str
     citations: tuple[Citation, ...]
+    trace_id: str | None = None
 
     @classmethod
     def from_json(cls, artifact: dict[str, Any]) -> AnswerRecord:
@@ -38,7 +40,12 @@ class AnswerRecord:
             )
             for c in artifact["citations"]
         )
-        return cls(question_id=artifact["id"], answer=artifact["answer"], citations=citations)
+        return cls(
+            question_id=artifact["id"],
+            answer=artifact["answer"],
+            citations=citations,
+            trace_id=artifact.get("trace_id"),
+        )
 
 
 @dataclass(frozen=True)
@@ -57,6 +64,7 @@ class QuestionGrade:
     judge_passed: bool | None = None
     hallucinated: bool | None = None  # None = not judged yet
     judge_reasoning: str = ""
+    trace_id: str | None = None  # Langfuse trace of the answering run
 
 
 @dataclass(frozen=True)
@@ -84,11 +92,21 @@ class CitationChecker:
         if question is None:
             raise ValueError(f"artifact {record.question_id!r} is not in the golden set")
         if question.category is Category.UNANSWERABLE:
-            return QuestionGrade(question.id, question.question, question.category, strategy, None, ())
+            return QuestionGrade(
+                question.id, question.question, question.category, strategy, None, (), trace_id=record.trace_id
+            )
         cited = {c.title for c in record.citations if _consistent(c)}
         matched = set(question.expected_citations) & cited
         missing = tuple(t for t in question.expected_citations if t not in cited)
-        return QuestionGrade(question.id, question.question, question.category, strategy, bool(matched), missing)
+        return QuestionGrade(
+            question.id,
+            question.question,
+            question.category,
+            strategy,
+            bool(matched),
+            missing,
+            trace_id=record.trace_id,
+        )
 
 
 def _consistent(citation: Citation) -> bool:
@@ -164,6 +182,27 @@ class ScoreBoard:
             direction: Literal["regressed", "fixed"] = "regressed" if base.passed and not grade.passed else "fixed"
             flips.append(Flip(grade.strategy, grade.question_id, grade.question, direction))
         return sorted(flips, key=lambda f: (f.direction != "regressed", f.strategy, f.question_id))
+
+
+class BaselineStore:
+    """Owns eval/baselines/: the Baseline moves only by explicit promotion (spec #11)."""
+
+    def __init__(self, root: Path):
+        self._root = root
+
+    def promote(self, run_dir: Path) -> Path:
+        if not (run_dir / "run.json").exists():
+            raise ValueError(f"{run_dir}: no manifest — an incomplete run cannot become the Baseline")
+        dest = self._root / run_dir.name
+        if dest.exists():
+            raise ValueError(f"{dest}: this run is already a Baseline")
+        self._root.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(run_dir, dest)
+        return dest
+
+    def latest(self) -> Path | None:
+        completed = sorted(d for d in self._root.glob("*") if (d / "run.json").exists()) if self._root.exists() else []
+        return completed[-1] if completed else None
 
 
 # Presentation order of the A/B/C table columns; unknown strategies are appended.

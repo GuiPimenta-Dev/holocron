@@ -16,12 +16,116 @@
     "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
   },
   {
+    "id": "single-hop-aayla-secura-species",
+    "category": "single-hop",
+    "question": "What species is Aayla Secura?",
+    "expected_facts": ["Twi'lek"],
+    "expected_citations": ["Aayla Secura", "Aayla Secura/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-chewbacca-homeworld",
+    "category": "single-hop",
+    "question": "What is Chewbacca's homeworld?",
+    "expected_facts": ["Kashyyyk"],
+    "expected_citations": ["Chewbacca", "Chewbacca/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-ackbar-species",
+    "category": "single-hop",
+    "question": "What species is Admiral Gial Ackbar?",
+    "expected_facts": ["Mon Calamari"],
+    "expected_citations": ["Gial Ackbar", "Gial Ackbar/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-greedo-species",
+    "category": "single-hop",
+    "question": "What species is Greedo?",
+    "expected_facts": ["Rodian"],
+    "expected_citations": ["Greedo", "Greedo/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-bib-fortuna-species",
+    "category": "single-hop",
+    "question": "What species is Bib Fortuna?",
+    "expected_facts": ["Twi'lek"],
+    "expected_citations": ["Bib Fortuna", "Bib Fortuna/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-bail-organa-homeworld",
+    "category": "single-hop",
+    "question": "What is Bail Organa's homeworld?",
+    "expected_facts": ["Alderaan"],
+    "expected_citations": ["Bail Prestor Organa", "Bail Prestor Organa/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
     "id": "multi-hop-boba-fett-donor-species",
     "category": "multi-hop",
     "question": "What species was the genetic donor Boba Fett was cloned from?",
     "expected_facts": ["Jango Fett", "Human"],
     "expected_citations": ["Boba Fett", "Jango Fett"],
     "expected_continuity": "Same answer in both continuities: donor Jango Fett, a Human."
+  },
+  {
+    "id": "multi-hop-dooku-jedi-trainer-species",
+    "category": "multi-hop",
+    "question": "What species is the Jedi who trained Dooku?",
+    "expected_facts": ["Yoda"],
+    "expected_citations": ["Dooku", "Yoda"],
+    "expected_continuity": "Same chain in both continuities: Dooku's Jedi trainer is Yoda, of Yoda's (unnamed) species."
+  },
+  {
+    "id": "multi-hop-depa-billaba-trainer-species",
+    "category": "multi-hop",
+    "question": "What species is the Jedi Master who trained Depa Billaba?",
+    "expected_facts": ["Mace Windu", "Human"],
+    "expected_citations": ["Depa Billaba", "Mace Windu"],
+    "expected_continuity": "Same chain in both continuities: trained by Mace Windu, a Human."
+  },
+  {
+    "id": "multi-hop-owen-lars-partner-homeworld",
+    "category": "multi-hop",
+    "question": "What is the homeworld of Owen Lars's partner?",
+    "expected_facts": ["Beru", "Tatooine"],
+    "expected_citations": ["Owen Lars", "Beru Whitesun Lars"],
+    "expected_continuity": "Same chain in both continuities: his partner Beru Whitesun Lars is from Tatooine."
+  },
+  {
+    "id": "multi-hop-rey-father-species",
+    "category": "multi-hop",
+    "question": "What species was Rey's father?",
+    "expected_facts": ["Dathan", "Human"],
+    "expected_citations": ["Rey Skywalker", "Dathan"],
+    "expected_continuity": "Canon-only subjects (no Legends pages for Rey or Dathan); the chain is Rey -> her father Dathan -> Human."
+  },
+  {
+    "id": "multi-hop-padme-partner-homeworld",
+    "category": "multi-hop",
+    "question": "What is the homeworld of Padmé Amidala's husband?",
+    "expected_facts": ["Anakin", "Tatooine"],
+    "expected_citations": ["Padmé Amidala Naberrie", "Anakin Skywalker"],
+    "expected_continuity": "Same chain in both continuities: her husband Anakin Skywalker is from Tatooine."
+  },
+  {
+    "id": "multi-hop-leia-adoptive-father-homeworld",
+    "category": "multi-hop",
+    "question": "What is the homeworld of Leia's adoptive father?",
+    "expected_facts": ["Bail", "Alderaan"],
+    "expected_citations": ["Leia Skywalker Organa Solo", "Bail Prestor Organa"],
+    "expected_continuity": "The chain is Leia -> adoptive father Bail Organa -> Alderaan (distinguish from her biological father Anakin)."
+  },
+  {
+    "id": "multi-hop-ben-solo-jedi-trainer-homeworld",
+    "category": "multi-hop",
+    "question": "What is the homeworld of the Jedi Master who trained Ben Solo?",
+    "expected_facts": ["Luke Skywalker", "Tatooine"],
+    "expected_citations": ["Ben Solo", "Luke Skywalker"],
+    "expected_continuity": "Canon-only subject; among Ben Solo's trainers only Luke Skywalker is a Jedi Master, and his homeworld is Tatooine."
   },
   {
     "id": "continuity-conflict-anakin-trainers",
@@ -32,11 +136,107 @@
     "expected_continuity": "Answer per continuity: both list Obi-Wan Kenobi (and Qui-Gon Jinn), but only Legends lists Ki-Adi-Mundi among his trainers."
   },
   {
+    "id": "continuity-conflict-anakin-children",
+    "category": "continuity-conflict",
+    "question": "Who are Anakin Skywalker's children?",
+    "expected_facts": ["Luke", "Leia"],
+    "expected_citations": ["Anakin Skywalker", "Anakin Skywalker/Legends"],
+    "expected_continuity": "Answer per continuity: canon records Luke and Leia; the Legends page in this corpus records only Luke."
+  },
+  {
+    "id": "continuity-conflict-barriss-offee-trainers",
+    "category": "continuity-conflict",
+    "question": "Who trained Barriss Offee?",
+    "expected_facts": ["Luminara Unduli", "Anakin Skywalker"],
+    "expected_citations": ["Barriss Offee", "Barriss Offee/Legends"],
+    "expected_continuity": "Answer per continuity: both list Luminara Unduli, but only canon also lists Anakin Skywalker."
+  },
+  {
+    "id": "continuity-conflict-boba-fett-trainers",
+    "category": "continuity-conflict",
+    "question": "Who trained Boba Fett?",
+    "expected_facts": ["Aurra Sing", "Bossk'wassak'Cradossk"],
+    "expected_citations": ["Boba Fett", "Boba Fett/Legends"],
+    "expected_continuity": "Answer per continuity: both list Aurra Sing, but only canon also lists Bossk'wassak'Cradossk."
+  },
+  {
+    "id": "continuity-conflict-luke-trainers",
+    "category": "continuity-conflict",
+    "question": "Who trained Luke Skywalker?",
+    "expected_facts": ["Obi-Wan Kenobi", "Yoda", "Palpatine"],
+    "expected_citations": ["Luke Skywalker", "Luke Skywalker/Legends"],
+    "expected_continuity": "Answer per continuity: both list Obi-Wan Kenobi and Yoda, but only Legends also lists Palpatine."
+  },
+  {
+    "id": "continuity-conflict-2-1b-affiliations",
+    "category": "continuity-conflict",
+    "question": "Which organizations was the droid 2-1B affiliated with?",
+    "expected_facts": ["Galactic Empire", "Alliance to Restore the Republic", "New Republic"],
+    "expected_citations": ["2-1B", "2-1B/Legends"],
+    "expected_continuity": "Answer per continuity: both list the Galactic Empire and the Alliance to Restore the Republic, but only Legends adds the New Republic."
+  },
+  {
+    "id": "continuity-conflict-501st-headquarters",
+    "category": "continuity-conflict",
+    "question": "Where was the 501st Legion headquartered?",
+    "expected_facts": ["Coruscant", "DS-1"],
+    "expected_citations": ["501st Legion", "501st Legion/Legends"],
+    "expected_continuity": "Answer per continuity: both list Coruscant, but only Legends also lists the DS-1 Orbital Battle Station."
+  },
+  {
     "id": "unanswerable-vela-korr-species",
     "category": "unanswerable",
     "question": "What species is Jedi Master Vela Korr?",
     "expected_facts": [],
     "expected_citations": [],
     "expected_continuity": "Refuse: Vela Korr is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-darth-malvex-master",
+    "category": "unanswerable",
+    "question": "Who was Darth Malvex's Sith master?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Darth Malvex is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-kessari-prime-location",
+    "category": "unanswerable",
+    "question": "In which sector is the planet Kessari Prime located?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Kessari Prime is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-orin-vashe-lightsaber",
+    "category": "unanswerable",
+    "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Orin Vashe is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-ryx-delvane-bounties",
+    "category": "unanswerable",
+    "question": "Which bounties did the bounty hunter Ryx Delvane collect?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Ryx Delvane is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-threx-kavan-fleet",
+    "category": "unanswerable",
+    "question": "Which fleet did Admiral Threx Kavan command?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Threx Kavan is fabricated — zero corpus presence by construction, so any answer is a hallucination."
+  },
+  {
+    "id": "unanswerable-battle-of-vorn-tessel",
+    "category": "unanswerable",
+    "question": "Who won the Battle of Vorn Tessel?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: the Battle of Vorn Tessel is fabricated — zero corpus presence by construction, so any answer is a hallucination."
   }
 ]
