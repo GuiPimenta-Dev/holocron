@@ -16,6 +16,7 @@ import argparse
 import asyncio
 import hashlib
 import os
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -100,11 +101,20 @@ def _report(root: Path, golden: GoldenSet, run_id: str | None) -> None:
     baseline_dir = _latest_completed(root / "baselines")
     run = PersistedRun.load(run_dir, golden)
     baseline = PersistedRun.load(baseline_dir, golden) if baseline_dir else None
-    print(ReportRenderer().render(run, baseline))
+    text = ReportRenderer().render(run, baseline)
+    (run_dir / "report.md").write_text(text)
+    print(text)
 
 
 def _latest_completed(root: Path) -> Path | None:
-    completed = sorted(d for d in root.glob("*") if (d / "run.json").exists()) if root.exists() else []
+    """Newest run dir holding a manifest; incomplete (interrupted) dirs are skipped loudly."""
+    dirs = sorted(root.glob("*")) if root.exists() else []
+    completed = [d for d in dirs if (d / "run.json").exists()]
+    if completed and dirs and dirs[-1] not in completed:
+        print(
+            f"WARNING: skipping incomplete run {dirs[-1].name} (no manifest); reporting {completed[-1].name}",
+            file=sys.stderr,
+        )
     return completed[-1] if completed else None
 
 

@@ -10,12 +10,35 @@ refusal is the Judge's call (#15).
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, replace
+from collections.abc import Iterable
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
-from core.domain import Continuity
+from core.domain import Citation, Continuity
 from eval.golden import Category, GoldenSet
+
+
+@dataclass(frozen=True)
+class AnswerRecord:
+    """One persisted answer, typed at the disk edge (ADR-0004: dicts only at edges)."""
+
+    question_id: str
+    answer: str
+    citations: tuple[Citation, ...]
+
+    @classmethod
+    def from_json(cls, artifact: dict[str, Any]) -> AnswerRecord:
+        citations = tuple(
+            Citation(
+                title=c["title"],
+                name=c["name"],
+                continuity=Continuity(c["continuity"]),
+                section=c.get("section"),
+            )
+            for c in artifact["citations"]
+        )
+        return cls(question_id=artifact["id"], answer=artifact["answer"], citations=citations)
 
 
 @dataclass(frozen=True)
@@ -29,10 +52,6 @@ class QuestionGrade:
     passed: bool | None
     missing: tuple[str, ...]  # expected titles the answer did not cite
 
-    def flipped(self) -> QuestionGrade:
-        """The same grade with the opposite outcome (test/fixture helper)."""
-        return replace(self, passed=not self.passed if self.passed is not None else None)
-
 
 @dataclass(frozen=True)
 class Flip:
@@ -41,7 +60,7 @@ class Flip:
     strategy: str
     question_id: str
     question: str
-    direction: str  # "regressed" | "fixed"
+    direction: Literal["regressed", "fixed"]
 
 
 class CitationChecker:
@@ -54,21 +73,21 @@ class CitationChecker:
     def __init__(self, golden: GoldenSet):
         self._by_id = {q.id: q for q in golden.questions}
 
-    def grade(self, strategy: str, artifact: dict[str, Any]) -> QuestionGrade:
-        question = self._by_id.get(artifact["id"])
+    def grade(self, strategy: str, record: AnswerRecord) -> QuestionGrade:
+        question = self._by_id.get(record.question_id)
         if question is None:
-            raise ValueError(f"artifact {artifact['id']!r} is not in the golden set")
+            raise ValueError(f"artifact {record.question_id!r} is not in the golden set")
         if question.category is Category.UNANSWERABLE:
             return QuestionGrade(question.id, question.question, question.category, strategy, None, ())
-        cited = {c["title"] for c in artifact["citations"] if _consistent(c)}
+        cited = {c.title for c in record.citations if _consistent(c)}
         matched = set(question.expected_citations) & cited
         missing = tuple(t for t in question.expected_citations if t not in cited)
         return QuestionGrade(question.id, question.question, question.category, strategy, bool(matched), missing)
 
 
-def _consistent(citation: dict[str, Any]) -> bool:
-    expected = Continuity.LEGENDS if citation["title"].endswith("/Legends") else Continuity.CANON
-    return Continuity.parse(citation["continuity"]) is expected
+def _consistent(citation: Citation) -> bool:
+    expected = Continuity.LEGENDS if citation.title.endswith("/Legends") else Continuity.CANON
+    return citation.continuity is expected
 
 
 class PersistedRun:
@@ -95,7 +114,7 @@ class PersistedRun:
                 path = run_dir / strategy / f"{qid}.json"
                 if not path.exists():
                     raise ValueError(f"{run_dir}: missing artifact {strategy}/{qid}.json — run is incomplete")
-                grades.append(checker.grade(strategy, json.loads(path.read_text())))
+                grades.append(checker.grade(strategy, AnswerRecord.from_json(json.loads(path.read_text()))))
         return cls(
             run_id=manifest["run_id"],
             corpus_lock_sha256=manifest["corpus_lock_sha256"],
@@ -107,7 +126,7 @@ class PersistedRun:
 class ScoreBoard:
     """Per-category x per-strategy aggregation over graded questions."""
 
-    def __init__(self, grades: list[QuestionGrade] | tuple[QuestionGrade, ...]):
+    def __init__(self, grades: Iterable[QuestionGrade]):
         self._grades = {(g.strategy, g.question_id): g for g in grades}
 
     def cell(self, category: Category, strategy: str) -> tuple[int, int]:
@@ -126,7 +145,7 @@ class ScoreBoard:
             base = baseline._grades.get(key)
             if base is None or grade.passed is None or base.passed is None or grade.passed == base.passed:
                 continue
-            direction = "regressed" if base.passed and not grade.passed else "fixed"
+            direction: Literal["regressed", "fixed"] = "regressed" if base.passed and not grade.passed else "fixed"
             flips.append(Flip(grade.strategy, grade.question_id, grade.question, direction))
         return sorted(flips, key=lambda f: (f.direction != "regressed", f.strategy, f.question_id))
 
@@ -139,9 +158,9 @@ class ReportRenderer:
     """Markdown table (readable in terminal and pasteable into the README)."""
 
     def render(self, run: PersistedRun, baseline: PersistedRun | None) -> str:
-        board = ScoreBoard(list(run.grades))
+        board = ScoreBoard(run.grades)
         comparable = baseline is not None and baseline.corpus_lock_sha256 == run.corpus_lock_sha256
-        base_board = ScoreBoard(list(baseline.grades)) if baseline and comparable else None
+        base_board = ScoreBoard(baseline.grades) if baseline and comparable else None
 
         lines = [f"# Eval report — run {run.run_id}", ""]
         if baseline is None:
