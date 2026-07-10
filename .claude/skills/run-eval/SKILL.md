@@ -10,14 +10,18 @@ means nothing alone; the delta is the result.
 
 ## Steps
 
-1. **Preflight**: confirm indices exist (LanceDB dir + Neo4j reachable) and the
-   golden set loads. If either fails, stop and report — don't burn API calls on
-   a broken setup.
-2. **Run**: `uv run python -m eval.harness` (all three configs: vector-only,
-   graph-only, agent). If the user asked for one config only, pass it through.
-3. **Compare**: load the latest baseline from `eval/baselines/`. Produce a table:
-   rows = 4 categories (single-hop, multi-hop, canon-vs-legends, unanswerable),
-   columns = the three configs, cells = score with delta vs baseline.
+1. **Preflight**: confirm indices exist (LanceDB dir + Neo4j reachable), the
+   golden set loads, and the `claude` CLI is logged in (the Judge runs through
+   it). If any fails, stop and report — don't burn API calls on a broken setup.
+2. **Run**: `uv run python -m eval answer` (all three Retrieval Strategies:
+   vector-only, graph-only, agent). One strategy: `--strategy X`; one category:
+   `--category Y`. Then `uv run python -m eval judge` (free; existing verdicts
+   kept — delete `*.verdict.json` to re-judge).
+3. **Compare**: `uv run python -m eval report` — reads the latest run and the
+   latest Baseline from `eval/baselines/`, renders citation-check + Judge tables
+   (rows = 4 categories: single-hop, multi-hop, continuity-conflict,
+   unanswerable; columns = the three strategies; cells = pass rate with delta
+   vs Baseline) and persists `report.md` into the run dir.
 4. **Interpret** — in this order:
    - Any category regressed >2 points? Name it first, with 2–3 example questions
      that flipped from pass to fail (read them from the run output).
@@ -28,8 +32,8 @@ means nothing alone; the delta is the result.
 
 ## Rules
 
-- Judge model and rubric are fixed in `eval/` config — never change them in the
-  same run as a system change (you'd be moving the ruler with the object).
+- Judge model and rubric are pinned in `eval/judge.py` — never change them in
+  the same run as a system change (you'd be moving the ruler with the object).
 - Flipped questions get quoted verbatim in the report; aggregate scores hide
   what actually broke.
 - A run that errors mid-way is discarded, not partially reported.

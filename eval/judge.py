@@ -12,7 +12,6 @@ Langfuse-traced (scores are pushed programmatically, #16).
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -90,16 +89,25 @@ class Verdict:
             data = json.loads(cleaned)
         except ValueError:
             raise ValueError(f"unparseable verdict: {text[:200]!r}") from None
+        if not isinstance(data, dict):
+            raise ValueError(f"verdict must be a JSON object: {cleaned[:200]!r}")
         if not isinstance(data.get("passed"), bool) or not isinstance(data.get("hallucinated"), bool):
             raise ValueError(f"verdict fields must be booleans: {cleaned[:200]!r}")
         return cls(passed=data["passed"], hallucinated=data["hallucinated"], reasoning=str(data.get("reasoning", "")))
 
 
 class ClaudeJudge:
-    """One judgment per call through `claude -p` (owned CLI transport, model pinned)."""
+    """One judgment per call through `claude -p` (owned CLI transport, model pinned).
 
-    def __init__(self, model: str = JUDGE_MODEL):
-        self._model = model
+    `env` is injected by the composition root (ADR-0004: environment read there
+    only). It must NOT contain ANTHROPIC_API_KEY: the key would bill the API per
+    token instead of the subscription (spec #11: judging costs nothing per run)
+    and overrides the claude.ai login.
+    """
+
+    def __init__(self, env: dict[str, str]):
+        self._model = JUDGE_MODEL
+        self._env = env
 
     def judge(self, question: GoldenQuestion, record: AnswerRecord) -> Verdict:
         prompt = _PROMPT.format(
@@ -111,25 +119,26 @@ class ClaudeJudge:
             answer=record.answer,
             citations=", ".join(c.title for c in record.citations) or "(none)",
         )
-        # The API key (loaded from .env for the system under test) must NOT reach the
-        # CLI: it would bill the API per token instead of the subscription (spec #11:
-        # judging costs nothing per run) and overrides the claude.ai login.
-        env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
         try:
             proc = subprocess.run(
                 ["claude", "-p", prompt, "--output-format", "json", "--model", self._model],
                 capture_output=True,
                 text=True,
                 timeout=300,
-                env=env,
+                env=self._env,
             )
         except FileNotFoundError:
             raise JudgeUnavailableError(
                 "`claude` CLI not found — the Judge runs through Claude Code; install it and run `claude login`"
             ) from None
+        except subprocess.TimeoutExpired:
+            raise JudgeUnavailableError("claude CLI timed out after 300s") from None
         if proc.returncode != 0:
             raise JudgeUnavailableError(f"claude CLI failed (logged out?): {proc.stderr.strip()[:300]}")
-        envelope = json.loads(proc.stdout)
+        try:
+            envelope = json.loads(proc.stdout)
+        except ValueError:
+            raise JudgeUnavailableError(f"claude CLI printed non-JSON: {proc.stdout[:300]!r}") from None
         if envelope.get("is_error"):
             raise JudgeUnavailableError(f"claude CLI returned an error: {envelope.get('result', '')[:300]}")
         return Verdict.parse(envelope["result"])
@@ -142,7 +151,10 @@ class JudgeRunner:
         self._judge = judge
 
     def run(self, run_dir: Path, golden: GoldenSet) -> int:
-        manifest = json.loads((run_dir / "run.json").read_text())
+        manifest_path = run_dir / "run.json"
+        if not manifest_path.exists():
+            raise ValueError(f"{run_dir}: no manifest — the run is incomplete and cannot be judged")
+        manifest = json.loads(manifest_path.read_text())
         by_id = {q.id: q for q in golden.questions}
         judged = 0
         pairs = [(s, q) for s in manifest["strategies"] for q in manifest["questions"]]

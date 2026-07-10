@@ -42,7 +42,11 @@ def main() -> None:
     answer.add_argument("--strategy", choices=STRATEGY_NAMES, help="run one strategy only (default: all three)")
     report = sub.add_parser("report", help="citation-check a persisted run and render the table vs the Baseline")
     report.add_argument("--run", help="run id under eval/runs (default: latest completed)")
-    judge = sub.add_parser("judge", help="judge a persisted run via claude -p (Opus, pinned rubric); free, re-runnable")
+    judge = sub.add_parser(
+        "judge",
+        help="judge a persisted run via claude -p (Opus, pinned rubric); free; "
+        "existing verdicts are kept — delete *.verdict.json to re-judge",
+    )
     judge.add_argument("--run", help="run id under eval/runs (default: latest completed)")
     args = parser.parse_args()
 
@@ -121,8 +125,10 @@ def _judge(root: Path, golden: GoldenSet, run_id: str | None) -> None:
     run_dir = (root / "runs" / run_id) if run_id else _latest_completed(root / "runs")
     if run_dir is None:
         raise SystemExit("no completed run under eval/runs — run `python -m eval answer` first")
+    # No ANTHROPIC_API_KEY: the judge must bill the subscription, not the API (spec #11).
+    judge_env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}
     try:
-        judged = JudgeRunner(ClaudeJudge()).run(run_dir, golden)
+        judged = JudgeRunner(ClaudeJudge(judge_env)).run(run_dir, golden)
     except JudgeUnavailableError as exc:
         raise SystemExit(f"judge unavailable: {exc}") from None
     print(f"{judged} new verdict(s) in {run_dir}")

@@ -55,7 +55,7 @@ class QuestionGrade:
     passed: bool | None
     missing: tuple[str, ...]  # expected titles the answer did not cite
     judge_passed: bool | None = None
-    hallucinated: bool = False
+    hallucinated: bool | None = None  # None = not judged yet
     judge_reasoning: str = ""
 
 
