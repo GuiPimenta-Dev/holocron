@@ -40,12 +40,16 @@ Boundary rules (non-negotiable):
 ## Code style (ADR-0004)
 
 - Public surface is classes and methods only; loose functions may exist private
-  (`_name`), pure, inside the module that uses them.
-- Whoever owns a resource or configuration is a class. Resources are constructed
-  once in the composition root (`api/__main__.py`, eval harness, CLI entrypoints)
-  and injected via constructor — required params, no hidden defaults, no class
-  constructs its own resource dependency. Config is read from the environment at
-  the composition root only.
+  (`_name`), pure, inside the module that uses them. Two carve-outs: module
+  factories for Protocol implementations (`provider_from_env` — a Protocol has
+  no home class) and shared private IO helpers inside `core/`.
+- Whoever owns a resource or configuration is a class. Shared resources (DB
+  drivers, index tables, embedding providers) are constructed once in the
+  composition root (`api/__main__.py`, `ingest/__main__.py`, eval harness,
+  tests' conftest) and injected via constructor — required params, no hidden
+  defaults. A class may build a client it exclusively owns (WikiClient's HTTP
+  session, the agent's LLM client). The environment is read at composition
+  roots only.
 - Implementation inheritance is forbidden. Polymorphism goes through
   `typing.Protocol`; the only carve-out is custom exceptions extending
   `Exception`. Prefer composition (has-a) always.

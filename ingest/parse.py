@@ -12,60 +12,6 @@ from dataclasses import dataclass, field
 import mwparserfromhell as mw
 from mwparserfromhell.wikicode import Wikicode
 
-_NON_INFOBOX = {
-    "top",
-    "otheruses",
-    "youmay",
-    "multipleissues",
-    "quote",
-    "dialogue",
-    "redirect",
-    "about",
-    "correct title",
-    "shortstory",
-    "update",
-    "more",
-    "expand",
-    "image",
-    "citation",
-    "cite",
-    "eras",
-    "title",
-    "conjecture",
-    "disambig",
-    "nocanon",
-    "noncanon",
-    "interlang",
-    "cn",
-    "storycite",
-    "legoweb",
-}
-
-_SKIP_PARAMS = {
-    "image",
-    "image2",
-    "image3",
-    "imagesize",
-    "caption",
-    "option1",
-    "option2",
-    "option3",
-    "name",
-    "hide",
-}
-
-_SKIP_SECTIONS = {
-    "appearances",
-    "sources",
-    "notes and references",
-    "external links",
-    "non-canon appearances",
-    "real-world similarities",
-    "bibliography",
-}
-
-_CHUNK_MAX = 1500
-
 
 @dataclass
 class Entity:
@@ -128,11 +74,57 @@ class PageParser:
     """Turns one cached wiki page into an Entity (or nothing)."""
 
     # Templates that look like infoboxes (many named params) but aren't.
-    NON_INFOBOX = _NON_INFOBOX
+    NON_INFOBOX = {
+        "top",
+        "otheruses",
+        "youmay",
+        "multipleissues",
+        "quote",
+        "dialogue",
+        "redirect",
+        "about",
+        "correct title",
+        "shortstory",
+        "update",
+        "more",
+        "expand",
+        "image",
+        "citation",
+        "cite",
+        "eras",
+        "title",
+        "conjecture",
+        "disambig",
+        "nocanon",
+        "noncanon",
+        "interlang",
+        "cn",
+        "storycite",
+        "legoweb",
+    }
     # Infobox params that are page furniture, never lore.
-    SKIP_PARAMS = _SKIP_PARAMS
-    SKIP_SECTIONS = _SKIP_SECTIONS
-    CHUNK_MAX = _CHUNK_MAX
+    SKIP_PARAMS = {
+        "image",
+        "image2",
+        "image3",
+        "imagesize",
+        "caption",
+        "option1",
+        "option2",
+        "option3",
+        "name",
+        "hide",
+    }
+    SKIP_SECTIONS = {
+        "appearances",
+        "sources",
+        "notes and references",
+        "external links",
+        "non-canon appearances",
+        "real-world similarities",
+        "bibliography",
+    }
+    CHUNK_MAX = 1500
 
     def parse(self, title: str, wikitext: str, categories: list[str]) -> Entity | None:
         """Returns None for real-world pages (actors, films, companies) and redirects.

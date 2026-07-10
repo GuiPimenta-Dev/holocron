@@ -145,7 +145,7 @@ def _cmd_embed() -> None:
     from core.embeddings import provider_from_env
     from ingest.embed import IndexBuilder
 
-    builder = IndexBuilder(provider_from_env(dict(os.environ)), "data/lancedb")
+    builder = IndexBuilder(provider_from_env(dict(os.environ), retries=8), "data/lancedb")
     chunks = [json.loads(line) for line in CHUNKS_FILE.read_text().splitlines()]
     print(f"{builder.build(chunks)} chunks embedded into data/lancedb")
 

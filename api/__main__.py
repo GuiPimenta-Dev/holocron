@@ -34,6 +34,7 @@ def main() -> None:
     agent = HolocronAgent(
         graph=KnowledgeGraph(driver),
         index=VectorIndex(provider_from_env(dict(os.environ)), chunks),
+        traced=bool(os.environ.get("LANGFUSE_PUBLIC_KEY")),
     )
     try:
         uvicorn.run(create_app(agent), host="127.0.0.1", port=8000)

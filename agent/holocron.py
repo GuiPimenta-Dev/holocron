@@ -9,7 +9,6 @@ callback when LANGFUSE_* keys are configured.
 from __future__ import annotations
 
 import json
-import os
 import sys
 from collections.abc import AsyncIterator
 from typing import Any, Protocol
@@ -81,7 +80,7 @@ class Citations:
 class HolocronAgent:
     """Streams plain-dict events; the API layer maps them 1:1 onto SSE."""
 
-    def __init__(self, graph: KnowledgeGraph, index: VectorIndex, model: str = MODEL):
+    def __init__(self, graph: KnowledgeGraph, index: VectorIndex, traced: bool, model: str = MODEL):
         self._graph = graph
         self._index = index
         # ponytail: thinking disabled — Sonnet 5 defaults to adaptive thinking, but
@@ -94,7 +93,7 @@ class HolocronAgent:
             thinking={"type": "disabled"},
         )
         self._callbacks: list[Any] = []
-        if os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        if traced:
             from langfuse.langchain import CallbackHandler
 
             self._callbacks = [CallbackHandler()]
@@ -155,7 +154,9 @@ class HolocronAgent:
         def get_relations(name: str) -> list[dict[str, Any]]:
             return [r.as_dict() for r in citations.record(self._graph.get_relations(name))]
 
-        def search_chunks(query: str, continuity: str | None = None, k: int = 8):
+        def search_chunks(
+            query: str, continuity: str | None = None, k: int = 8
+        ) -> list[dict[str, Any]]:
             # a user-pinned continuity overrides whatever the LLM passes
             wanted = str(restrict) if restrict else continuity
             return [c.as_dict() for c in citations.record(self._index.search(query, wanted, k))]
