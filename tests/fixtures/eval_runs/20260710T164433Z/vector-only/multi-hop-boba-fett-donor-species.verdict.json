@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Jango Fett, Human) and makes the multi-hop chain explicit\u2014Boba was cloned from Jango, who is human, so Boba is human\u2014correctly noting it holds in both continuities, with no invented links.",
+  "judge_model": "claude-opus-4-8"
+}

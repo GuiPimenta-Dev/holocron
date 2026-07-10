@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Literal
 
@@ -43,7 +43,10 @@ class AnswerRecord:
 
 @dataclass(frozen=True)
 class QuestionGrade:
-    """One strategy's deterministic grade on one question. passed=None: not citation-graded."""
+    """One strategy's grades on one question: deterministic + judge halves.
+
+    passed=None: not citation-graded (unanswerable). judge_passed=None: not judged yet.
+    """
 
     question_id: str
     question: str
@@ -51,6 +54,9 @@ class QuestionGrade:
     strategy: str
     passed: bool | None
     missing: tuple[str, ...]  # expected titles the answer did not cite
+    judge_passed: bool | None = None
+    hallucinated: bool = False
+    judge_reasoning: str = ""
 
 
 @dataclass(frozen=True)
@@ -114,7 +120,17 @@ class PersistedRun:
                 path = run_dir / strategy / f"{qid}.json"
                 if not path.exists():
                     raise ValueError(f"{run_dir}: missing artifact {strategy}/{qid}.json — run is incomplete")
-                grades.append(checker.grade(strategy, AnswerRecord.from_json(json.loads(path.read_text()))))
+                grade = checker.grade(strategy, AnswerRecord.from_json(json.loads(path.read_text())))
+                verdict_path = run_dir / strategy / f"{qid}.verdict.json"
+                if verdict_path.exists():
+                    v = json.loads(verdict_path.read_text())
+                    grade = replace(
+                        grade,
+                        judge_passed=v["passed"],
+                        hallucinated=v["hallucinated"],
+                        judge_reasoning=v.get("reasoning", ""),
+                    )
+                grades.append(grade)
         return cls(
             run_id=manifest["run_id"],
             corpus_lock_sha256=manifest["corpus_lock_sha256"],
@@ -154,13 +170,16 @@ class ScoreBoard:
 _STRATEGY_ORDER = ("vector-only", "graph-only", "agent")
 
 
+def _as_judge_grades(grades: Iterable[QuestionGrade]) -> list[QuestionGrade]:
+    """Judge verdicts as a ScoreBoard input: `passed` becomes the judge's call."""
+    return [replace(g, passed=g.judge_passed) for g in grades]
+
+
 class ReportRenderer:
     """Markdown table (readable in terminal and pasteable into the README)."""
 
     def render(self, run: PersistedRun, baseline: PersistedRun | None) -> str:
-        board = ScoreBoard(run.grades)
         comparable = baseline is not None and baseline.corpus_lock_sha256 == run.corpus_lock_sha256
-        base_board = ScoreBoard(baseline.grades) if baseline and comparable else None
 
         lines = [f"# Eval report — run {run.run_id}", ""]
         if baseline is None:
@@ -172,29 +191,52 @@ class ReportRenderer:
             )
         else:
             lines.append(f"Baseline: {baseline.run_id} — cells show pass rate and delta.")
-        lines.append("")
 
         strategies = [s for s in _STRATEGY_ORDER if s in run.strategies]
         strategies += [s for s in run.strategies if s not in strategies]
-        lines.append("| Category | " + " | ".join(strategies) + " |")
-        lines.append("|---" * (len(strategies) + 1) + "|")
-        rows = 0
+
+        board = ScoreBoard(run.grades)
+        base_board = ScoreBoard(baseline.grades) if baseline and comparable else None
+        lines += ["", "## Citation check", ""]
+        lines += self._table(board, base_board, strategies)
+        if not any(g.passed is not None for g in run.grades):
+            lines += [
+                "",
+                "No citation-gradable questions in this run — unanswerable questions are scored by the Judge.",
+            ]
+
+        judged = any(g.judge_passed is not None for g in run.grades)
+        judge_board = judge_base = None
+        if judged:
+            judge_board = ScoreBoard(_as_judge_grades(run.grades))
+            judge_base = ScoreBoard(_as_judge_grades(baseline.grades)) if baseline and comparable else None
+            lines += ["", "## Judge", ""]
+            lines += self._table(judge_board, judge_base, strategies)
+
+        hallucinations = [g for g in run.grades if g.hallucinated]
+        if hallucinations:
+            lines += ["", "## ⚠ HALLUCINATIONS", ""]
+            lines += [
+                f'- **{g.strategy}/{g.question_id}**: "{g.question}" — {g.judge_reasoning}' for g in hallucinations
+            ]
+
+        for title, cur, base in (("citation check", board, base_board), ("judge", judge_board, judge_base)):
+            if cur is None or base is None:
+                continue
+            flips = cur.flips_against(base)
+            if flips:
+                lines += ["", f"## Flipped vs Baseline ({title})", ""]
+                lines += [f'- **{f.direction}** {f.strategy}/{f.question_id}: "{f.question}"' for f in flips]
+        return "\n".join(lines) + "\n"
+
+    def _table(self, board: ScoreBoard, base: ScoreBoard | None, strategies: list[str]) -> list[str]:
+        lines = ["| Category | " + " | ".join(strategies) + " |", "|---" * (len(strategies) + 1) + "|"]
         for category in Category:
-            cells = [self._cell(board, base_board, category, s) for s in strategies]
+            cells = [self._cell(board, base, category, s) for s in strategies]
             if all(c == "–" for c in cells):
                 continue
             lines.append(f"| {category} | " + " | ".join(cells) + " |")
-            rows += 1
-        if rows == 0:
-            lines.append("")
-            lines.append("No citation-gradable questions in this run — unanswerable questions are scored by the Judge.")
-
-        if base_board is not None:
-            flips = board.flips_against(base_board)
-            if flips:
-                lines += ["", "## Flipped vs Baseline", ""]
-                lines += [f'- **{f.direction}** {f.strategy}/{f.question_id}: "{f.question}"' for f in flips]
-        return "\n".join(lines) + "\n"
+        return lines
 
     def _cell(self, board: ScoreBoard, base: ScoreBoard | None, category: Category, strategy: str) -> str:
         passed, graded = board.cell(category, strategy)
