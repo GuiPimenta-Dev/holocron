@@ -1,0 +1,21 @@
+{
+  "id": "multi-hop-depa-billaba-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi Master who trained Depa Billaba?",
+  "answer": "Depa Billaba was trained by Jedi Master **Mace Windu**, who is human in both continuities — canon and Legends. In canon, Billaba herself is also depicted as human, while in Legends she is a Chalactan.\n\nSo, the answer to your question: Mace Windu, Depa Billaba's Jedi Master, is **human**.",
+  "citations": [
+    {
+      "title": "Depa Billaba/Legends",
+      "name": "Depa Billaba",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Depa Billaba",
+      "name": "Depa Billaba",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "ca8bd923311111850b180baa42283116"
+}

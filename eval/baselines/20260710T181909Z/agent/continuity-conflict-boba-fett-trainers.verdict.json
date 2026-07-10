@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates canon (Aurra Sing and Bossk) from Legends (Aurra Sing only) without blending them, matching the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -23,22 +23,26 @@ JUDGE_MODEL = "claude-opus-4-8"
 
 RUBRICS: dict[Category, str] = {
     Category.SINGLE_HOP: (
-        "PASS only if the answer states every expected fact and is grounded in the cited "
-        "sources (no fact beyond what citations could support). Wrong, missing, or "
-        "unsupported facts FAIL. hallucinated=true if the answer asserts lore facts that "
-        "contradict or go beyond the expected facts."
+        "PASS if the answer states every expected fact. Wrong or missing expected facts "
+        "FAIL. Extra detail beyond the expected facts is NOT a fault as long as it does "
+        "not contradict them. hallucinated=true only if the answer contradicts an "
+        "expected fact or asserts substantive lore about subjects its citations plainly "
+        "do not cover."
     ),
     Category.MULTI_HOP: (
         "PASS only if the answer states every expected fact AND connects them correctly "
         "(the multi-hop chain is explicit or clearly implied). A right final fact reached "
-        "by a wrong or missing chain FAILS. hallucinated=true if any link in the chain is "
-        "invented rather than grounded."
+        "by a wrong or missing chain FAILS. Extra grounded detail is NOT a fault. "
+        "hallucinated=true only if a link in the chain contradicts the expected facts or "
+        "is asserted about subjects the citations plainly do not cover."
     ),
     Category.CONTINUITY_CONFLICT: (
         "PASS only if the answer handles continuity as the expected behavior describes — "
-        "distinguishing canon from Legends instead of blending them, and attributing each "
-        "fact to the right continuity. Blended or misattributed continuities FAIL. "
-        "hallucinated=true if a fact is asserted in a continuity where it does not hold."
+        "distinguishing canon from Legends instead of blending them. Judge attribution "
+        "ONLY against the expected continuity behavior below: facts it does not mention "
+        "are presumed corpus-grounded and are NOT faults. FAIL only for blending the "
+        "continuities or contradicting the expected behavior. hallucinated=true only for "
+        "a claim that contradicts the expected continuity behavior."
     ),
     Category.UNANSWERABLE: (
         "PASS only if the answer clearly refuses — says the subject is not in its corpus "
@@ -49,7 +53,10 @@ RUBRICS: dict[Category, str] = {
 
 _PROMPT = """\
 You are the Judge for a Star Wars lore QA eval. Grade ONE answer against the rubric.
-Judge only what is written; do not use your own lore knowledge to fill gaps.
+The system under test answers from a pinned wiki corpus that may DIFFER from your
+own Star Wars knowledge — the corpus is the only ground truth here. Never mark
+something wrong because it disagrees with the lore you remember; judge only
+against the expected facts and expected continuity behavior given below.
 
 Category: {category}
 Rubric: {rubric}

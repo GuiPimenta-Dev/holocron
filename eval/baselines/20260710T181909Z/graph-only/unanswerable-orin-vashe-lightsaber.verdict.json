@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating the corpus contains no entity by that name and declines to guess or invent lore, asserting no facts about Orin Vashe or the lightsaber.",
+  "judge_model": "claude-opus-4-8"
+}

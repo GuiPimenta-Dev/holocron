@@ -1,0 +1,33 @@
+{
+  "id": "single-hop-bail-organa-homeworld",
+  "category": "single-hop",
+  "question": "What is Bail Organa's homeworld?",
+  "answer": "Bail Organa's homeworld is **Alderaan**. This holds true in both continuities:\n\n- **Canon**: Bail Prestor Organa was an Alderaanian human male who represented Alderaan in the Galactic Senate and later married Queen Breha Organa of Alderaan.\n- **Legends**: Bail Prestor Organa was likewise a native of Alderaan, born to its reigning queen, Mazicia, and a father from the noble House of Organa.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "4f220018395414a297f7c9197b554d82"
+}

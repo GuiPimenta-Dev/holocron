@@ -1,0 +1,81 @@
+{
+  "id": "continuity-conflict-anakin-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Anakin Skywalker?",
+  "answer": "In both continuities, Anakin Skywalker's principal Jedi training came from **Obi-Wan Kenobi**:\n\n- **In canon**: After being discovered on Tatooine, Anakin was inducted into the Jedi Order and became Obi-Wan Kenobi's Padawan. Kenobi trained him for years — teaching him lightsaber combat, guiding his construction of his first lightsaber on Ilum, and mentoring him through many missions during the Clone Wars, eventually coming to see him as a brother.\n\n- **In Legends**: Qui-Gon Jinn, who first discovered Anakin on Tatooine, was killed by Darth Maul before he could train the boy himself. Qui-Gon's dying wish was for his own apprentice, Obi-Wan Kenobi, to train Anakin, and the Jedi Council reluctantly agreed. Kenobi then served as Anakin's Master from that point through his knighthood.\n\nWorth noting: Anakin was almost trained by **Qui-Gon Jinn** directly in both continuities, but Jinn's death on Naboo passed that duty to Kenobi. Additionally, in the shadows, **Chancellor Palpatine (Darth Sidious)** secretly cultivated a mentorship with Anakin over the years, ultimately turning him into his Sith apprentice, Darth Vader — a corrupting influence separate from his official Jedi training.",
+  "citations": [
+    {
+      "title": "Ki-Adi-Mundi/Legends",
+      "name": "Ki-Adi-Mundi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Mace Windu",
+      "name": "Mace Windu",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Obi-Wan Kenobi/Legends",
+      "name": "Obi-Wan Kenobi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Obi-Wan Kenobi",
+      "name": "Obi-Wan Kenobi",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi",
+      "name": "Jedi",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Chosen One/Legends",
+      "name": "Chosen One",
+      "continuity": "legends",
+      "section": "History of the Chosen One"
+    },
+    {
+      "title": "Palpatine/Legends",
+      "name": "Palpatine",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Powers and abilities"
+    },
+    {
+      "title": "Chosen One",
+      "name": "Chosen One",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "69344484268a9df6672b873e3a65cf81"
+}

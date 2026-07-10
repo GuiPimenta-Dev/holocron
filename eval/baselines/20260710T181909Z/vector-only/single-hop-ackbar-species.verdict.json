@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Ackbar is Mon Calamari in both continuities, matching the expected fact, with only non-contradicting extra detail.",
+  "judge_model": "claude-opus-4-8"
+}

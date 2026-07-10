@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer blends continuities by attributing Bossk to canon-only correctly but adds an unsupported 'donor'/Jango Fett trainer claim and, critically, omits Bossk'wassak'Cradossk from the Legends listing while the expected behavior says Legends lists Aurra Sing (which it does) \u2014 however it fabricates a canon/Legends split framing that contradicts by treating Jango as a listed trainer, contradicting the expected two-fact attribution.",
+  "judge_model": "claude-opus-4-8"
+}

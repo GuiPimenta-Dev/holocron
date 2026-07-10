@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-aayla-secura-species",
+  "category": "single-hop",
+  "question": "What species is Aayla Secura?",
+  "answer": "The infobox entries don't list species directly, so let me check her relations for a species link.Aayla Secura is a **Twi'lek** — this holds true in both **canon** and **Legends** continuities. She was a blue-skinned Twi'lek Jedi Master trained by Quinlan Vos.",
+  "citations": [
+    {
+      "title": "Aayla Secura",
+      "name": "Aayla Secura",
+      "continuity": "canon"
+    },
+    {
+      "title": "Aayla Secura/Legends",
+      "name": "Aayla Secura",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "f865656d7d3fe074f1bfbf307559e729"
+}

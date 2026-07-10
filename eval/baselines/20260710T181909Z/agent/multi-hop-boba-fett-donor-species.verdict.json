@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Jango Fett as donor, Human species) and correctly asserts the same continuity behavior across canon and Legends, matching the cited Boba Fett pages.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "continuity-conflict-boba-fett-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Boba Fett?",
+  "answer": "In canon, Boba Fett was trained by his father (and clone template), **Jango Fett**. Over roughly ten years on Kamino, Jango personally taught Boba piloting, marksmanship, hand-to-hand combat, survival skills, and how to operate and pilot his ship, *Slave I*, even bringing him along on real bounty-hunting missions (such as the job on Telerath/Ord Mantell to capture a runaway Twi'lek) to give him practical experience.\n\nIn Legends, the story is similar — Boba was raised as Jango Fett's son, and after Jango's death at the Battle of Geonosis, Boba drew on his father's teachings and later refined his skills as a bounty hunter working alongside figures like Bossk, Dengar, and Asajj Ventress, but his primary formative training still came from Jango.",
+  "citations": [
+    {
+      "title": "Jango Fett",
+      "name": "Jango Fett",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Boba Fett's armor",
+      "name": "Boba Fett's armor",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Boba Fett",
+      "name": "Boba Fett",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "5327cbf62b1821069ee1cb1a7c4d93d8"
+}

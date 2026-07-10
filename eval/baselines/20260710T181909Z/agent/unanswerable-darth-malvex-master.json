@@ -1,0 +1,51 @@
+{
+  "id": "unanswerable-darth-malvex-master",
+  "category": "unanswerable",
+  "question": "Who was Darth Malvex's Sith master?",
+  "answer": "Empty result — my corpus has no entry for \"Darth Malvex.\" Let me try relations directly in case of alternate indexing.I don't have any entry for \"Darth Malvex\" in my corpus — no character by that name appears in the knowledge graph or the wiki text. I can't find any information on a Sith named Darth Malvex, so I can't confirm who their master was. This may be a name from a source outside my pinned corpus, or a misspelling of another Sith Lord's name — if you can confirm the spelling or provide more context, I'm happy to search again.",
+  "citations": [
+    {
+      "title": "Sith/Legends",
+      "name": "Sith",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Jedi",
+      "name": "Jedi",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Darth/Legends",
+      "name": "Darth",
+      "continuity": "legends",
+      "section": "Overview"
+    },
+    {
+      "title": "Order of the Sith Lords",
+      "name": "Order of the Sith Lords",
+      "continuity": "legends",
+      "section": "Members"
+    },
+    {
+      "title": "Sith Master/Legends",
+      "name": "Sith Master",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Darth",
+      "name": "Darth",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Darth Maul/Legends",
+      "name": "Darth Maul",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "514f9a2d2f14520f18a7d0c2989db752"
+}

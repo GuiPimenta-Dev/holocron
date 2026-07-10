@@ -1,0 +1,45 @@
+{
+  "id": "single-hop-bail-organa-homeworld",
+  "category": "single-hop",
+  "question": "What is Bail Organa's homeworld?",
+  "answer": "It seems the tools returned no data for \"Bail Organa\" directly. Let me try alternate lookups.Bail Organa's homeworld is **Alderaan** — in both continuities. He was known formally as Bail Prestor Organa of Alderaan, representing the planet in the Galactic Senate (and later the Imperial Senate) as its viceroy/senator, in both canon and Legends continuities.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Alderaan",
+      "name": "Alderaan",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Alderaan sector",
+      "name": "Alderaan sector",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "276177e15abdb7727ed6d0aab8075c9c"
+}

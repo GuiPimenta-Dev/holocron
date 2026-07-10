@@ -1,0 +1,21 @@
+{
+  "id": "continuity-conflict-barriss-offee-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Barriss Offee?",
+  "answer": "Barriss Offee was trained as a Jedi Padawan by **Jedi Master Luminara Unduli**, a fellow Mirialan. This holds true in both continuities:\n\n- **Canon**: Offee was \"trained as a Padawan under Jedi Master Luminara Unduli.\"\n- **Legends**: Offee \"embarked under the tutelage of Jedi Master Luminara Unduli,\" who instructed her in the ways of the Force as well as the traditions of their shared Mirialan heritage. In Legends specifically, she also learned proper lightsaber grip and combat honing from Tutso Mara, and later received Force-healing expertise from Stass Allie (noted in canon as well).",
+  "citations": [
+    {
+      "title": "Barriss Offee",
+      "name": "Barriss Offee",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Barriss Offee/Legends",
+      "name": "Barriss Offee",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "af8b9f74ca1e8f44d8b2b9e1d143b04b"
+}

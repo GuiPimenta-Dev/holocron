@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Naboo as the homeworld and cites the Legends page, with no contradiction of the expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

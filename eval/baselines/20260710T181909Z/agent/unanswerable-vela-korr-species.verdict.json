@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer refuses by stating the corpus has no record of Vela Korr and declines to confirm any species, asserting no lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

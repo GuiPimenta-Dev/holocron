@@ -1,0 +1,42 @@
+{
+  "run_id": "20260710T181909Z",
+  "strategies": [
+    "agent",
+    "graph-only",
+    "vector-only"
+  ],
+  "category": null,
+  "corpus_lock_sha256": "c82411f2fb4724fe5e47e2d4d8c96a98a68fe9ef1f99ecf3b0d50333c71ce08c",
+  "questions": [
+    "single-hop-kit-fisto-species",
+    "single-hop-padme-homeworld",
+    "single-hop-aayla-secura-species",
+    "single-hop-chewbacca-homeworld",
+    "single-hop-ackbar-species",
+    "single-hop-greedo-species",
+    "single-hop-bib-fortuna-species",
+    "single-hop-bail-organa-homeworld",
+    "multi-hop-boba-fett-donor-species",
+    "multi-hop-dooku-jedi-trainer-species",
+    "multi-hop-depa-billaba-trainer-species",
+    "multi-hop-owen-lars-partner-homeworld",
+    "multi-hop-rey-father-species",
+    "multi-hop-padme-partner-homeworld",
+    "multi-hop-leia-adoptive-father-homeworld",
+    "multi-hop-ben-solo-jedi-trainer-homeworld",
+    "continuity-conflict-anakin-trainers",
+    "continuity-conflict-anakin-children",
+    "continuity-conflict-barriss-offee-trainers",
+    "continuity-conflict-boba-fett-trainers",
+    "continuity-conflict-luke-trainers",
+    "continuity-conflict-2-1b-affiliations",
+    "continuity-conflict-501st-headquarters",
+    "unanswerable-vela-korr-species",
+    "unanswerable-darth-malvex-master",
+    "unanswerable-kessari-prime-location",
+    "unanswerable-orin-vashe-lightsaber",
+    "unanswerable-ryx-delvane-bounties",
+    "unanswerable-threx-kavan-fleet",
+    "unanswerable-battle-of-vorn-tessel"
+  ]
+}

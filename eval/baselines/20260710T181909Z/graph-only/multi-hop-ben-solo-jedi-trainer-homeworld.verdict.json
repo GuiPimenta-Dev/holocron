@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Luke Skywalker trained Ben Solo, homeworld Tatooine) and makes the trainer\u2192homeworld chain explicit, correctly treating it as canon.",
+  "judge_model": "claude-opus-4-8"
+}

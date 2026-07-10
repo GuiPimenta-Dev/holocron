@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Dooku was trained by two Jedi according to the corpus: **Yoda** and, in canon, also **Darth Sidious** (though that was Sith training, not Jedi training — as a Jedi Padawan, Dooku's true trainer was Yoda).Yoda, the Jedi Master who trained Count Dooku (in both canon and Legends), belongs to an unnamed species — Wookieepedia does not give it a specific name in the corpus; Yoda's own species is simply referred to as \"Yoda's species,\" which remains unidentified in Star Wars lore. There's no \"SPECIES\" property listed for Yoda in either continuity in this corpus.\n\nSo, to directly answer: Dooku's Jedi trainer was **Yoda**, whose species is unnamed/unidentified — often just called \"Yoda's species\" in both canon and Legends sources.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends"
+    },
+    {
+      "title": "Yoda",
+      "name": "Yoda",
+      "continuity": "canon"
+    },
+    {
+      "title": "Yoda/Legends",
+      "name": "Yoda",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "87be5bb133b86c610d35866f2e12324a"
+}

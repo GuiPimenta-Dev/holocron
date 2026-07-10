@@ -1,0 +1,24 @@
+{
+  "id": "multi-hop-padme-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Padmé Amidala's husband?",
+  "answer": "Padmé Amidala's husband is Anakin Skywalker.Anakin Skywalker's homeworld is **Tatooine**, in both canon and Legends (birth listed as \"41 BBY, Tatooine\"). Since Padmé Amidala married Anakin Skywalker, his homeworld — Tatooine — is the answer in both continuities.",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends"
+    },
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "af7f24b689c51889b5d78eaea7c0211d"
+}

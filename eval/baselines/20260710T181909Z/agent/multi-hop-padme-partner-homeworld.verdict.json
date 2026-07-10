@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Anakin Skywalker as the husband and Tatooine as his homeworld, making the multi-hop chain explicit and correct in both continuities as expected.",
+  "judge_model": "claude-opus-4-8"
+}

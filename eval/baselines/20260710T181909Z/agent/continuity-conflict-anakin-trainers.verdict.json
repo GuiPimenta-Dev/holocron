@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer cleanly separates canon (Qui-Gon, Obi-Wan) from Legends and correctly restricts Ki-Adi-Mundi to the Legends trainer list, matching the expected continuity behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

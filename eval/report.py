@@ -214,6 +214,11 @@ def _as_judge_grades(grades: Iterable[QuestionGrade]) -> list[QuestionGrade]:
     return [replace(g, passed=g.judge_passed) for g in grades]
 
 
+def _trace(grade: QuestionGrade | None) -> str:
+    """Langfuse trace pointer for a failing question (run-eval: regressions are debuggable)."""
+    return f" (trace `{grade.trace_id}`)" if grade and grade.trace_id else ""
+
+
 class ReportRenderer:
     """Markdown table (readable in terminal and pasteable into the README)."""
 
@@ -256,16 +261,22 @@ class ReportRenderer:
         if hallucinations:
             lines += ["", "## ⚠ HALLUCINATIONS", ""]
             lines += [
-                f'- **{g.strategy}/{g.question_id}**: "{g.question}" — {g.judge_reasoning}' for g in hallucinations
+                f'- **{g.strategy}/{g.question_id}**{_trace(g)}: "{g.question}" — {g.judge_reasoning}'
+                for g in hallucinations
             ]
 
+        by_key = {(g.strategy, g.question_id): g for g in run.grades}
         for title, cur, base in (("citation check", board, base_board), ("judge", judge_board, judge_base)):
             if cur is None or base is None:
                 continue
             flips = cur.flips_against(base)
             if flips:
                 lines += ["", f"## Flipped vs Baseline ({title})", ""]
-                lines += [f'- **{f.direction}** {f.strategy}/{f.question_id}: "{f.question}"' for f in flips]
+                lines += [
+                    f"- **{f.direction}** {f.strategy}/{f.question_id}"
+                    f'{_trace(by_key.get((f.strategy, f.question_id)))}: "{f.question}"'
+                    for f in flips
+                ]
         return "\n".join(lines) + "\n"
 
     def _table(self, board: ScoreBoard, base: ScoreBoard | None, strategies: list[str]) -> list[str]:

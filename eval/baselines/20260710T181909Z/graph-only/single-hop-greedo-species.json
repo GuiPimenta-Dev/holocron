@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "Greedo is a **Rodian**, in both canon and Legends continuity. He was born on Rodia (Legends specifies this explicitly; canon lists his homeworld as Tatooine, where he lived and worked as a bounty hunter for Jabba's criminal empire).",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "4e948c95501fe365e74580e045b5e708"
+}

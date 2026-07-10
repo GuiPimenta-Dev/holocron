@@ -1,0 +1,14 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "Padmé Amidala's homeworld is **Naboo** (confirmed in Legends; canon material consistently establishes the same, as Naboo is her home planet and where she serves as Queen and later Senator).",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "c11a06b86117cbf96e262c165da74517"
+}

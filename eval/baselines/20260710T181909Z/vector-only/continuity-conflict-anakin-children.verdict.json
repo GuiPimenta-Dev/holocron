@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer blends the continuities by claiming Leia is Anakin's child in both canon and Legends, contradicting the expected behavior that the corpus's Legends page records only Luke.",
+  "judge_model": "claude-opus-4-8"
+}

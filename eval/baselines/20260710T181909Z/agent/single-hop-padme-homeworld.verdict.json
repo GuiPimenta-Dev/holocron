@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Naboo) and the extra detail about Queen/Senator does not contradict it, matching the expected same-answer-in-both-continuities behavior.",
+  "judge_model": "claude-opus-4-8"
+}

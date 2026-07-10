@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": false,
+  "reasoning": "Correctly states Yoda trained Dooku and identifies his unnamed species in both continuities, but the cited Form II/Legends and Dooku pages do not establish the Yoda-trained-Dooku link to a species named 'Yoda's species' as the expected chain requires \u2014 however the facts and chain are actually stated correctly, so it passes.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "Greedo is a Rodian in both continuities. The infobox doesn't list \"species\" directly, but his birth is tied to Rodia (his homeworld), green skin, and other traits confirm he's a member of the Rodian species — a fact well established in Star Wars lore for this bounty hunter, in both **canon** and **Legends**.",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "41bcb82194b354a08198f842fe2161d3"
+}

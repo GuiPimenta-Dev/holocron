@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer keeps canon and Legends separate rather than blending them and lists Luminara Unduli in both, and omitting Anakin is not a fault per the rubric since unmentioned facts are presumed corpus-grounded.",
+  "judge_model": "claude-opus-4-8"
+}

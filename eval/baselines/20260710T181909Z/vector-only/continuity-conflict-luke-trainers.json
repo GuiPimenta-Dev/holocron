@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-luke-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Luke Skywalker?",
+  "answer": "In canon, Luke Skywalker was trained primarily by two Jedi Masters:\n\n- **Obi-Wan Kenobi** – gave Luke his initial training, including basic lightsaber combat (the \"training remote\" exercise) on the *Millennium Falcon* en route to Alderaan, and later guided him (as a Force ghost) to seek further training.\n- **Master Yoda** – on the swamp planet Dagobah, Yoda formally trained Luke in the ways of the Force and the Jedi Order, though Luke cut his training short to rescue his friends and later returned to complete it. Yoda declared Luke's training complete just before dying, though he noted Luke still had to confront Darth Vader to become a true Jedi.\n\nBeyond his formal masters, Luke also picked up additional combat experience/training from other sources, such as the mysterious \"Gamemaster\" (a servant of Grakkus the Hutt) who improved his lightsaber skills.\n\nThis is consistent in both **canon** and **Legends** continuities — in both, Kenobi begins Luke's training and Yoda completes it on Dagobah.",
+  "citations": [
+    {
+      "title": "Ki-Adi-Mundi/Legends",
+      "name": "Ki-Adi-Mundi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi training",
+      "name": "Jedi training",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Dagobah",
+      "name": "Dagobah",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi Order",
+      "name": "Jedi Order",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "2ce146b5b066afee2d8b84dd1c6cd27e"
+}

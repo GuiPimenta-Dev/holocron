@@ -1,0 +1,14 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "Padmé Amidala's homeworld is **Naboo** (confirmed in the Legends continuity data). Given that Naboo is her homeworld consistently across Star Wars canon as well, this holds true in both continuities.",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "e47ba989565d90f6e648421f4e3c8418"
+}

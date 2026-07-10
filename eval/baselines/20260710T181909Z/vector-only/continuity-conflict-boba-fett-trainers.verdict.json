@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer names Jango Fett as Boba's trainer in both continuities and never mentions Aurra Sing or Bossk'wassak'Cradossk, contradicting the expected continuity behavior (canon: Aurra Sing + Bossk'wassak'Cradossk; Legends: Aurra Sing).",
+  "judge_model": "claude-opus-4-8"
+}

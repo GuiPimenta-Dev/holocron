@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-anakin-children",
+  "category": "continuity-conflict",
+  "question": "Who are Anakin Skywalker's children?",
+  "answer": "In **canon**, Anakin Skywalker's children (with Padmé Amidala) are:\n- **Luke Skywalker**\n- **Leia Organa** (Leia Skywalker Organa Solo)\n\nIn **Legends**, the graph only lists **Luke Skywalker** as his child directly, though in Legends continuity Leia Organa Solo is also his daughter/twin sister of Luke — the corpus's Legends relation data just isn't as complete on that link.",
+  "citations": [
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "3d51f9429d8b05cae9870af5e8be6735"
+}

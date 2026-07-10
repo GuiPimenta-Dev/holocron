@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Dooku was trained by Yoda (and, in canon, also has a Force-bond/training connection listed with Darth Sidious/Palpatine as a Sith master).Dooku's Jedi master was **Yoda**, whose species is famously unnamed in Wookieepedia records — Yoda's own species has never been officially identified (it's simply referred to as \"Yoda's species\" in both canon and Legends). His infobox lists physical traits (green skin, green-gold or brown eyes depending on continuity, ~0.66 m tall) but no species designation is given, since that detail has deliberately never been revealed in official Star Wars material.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends"
+    },
+    {
+      "title": "Yoda",
+      "name": "Yoda",
+      "continuity": "canon"
+    },
+    {
+      "title": "Yoda/Legends",
+      "name": "Yoda",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "7f69c9f76bb175ecfeed007dbeeb7892"
+}
