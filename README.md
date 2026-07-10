@@ -25,10 +25,19 @@ The agent beats graph-only by falling back to prose when relations alone can't
 carry the answer. Its one unanswerable miss: refusing while name-dropping real
 Kessel lore — flagged by the Judge as a hallucination, exactly what that
 category exists to catch. The deterministic citation check agrees directionally
-(vector-only 85% on continuity-conflict, everything else 100% across the board).
+(vector-only 85% on continuity-conflict; every question it grades elsewhere
+passes; unanswerable is refusal-graded by the Judge only).
 
-Full report: `eval/baselines/20260710T181909Z/report.md`. Reproduce with the
-[eval commands](#eval) below — deltas are always reported against this Baseline.
+One full run costs **~US$3 / ~1.5h**: 90 Sonnet answer runs (the only paid
+part; wall time inflated by org-tier rate limits) + 90 free Opus verdicts via
+the `claude` CLI (~25 min). Re-judging is free; single-category iteration
+costs cents.
+
+Full report — every failing question with its Langfuse trace id — lives in
+[`eval/baselines/20260710T181909Z/report.md`](eval/baselines/20260710T181909Z/report.md);
+open the trace ids in the local Langfuse UI (<http://localhost:3001>) to debug.
+Reproduce with the [eval commands](#eval) below — deltas are always reported
+against this Baseline.
 
 ## Setup
 

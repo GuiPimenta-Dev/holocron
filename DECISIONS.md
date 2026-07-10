@@ -78,6 +78,8 @@
 | 33 | Docstrings | Duas classes: LLM-facing (tools de retrieval — obrigatórias, longas, intocáveis) vs internas (mínimas) | As docstrings das tools são prompt engineering — o agente roteia por elas |
 | 34 | Polimorfismo | Um único ponto: `EmbeddingProvider` (Protocol) em `core/embeddings.py` | Único type-switch repetido (ingest + query); centralizar mata bug latente de dimensão índice≠query. Rejeitados: Tool objects, estratégias polimórficas (fase 4), reescrever ifs de validação |
 | 35 | Pastas | `core/` (folha neutra: domain + embeddings) e `retrieval/` (substitui `tools.py`) | `retrieval` vem do glossário (Retrieval Strategy); `core/` resolve a fronteira ingest↔serving sem arquivos soltos na raiz |
+| 36 | Eval: rubrica | Rubrica do Judge v2 fixada ANTES do primeiro Baseline (run 20260710T181909Z): fato extra fundamentado não é alucinação; o corpus vence o conhecimento próprio do Judge; atribuição de continuidade julgada só contra o comportamento esperado | v1 punia respostas corretas (fatos extras) e usava lore de memória contra o grafo; ajustar antes de existir Baseline não move régua junto com objeto — os 90 veredictos foram re-julgados sob uma única rubrica |
+| 37 | Eval: runs interrompidas | Run que morre no meio nunca é reportada (sem manifest), mas é retomável com `eval answer --resume <run-id>` — só as respostas faltantes são geradas | O run oficial morreu em 60/90 por rate limit da org (429); descartar 60 respostas pagas re-paga a API sem ganho; o invariante "sem manifest = sem report" continua garantindo números completos |
 | 36 | Governança | Sem skill nova (decisão #13); skill `add-tool` atualizada para o novo layout | Estilo é restrição permanente (CLAUDE.md), não ritual |
 
 ## Risco nº 1

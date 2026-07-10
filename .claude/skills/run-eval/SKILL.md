@@ -38,4 +38,6 @@ means nothing alone; the delta is the result.
   the same run as a system change (you'd be moving the ruler with the object).
 - Flipped questions get quoted verbatim in the report; aggregate scores hide
   what actually broke.
-- A run that errors mid-way is discarded, not partially reported.
+- A run that errors mid-way is never partially reported (no manifest = no
+  report). Don't re-pay for its finished answers: complete it with
+  `uv run python -m eval answer --resume <run-id>`.

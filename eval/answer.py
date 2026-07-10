@@ -121,7 +121,7 @@ class AnswerRunner:
             for name, strategy in self._strategies.items():
                 if self._writer.existing(name, q.id):
                     self._writer.keep(name, q.id)
-                    print(f"    {name}: exists, kept (resume)")
+                    print(f"    {name}: exists, kept (resume)", flush=True)
                     continue
                 events = [ev async for ev in strategy.astream(q.question)]
                 result = QuestionResult.from_events(q, events)
