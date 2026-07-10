@@ -23,9 +23,7 @@ def test_citation_serializes_without_null_section():
 
 def test_provider_selection_prefers_openai_and_fails_loudly():
     assert isinstance(provider_from_env({"OPENAI_API_KEY": "x"}), OpenAIEmbeddings)
-    assert isinstance(
-        provider_from_env({"VOYAGE_API_KEY": "y"}), VoyageEmbeddings
-    )
+    assert isinstance(provider_from_env({"VOYAGE_API_KEY": "y"}), VoyageEmbeddings)
     assert isinstance(
         provider_from_env({"OPENAI_API_KEY": "x", "VOYAGE_API_KEY": "y"}), OpenAIEmbeddings
     )
