@@ -36,7 +36,7 @@ def neo4j_driver():
         with driver.session() as session:
             count = session.run("MATCH (e:Entity) RETURN count(e)").single(strict=True)[0]
             if count == 0:
-                _seed_from_fixtures()
+                _seed_from_fixtures(driver)
             else:
                 have = session.run("MATCH (e:Entity {name: 'Kit Fisto'}) RETURN count(e)").single(
                     strict=True
@@ -49,17 +49,18 @@ def neo4j_driver():
     driver.close()
 
 
-def _seed_from_fixtures() -> None:
-    from ingest import graph as graph_mod
-    from ingest.parse import parse_page
+def _seed_from_fixtures(driver) -> None:
+    from ingest.graph import GraphLoader
+    from ingest.parse import PageParser
 
+    parser = PageParser()
     entities = []
     for p in sorted(FIXTURES.glob("*.json")):
         page = json.loads(p.read_text())
-        e = parse_page(page["title"], page["wikitext"], page["categories"])
+        e = parser.parse(page["title"], page["wikitext"], page["categories"])
         if e:
             entities.append(e)
-    graph_mod.load(entities, {})
+    GraphLoader(driver).load(entities, {})
 
 
 @pytest.fixture(scope="session")

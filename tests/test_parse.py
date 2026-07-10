@@ -6,14 +6,14 @@ from pathlib import Path
 import pytest
 
 from ingest.graph import _edge_name, _resolve, _target_ok
-from ingest.parse import parse_page
+from ingest.parse import PageParser
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def load(name: str):
     page = json.loads((FIXTURES / f"{name}.json").read_text())
-    return parse_page(page["title"], page["wikitext"], page["categories"])
+    return PageParser().parse(page["title"], page["wikitext"], page["categories"])
 
 
 @pytest.fixture(scope="module")
@@ -58,7 +58,7 @@ def test_chunks_are_clean_text(kit):
 
 
 def test_page_without_infobox_returns_none():
-    assert parse_page("Redirect page", "#REDIRECT [[Anakin Skywalker]]", []) is None
+    assert PageParser().parse("Redirect page", "#REDIRECT [[Anakin Skywalker]]", []) is None
 
 
 def test_real_world_page_is_skipped():

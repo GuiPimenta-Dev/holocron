@@ -7,11 +7,10 @@ Edge names: curated map for the common fields, SCREAMING_SNAKE fallback.
 
 from __future__ import annotations
 
-import os
 import re
 from typing import LiteralString, cast
 
-from neo4j import GraphDatabase
+from neo4j import Driver
 
 from ingest.parse import Entity
 
@@ -35,38 +34,11 @@ FIELD_TO_EDGE = {
 # Fields that are properties of the entity, not relations — even if they
 # happen to contain wikilinks (dates link to year pages, etc.).
 PROP_FIELDS = {
-    "birth",
-    "death",
-    "gender",
-    "pronouns",
-    "height",
-    "mass",
-    "hair",
-    "eyes",
-    "skin",
-    "cyber",
-    "era",
-    "type",
-    "class",
-    "length",
-    "width",
-    "population",
-    "language",
-    "currency",
-    "atmosphere",
-    "climate",
-    "terrain",
-    "gravity",
-    "diameter",
-    "rotation",
-    "orbit",
-    "moons",
-    "suns",
-    "grid",
-}
-
-SAFE_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
-
+    "birth", "death", "gender", "pronouns", "height", "mass", "hair", "eyes",
+    "skin", "cyber", "era", "type", "class", "length", "width", "population",
+    "language", "currency", "atmosphere", "climate", "terrain", "gravity",
+    "diameter", "rotation", "orbit", "moons", "suns", "grid",
+}  # fmt: skip
 
 # Target-type compatibility matrix (decision #28) — CURATED edges only; the
 # uncurated tail is pruned only with eval evidence, never for aesthetics.
@@ -89,6 +61,8 @@ EDGE_TARGET_NEVER = {
     "SPECIES": {"Device", "Organization", "Celestialbody"},
 }
 
+SAFE_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+
 
 def _target_ok(rel: str, target_type: str) -> bool:
     if rel in EDGE_TARGET_ONLY and target_type not in EDGE_TARGET_ONLY[rel]:
@@ -104,16 +78,6 @@ def _edge_name(fieldname: str) -> str | None:
     return name if SAFE_NAME.match(name) else None
 
 
-def driver():
-    return GraphDatabase.driver(
-        os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
-        auth=(
-            os.environ.get("NEO4J_USER", "neo4j"),
-            os.environ.get("NEO4J_PASSWORD", "holocron123"),
-        ),
-    )
-
-
 def _resolve(
     target: str, continuity: str, corpus: set[str], redirects: dict[str, str]
 ) -> str | None:
@@ -124,64 +88,82 @@ def _resolve(
     return target if target in corpus else None
 
 
-def load(entities: list[Entity], redirects: dict[str, str]) -> dict[str, int]:
-    corpus = {e.title for e in entities}
-    nodes = [
-        {
-            "title": e.title,
-            "name": e.name,
-            "type": e.type,
-            "continuity": e.continuity,
-            "props": {k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]},
-        }
-        for e in entities
-    ]
-    types = {e.title: e.type for e in entities}
-    edges: dict[str, list[dict]] = {}
-    for e in entities:
-        for fieldname, value in e.fields.items():
-            rel = _edge_name(fieldname)
-            if rel is None:
-                continue
-            for link in value["links"]:
-                target = _resolve(link, e.continuity, corpus, redirects)
-                if target is None or target == e.title:
-                    continue
-                if not _target_ok(rel, types[target]):
-                    continue
-                edges.setdefault(rel, []).append({"src": e.title, "dst": target})
+class GraphLoader:
+    """Rebuilds the Neo4j graph from parsed entities (wipe-and-load)."""
 
-    with driver() as drv, drv.session() as session:
-        session.run("MATCH (n) DETACH DELETE n")  # load() rebuilds from scratch
-        session.run(
-            "CREATE CONSTRAINT entity_title IF NOT EXISTS FOR (e:Entity) REQUIRE e.title IS UNIQUE"
-        )
-        session.run(
-            # props first, core fields last: infobox fields like "type"
-            # ("Jedi", "Terrestrial") must not shadow the entity type.
-            "UNWIND $nodes AS n "
-            "MERGE (e:Entity {title: n.title}) "
-            "SET e += n.props, e.name = n.name, e.type = n.type, e.continuity = n.continuity",
-            nodes=nodes,
-        )
-        # Second pass: type-specific labels (dynamic labels need per-type queries).
-        for etype in {n["type"] for n in nodes}:
-            if SAFE_NAME.match(etype):
-                # cast is safe: etype/rel are SAFE_NAME-validated identifiers
-                session.run(
-                    cast(LiteralString, f"MATCH (e:Entity) WHERE e.type = $t SET e:`{etype}`"),
-                    t=etype,
-                )
-        edge_count = 0
-        for rel, rows in edges.items():
+    def __init__(self, driver: Driver):
+        self._driver = driver
+
+    def load(self, entities: list[Entity], redirects: dict[str, str]) -> dict[str, int]:
+        nodes = self._nodes(entities)
+        edges = self._edges(entities, redirects)
+        with self._driver.session() as session:
+            session.run("MATCH (n) DETACH DELETE n")  # load() rebuilds from scratch
             session.run(
-                cast(
-                    LiteralString,
-                    f"UNWIND $rows AS r "
-                    f"MATCH (a:Entity {{title: r.src}}), (b:Entity {{title: r.dst}}) "
-                    f"MERGE (a)-[:`{rel}`]->(b)",
-                ),
-                rows=rows,
+                "CREATE CONSTRAINT entity_title IF NOT EXISTS "
+                "FOR (e:Entity) REQUIRE e.title IS UNIQUE"
             )
-            edge_count += len(rows)
-    return {"nodes": len(nodes), "edges": edge_count, "edge_types": len(edges)}
+            session.run(
+                # props first, core fields last: infobox fields like "type"
+                # ("Jedi", "Terrestrial") must not shadow the entity type.
+                "UNWIND $nodes AS n "
+                "MERGE (e:Entity {title: n.title}) "
+                "SET e += n.props, e.name = n.name, e.type = n.type, "
+                "e.continuity = n.continuity",
+                nodes=nodes,
+            )
+            # Second pass: type-specific labels (dynamic labels need per-type queries).
+            for etype in {n["type"] for n in nodes}:
+                if SAFE_NAME.match(etype):
+                    # cast is safe: etype/rel are SAFE_NAME-validated identifiers
+                    session.run(
+                        cast(LiteralString, f"MATCH (e:Entity) WHERE e.type = $t SET e:`{etype}`"),
+                        t=etype,
+                    )
+            edge_count = 0
+            for rel, rows in edges.items():
+                session.run(
+                    cast(
+                        LiteralString,
+                        f"UNWIND $rows AS r "
+                        f"MATCH (a:Entity {{title: r.src}}), (b:Entity {{title: r.dst}}) "
+                        f"MERGE (a)-[:`{rel}`]->(b)",
+                    ),
+                    rows=rows,
+                )
+                edge_count += len(rows)
+        return {"nodes": len(nodes), "edges": edge_count, "edge_types": len(edges)}
+
+    @staticmethod
+    def _nodes(entities: list[Entity]) -> list[dict]:
+        return [
+            {
+                "title": e.title,
+                "name": e.name,
+                "type": e.type,
+                "continuity": e.continuity,
+                "props": {
+                    k: v["text"] for k, v in e.fields.items() if k in PROP_FIELDS and v["text"]
+                },
+            }
+            for e in entities
+        ]
+
+    @staticmethod
+    def _edges(entities: list[Entity], redirects: dict[str, str]) -> dict[str, list[dict]]:
+        corpus = {e.title for e in entities}
+        types = {e.title: e.type for e in entities}
+        edges: dict[str, list[dict]] = {}
+        for e in entities:
+            for fieldname, value in e.fields.items():
+                rel = _edge_name(fieldname)
+                if rel is None:
+                    continue
+                for link in value["links"]:
+                    target = _resolve(link, e.continuity, corpus, redirects)
+                    if target is None or target == e.title:
+                        continue
+                    if not _target_ok(rel, types[target]):
+                        continue
+                    edges.setdefault(rel, []).append({"src": e.title, "dst": target})
+        return edges
