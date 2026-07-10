@@ -7,7 +7,7 @@ Langfuse trace id is persisted per run, so a rubric change re-judges for free.
 from __future__ import annotations
 
 import json
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Protocol
@@ -70,46 +70,48 @@ class RunWriter:
     completed run, so an interrupted run can never be partially reported.
     """
 
-    def __init__(self, runs_root: Path, run_id: str, strategy: str, corpus_lock_sha256: str):
+    def __init__(self, runs_root: Path, run_id: str, corpus_lock_sha256: str):
         self._dir = runs_root / run_id
         self._run_id = run_id
-        self._strategy = strategy
         self._corpus_lock_sha256 = corpus_lock_sha256
-        self._written: list[str] = []
+        self._strategies: set[str] = set()
+        self._questions: dict[str, None] = {}  # insertion-ordered unique ids
 
-    def write(self, result: QuestionResult) -> Path:
-        strategy_dir = self._dir / self._strategy
+    def write(self, strategy: str, result: QuestionResult) -> Path:
+        strategy_dir = self._dir / strategy
         strategy_dir.mkdir(parents=True, exist_ok=True)
         path = strategy_dir / f"{result.question.id}.json"
         path.write_text(json.dumps(result.as_dict(), ensure_ascii=False, indent=2))
-        self._written.append(result.question.id)
+        self._strategies.add(strategy)
+        self._questions[result.question.id] = None
         return path
 
     def finish(self, category: Category | None) -> Path:
         manifest = {
             "run_id": self._run_id,
-            "strategies": [self._strategy],
+            "strategies": sorted(self._strategies),
             "category": str(category) if category else None,
             "corpus_lock_sha256": self._corpus_lock_sha256,
-            "questions": self._written,
+            "questions": list(self._questions),
         }
         (self._dir / "run.json").write_text(json.dumps(manifest, indent=2))
         return self._dir
 
 
 class AnswerRunner:
-    """Drives the strategy question-by-question, streaming progress to stdout."""
+    """Drives every Retrieval Strategy question-by-question, streaming progress to stdout."""
 
-    def __init__(self, strategy: Strategy, writer: RunWriter):
-        self._strategy = strategy
+    def __init__(self, strategies: Mapping[str, Strategy], writer: RunWriter):
+        self._strategies = strategies
         self._writer = writer
 
     async def run(self, golden: GoldenSet, category: Category | None) -> Path:
         questions = (golden.filter(category) if category else golden).questions
         for i, q in enumerate(questions, 1):
             print(f"[{i}/{len(questions)}] {q.id}", flush=True)
-            events = [ev async for ev in self._strategy.astream(q.question)]
-            result = QuestionResult.from_events(q, events)
-            self._writer.write(result)
-            print(f"    citations={len(result.citations)} trace={result.trace_id}")
+            for name, strategy in self._strategies.items():
+                events = [ev async for ev in strategy.astream(q.question)]
+                result = QuestionResult.from_events(q, events)
+                self._writer.write(name, result)
+                print(f"    {name}: citations={len(result.citations)} trace={result.trace_id}")
         return self._writer.finish(category)

@@ -23,6 +23,8 @@ from retrieval import KnowledgeGraph, VectorIndex
 
 MODEL = "claude-sonnet-5"
 
+TOOL_NAMES = frozenset({"get_entity", "get_relations", "search_chunks", "path_between", "run_cypher"})
+
 SYSTEM_PROMPT = """\
 You are Holocron, a Star Wars lore assistant answering strictly from a pinned
 Wookieepedia corpus exposed through your tools.
@@ -80,7 +82,19 @@ class Citations:
 class HolocronAgent:
     """Streams plain-dict events; the API layer maps them 1:1 onto SSE."""
 
-    def __init__(self, graph: KnowledgeGraph, index: VectorIndex, traced: bool, model: str = MODEL):
+    def __init__(
+        self,
+        graph: KnowledgeGraph,
+        index: VectorIndex,
+        traced: bool,
+        model: str = MODEL,
+        toolset: frozenset[str] | None = None,  # None = all tools (the production default)
+        tags: tuple[str, ...] = (),  # Langfuse trace tags (the eval tags per Retrieval Strategy)
+    ):
+        if toolset is not None and (unknown := toolset - TOOL_NAMES):
+            raise ValueError(f"unknown tool(s) {sorted(unknown)}; available: {sorted(TOOL_NAMES)}")
+        self._toolset = toolset
+        self._tags = tags
         self._graph = graph
         self._index = index
         # ponytail: thinking disabled — Sonnet 5 defaults to adaptive thinking, but
@@ -119,7 +133,10 @@ class HolocronAgent:
                 ("user", question),
             ]
         }
-        async for ev in graph.astream_events(inputs, config={"callbacks": self._callbacks}, version="v2"):
+        config: dict[str, Any] = {"callbacks": self._callbacks}
+        if self._tags:
+            config["metadata"] = {"langfuse_tags": list(self._tags)}
+        async for ev in graph.astream_events(inputs, config=config, version="v2"):
             kind = ev["event"]
             if kind == "on_chat_model_stream":
                 if text := _text(ev["data"]["chunk"].content):
@@ -174,7 +191,10 @@ class HolocronAgent:
         }
         for wrapper, method in sources.items():
             wrapper.__doc__ = method.__doc__
-        return [lc_tool(w) for w in sources]
+        wrappers = [w for w in sources if self._toolset is None or w.__name__ in self._toolset]
+        if self._toolset is not None and len(wrappers) != len(self._toolset):
+            raise RuntimeError(f"TOOL_NAMES drifted from the tools bound here: {sorted(self._toolset)}")
+        return [lc_tool(w) for w in wrappers]
 
     def _build_graph(self, tools: list[Any]) -> Any:
         llm = self._llm.bind_tools(tools)
