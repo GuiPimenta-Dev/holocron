@@ -1,0 +1,13 @@
+{
+  "run_id": "20260710T165239Z",
+  "strategies": [
+    "agent",
+    "graph-only",
+    "vector-only"
+  ],
+  "category": "unanswerable",
+  "corpus_lock_sha256": "c82411f2fb4724fe5e47e2d4d8c96a98a68fe9ef1f99ecf3b0d50333c71ce08c",
+  "questions": [
+    "unanswerable-vela-korr-species"
+  ]
+}
