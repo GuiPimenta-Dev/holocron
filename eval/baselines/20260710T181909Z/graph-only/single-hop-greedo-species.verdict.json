@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact that Greedo is a Rodian and gives consistent same-answer-in-both-continuities behavior, with extra homeworld detail that does not contradict the expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

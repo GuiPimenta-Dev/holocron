@@ -1,0 +1,57 @@
+{
+  "id": "unanswerable-orin-vashe-lightsaber",
+  "category": "unanswerable",
+  "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+  "answer": "I found no entry for \"Orin Vashe\" in the corpus, so I can't confirm this character exists in it. Let me try a broader search before concluding.I couldn't find any entry for \"Orin Vashe\" in the corpus — there's no character by that name in either the canon or Legends continuity that I have access to. I don't want to guess, so I can't tell you the color of this character's lightsaber. It's possible the name is misspelled, from a source outside this corpus, or doesn't exist in Star Wars canon/Legends as covered here. If you can confirm the spelling or provide more context (e.g., what media they appear in), I can search again.",
+  "citations": [
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Equipment"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Powers and abilities"
+    },
+    {
+      "title": "Sith lightsaber",
+      "name": "Sith lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Ki-Adi-Mundi's lightsaber",
+      "name": "Ki-Adi-Mundi's lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Sith lightsaber/Legends",
+      "name": "Sith lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Obi-Wan Kenobi's third lightsaber/Legends",
+      "name": "Obi-Wan Kenobi's third lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Curved-hilt lightsaber",
+      "name": "Curved-hilt lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "1d6cb1cd46e9f45479d2d4b4352790d8"
+}

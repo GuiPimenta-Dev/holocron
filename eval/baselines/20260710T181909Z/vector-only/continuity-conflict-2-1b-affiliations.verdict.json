@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer fails the expected per-continuity breakdown: it claims the individual 2-1B was affiliated only with the Rebel Alliance in both continuities and relegates the Galactic Empire and New Republic to a separate model-line discussion, contradicting the expected behavior that canon lists Empire + Alliance and Legends adds the New Republic.",
+  "judge_model": "claude-opus-4-8"
+}

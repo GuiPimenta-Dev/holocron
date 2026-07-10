@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "States both expected facts (Luke Skywalker, Tatooine) with the trainer\u2192homeworld chain explicit, and the extra Legends detail is grounded in cited titles without contradicting the expected canon facts.",
+  "judge_model": "claude-opus-4-8"
+}

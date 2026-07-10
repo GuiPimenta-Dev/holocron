@@ -1,0 +1,33 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "Greedo is a **Rodian** — a green-skinned, reptilian humanoid species native to the planet Rodia, known for large eyes with infrared vision and antennae used to detect vibrations. This holds true in both continuities: in **canon**, Greedo is a male Rodian bounty hunter who grew up on Tatooine; in **Legends**, he is likewise a Rodian, son of the bounty hunter Greedo the Elder, born on Rodia before fleeing as a refugee to the jungle planet U-Tendik.",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Rodian",
+      "name": "Rodian",
+      "continuity": "canon",
+      "section": "Rodians in the galaxy"
+    },
+    {
+      "title": "Rodian/Legends",
+      "name": "Rodian",
+      "continuity": "legends",
+      "section": "Biology and appearance"
+    }
+  ],
+  "trace_id": "1ceb774e7a4883f2c23f40c258cb789c"
+}

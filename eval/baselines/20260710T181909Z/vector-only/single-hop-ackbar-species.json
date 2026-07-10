@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-ackbar-species",
+  "category": "single-hop",
+  "question": "What species is Admiral Gial Ackbar?",
+  "answer": "Admiral Gial Ackbar is a **Mon Calamari** — a bipedal, amphibious humanoid species native to the ocean world of Mon Cala/Dac. This holds true in both continuities:\n\n- **Canon**: Ackbar was a male Mon Calamari from Mon Cala who rose from captain of the Mon Calamari Guard to become a top Rebel Alliance admiral, and later served the Resistance.\n- **Legends**: Ackbar was likewise a Mon Calamari, originally enslaved by the Empire before being rescued by the Rebel Alliance, after which he became a key admiral and rallied his species to the Rebellion's cause.",
+  "citations": [
+    {
+      "title": "Mon Calamari/Legends",
+      "name": "Mon Calamari",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Gial Ackbar",
+      "name": "Gial Ackbar",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Mon Calamari",
+      "name": "Mon Calamari",
+      "continuity": "canon",
+      "section": "Mon Calamari in the galaxy"
+    }
+  ],
+  "trace_id": "f655dd721223940945dbc204b4aa4d20"
+}

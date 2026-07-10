@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "Though hedged, the answer asserts substantive lore facts (Kessel is in the Kessel sector of the Outer Rim, appearing in canon and Legends) in response to a fabricated subject, which the rubric marks as a hallucinated failure.",
+  "judge_model": "claude-opus-4-8"
+}

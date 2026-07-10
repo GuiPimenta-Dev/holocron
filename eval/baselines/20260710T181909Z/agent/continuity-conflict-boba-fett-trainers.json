@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-boba-fett-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Boba Fett?",
+  "answer": "In **canon**, Boba Fett was trained by **Aurra Sing** and **Bossk** (Bossk'wassak'Cradossk), both fellow bounty hunters, after being raised initially by his father/genetic donor **Jango Fett**.\n\nIn **Legends**, Boba Fett was likewise trained by **Aurra Sing**.",
+  "citations": [
+    {
+      "title": "Boba Fett",
+      "name": "Boba Fett",
+      "continuity": "canon"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "07f1778b37a01a8cdbbe9d1b2975890b"
+}

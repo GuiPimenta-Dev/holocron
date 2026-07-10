@@ -1,0 +1,24 @@
+{
+  "id": "multi-hop-ben-solo-jedi-trainer-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of the Jedi Master who trained Ben Solo?",
+  "answer": "Ben Solo's Jedi training came from Luke Skywalker.In canon, Ben Solo (Kylo Ren) was trained as a Jedi by **Luke Skywalker**, whose homeworld is **Tatooine**.",
+  "citations": [
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "1e74f97ffd5054cb2f63994759a1fe3b"
+}

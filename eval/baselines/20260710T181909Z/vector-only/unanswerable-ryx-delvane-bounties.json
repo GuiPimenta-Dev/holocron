@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-ryx-delvane-bounties",
+  "category": "unanswerable",
+  "question": "Which bounties did the bounty hunter Ryx Delvane collect?",
+  "answer": "I found no information about a bounty hunter named \"Ryx Delvane\" in the corpus. None of the search results reference this name — the entity doesn't appear to exist in the pinned Wookieepedia data I have access to.\n\nI don't know — I can't find any record of \"Ryx Delvane\" in either canon or Legends sources. This character may not exist in the corpus, or you may be thinking of a different name. If you can confirm the spelling or provide more context (like which era, medium, or associated events), I can search again.",
+  "citations": [
+    {
+      "title": "Bounty hunter",
+      "name": "Bounty hunter",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Galactic Empire",
+      "name": "Galactic Empire",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Horox Ryyder/Legends",
+      "name": "Horox Ryyder",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "New Republic",
+      "name": "New Republic",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Bossk'wassak'Cradossk",
+      "name": "Bossk'wassak'Cradossk",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "9bf62826f34edf1d06b79a01b8f0b763"
+}

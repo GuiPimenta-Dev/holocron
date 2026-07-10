@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly states Bail Organa's homeworld is Alderaan, matching the expected fact, with the extra detail not contradicting it.",
+  "judge_model": "claude-opus-4-8"
+}

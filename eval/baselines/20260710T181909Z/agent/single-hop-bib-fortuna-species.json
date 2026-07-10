@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-bib-fortuna-species",
+  "category": "single-hop",
+  "question": "What species is Bib Fortuna?",
+  "answer": "The species field isn't directly listed, but Bib Fortuna is a **Twi'lek** — this holds true in both continuities (canon and Legends). He was born on Ryloth, the Twi'lek homeworld, consistent with his species in both versions of the lore.",
+  "citations": [
+    {
+      "title": "Bib Fortuna",
+      "name": "Bib Fortuna",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bib Fortuna/Legends",
+      "name": "Bib Fortuna",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "6485f426af06e1335fb03a6f19e404d0"
+}

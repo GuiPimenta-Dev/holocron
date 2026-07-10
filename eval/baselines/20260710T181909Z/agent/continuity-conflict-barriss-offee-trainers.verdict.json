@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates continuities\u2014canon lists both Luminara Unduli and Anakin Skywalker, Legends lists only Luminara Unduli\u2014matching the expected behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

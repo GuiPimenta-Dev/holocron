@@ -1,0 +1,45 @@
+{
+  "id": "multi-hop-boba-fett-donor-species",
+  "category": "multi-hop",
+  "question": "What species was the genetic donor Boba Fett was cloned from?",
+  "answer": "Boba Fett was cloned from **Jango Fett**, who was **human**. In both canon and Legends, the Kaminoan cloners used Jango Fett's DNA as the genetic template for the Grand Army of the Republic, and at Jango's request an unaltered clone — grown without the accelerated aging and behavioral modification given to the standard clone troopers — was raised by Jango as his son and named Boba Fett, making him an essentially exact genetic duplicate of the human bounty hunter Jango Fett.",
+  "citations": [
+    {
+      "title": "Cloning",
+      "name": "Cloning",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Cloning/Legends",
+      "name": "Cloning",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Jango Fett",
+      "name": "Jango Fett",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Clone template",
+      "name": "Clone template",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Clone trooper",
+      "name": "Clone trooper",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "904c88e2264bb0dd59c3f459f66821fb"
+}

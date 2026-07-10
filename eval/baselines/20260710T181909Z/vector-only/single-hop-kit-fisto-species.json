@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "Kit Fisto is a **Nautolan**, a Force-sensitive, amphibious humanoid species from the planet Glee Anselm — known for his green skin, large black eyes, and head-tentacles (which in Legends contained sensitive olfactory receptors). This is consistent in both **canon** and **Legends** continuities.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kit Fisto's lightsaber/Legends",
+      "name": "Kit Fisto's lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "1f8b47d0b86be0d0c90fc070ddf61bee"
+}

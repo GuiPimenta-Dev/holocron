@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer correctly reports canon (Luke, Leia) and the Legends corpus (Luke only), but then overrides the corpus with external lore by asserting Leia is also his Legends daughter and dismissing the corpus as incomplete, contradicting the expected continuity behavior that the Legends page records only Luke.",
+  "judge_model": "claude-opus-4-8"
+}

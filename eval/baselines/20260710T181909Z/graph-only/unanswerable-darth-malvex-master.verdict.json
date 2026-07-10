@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no results were found for Darth Malvex in the corpus and explicitly declines to guess or pull from outside memory, asserting no lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

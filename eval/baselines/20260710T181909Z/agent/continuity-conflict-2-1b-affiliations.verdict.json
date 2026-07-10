@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates continuities\u2014canon lists only the Galactic Empire and Alliance to Restore the Republic while Legends adds the New Republic\u2014matching the expected behavior without blending them.",
+  "judge_model": "claude-opus-4-8"
+}

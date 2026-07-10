@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": false,
+  "reasoning": "Dathan's Human species is inferred by the answer rather than stated by the corpus, so the multi-hop chain (Dathan -> Human) is not established by the cited facts, breaking the rubric's requirement that the chain be explicit or clearly implied by the expected facts.",
+  "judge_model": "claude-opus-4-8"
+}

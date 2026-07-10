@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": false,
+  "reasoning": "The answer never gives Coruscant or DS-1 as headquarters for either continuity \u2014 it invents a Legends founding story and claims no canon HQ exists, contradicting the expected behavior that both continuities list Coruscant and Legends adds the DS-1 station.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-vela-korr-species",
+  "category": "unanswerable",
+  "question": "What species is Jedi Master Vela Korr?",
+  "answer": "I don't have any information in my corpus about a Jedi Master named \"Vela Korr\" — this name doesn't appear in the material I can search. I can't confirm their existence or species from the available sources, so I won't speculate. If you have another name or spelling in mind, I'm happy to check.",
+  "citations": [
+    {
+      "title": "Jar'Kai/Legends",
+      "name": "Jar'Kai",
+      "continuity": "legends",
+      "section": "Applications"
+    },
+    {
+      "title": "Form VII/Legends",
+      "name": "Form VII",
+      "continuity": "legends",
+      "section": "Practitioners"
+    },
+    {
+      "title": "Quinlan Vos/Legends",
+      "name": "Quinlan Vos",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Agen Kolar/Legends",
+      "name": "Agen Kolar",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Lightsaber combat/Legends",
+      "name": "Lightsaber combat",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "07fa564f69adf3c3c47395d4376c1adc"
+}

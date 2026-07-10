@@ -1,0 +1,27 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Dooku was trained by Master **Yoda** — in both continuities. Yoda, the Jedi Grand Master, is a member of the **species known simply as \"Yoda's species,\"** which remains officially unnamed in Wookieepedia lore (it has no canonical species designation in either canon or Legends sources). \n\nTo directly answer your question: Dooku's Jedi trainer, Yoda, belongs to that same unidentified species commonly just called \"Yoda's species\" — Wookieepedia does not give it a formal name in either continuity.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Form II/Legends",
+      "name": "Form II",
+      "continuity": "legends",
+      "section": "Applications"
+    }
+  ],
+  "trace_id": "8d8fdb89d2cb50e3158716bbe4e00436"
+}

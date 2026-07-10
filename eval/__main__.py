@@ -40,6 +40,7 @@ def main() -> None:
     answer = sub.add_parser("answer", help="run the Retrieval Strategies over the Golden Set and persist a run dir")
     answer.add_argument("--category", choices=[str(c) for c in Category], help="run one category only")
     answer.add_argument("--strategy", choices=STRATEGY_NAMES, help="run one strategy only (default: all three)")
+    answer.add_argument("--resume", metavar="RUN_ID", help="fill in the missing answers of an interrupted run dir")
     report = sub.add_parser("report", help="citation-check a persisted run and render the table vs the Baseline")
     report.add_argument("--run", help="run id under eval/runs (default: latest completed)")
     judge = sub.add_parser(
@@ -108,7 +109,7 @@ def main() -> None:
     }
     writer = RunWriter(
         runs_root=root / "runs",
-        run_id=datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ"),
+        run_id=args.resume or datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ"),
         corpus_lock_sha256=hashlib.sha256(Path("corpus.lock").read_bytes()).hexdigest(),
     )
     try:

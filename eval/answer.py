@@ -86,6 +86,15 @@ class RunWriter:
         self._questions[result.question.id] = None
         return path
 
+    def existing(self, strategy: str, question_id: str) -> bool:
+        """True when this answer already sits on disk (an interrupted run being resumed)."""
+        return (self._dir / strategy / f"{question_id}.json").exists()
+
+    def keep(self, strategy: str, question_id: str) -> None:
+        """Register an existing answer so finish() counts it as part of the run."""
+        self._strategies.add(strategy)
+        self._questions[question_id] = None
+
     def finish(self, category: Category | None) -> Path:
         manifest = {
             "run_id": self._run_id,
@@ -110,8 +119,12 @@ class AnswerRunner:
         for i, q in enumerate(questions, 1):
             print(f"[{i}/{len(questions)}] {q.id}", flush=True)
             for name, strategy in self._strategies.items():
+                if self._writer.existing(name, q.id):
+                    self._writer.keep(name, q.id)
+                    print(f"    {name}: exists, kept (resume)")
+                    continue
                 events = [ev async for ev in strategy.astream(q.question)]
                 result = QuestionResult.from_events(q, events)
                 self._writer.write(name, result)
-                print(f"    {name}: citations={len(result.citations)} trace={result.trace_id}")
+                print(f"    {name}: citations={len(result.citations)} trace={result.trace_id}", flush=True)
         return self._writer.finish(category)

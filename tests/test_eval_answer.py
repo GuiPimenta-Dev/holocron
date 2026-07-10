@@ -75,6 +75,20 @@ def test_run_dir_shape(tmp_path):
     }
 
 
+def test_resume_keeps_existing_answers_in_the_manifest(tmp_path):
+    first = RunWriter(runs_root=tmp_path, run_id="r1", corpus_lock_sha256="deadbeef")
+    first.write("agent", QuestionResult.from_events(QUESTION, EVENTS))
+    # interrupted: no finish(). A resuming writer sees the artifact and keeps it.
+    resumed = RunWriter(runs_root=tmp_path, run_id="r1", corpus_lock_sha256="deadbeef")
+    assert resumed.existing("agent", QUESTION.id) is True
+    assert resumed.existing("agent", "never-answered") is False
+    resumed.keep("agent", QUESTION.id)
+    resumed.finish(category=None)
+    manifest = json.loads((tmp_path / "r1" / "run.json").read_text())
+    assert manifest["questions"] == [QUESTION.id]
+    assert manifest["strategies"] == ["agent"]
+
+
 def test_manifest_lands_only_on_finish(tmp_path):
     """An interrupted run has no manifest — it can never be reported (spec #11)."""
     writer = RunWriter(runs_root=tmp_path, run_id="r1", corpus_lock_sha256="deadbeef")

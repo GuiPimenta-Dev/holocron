@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-bail-organa-homeworld",
+  "category": "single-hop",
+  "question": "What is Bail Organa's homeworld?",
+  "answer": "Hmm, no results returned. Let me try again.It seems the tools aren't returning data for this query. Let me try a slightly different search.Bail Organa's homeworld is **Alderaan** — consistent in both continuities (in canon, \"Bail Prestor Organa\" → *Alderaan*; in Legends, \"Bail Prestor Organa/Legends\" → *Alderaan/Legends*). He was a Human of Alderaanian descent, and the planet was destroyed by the Death Star (canon: 1 BBY; Legends: 0 BBY), an event in which he himself perished.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "3c9498ae9f5959de257259fce0e3978f"
+}

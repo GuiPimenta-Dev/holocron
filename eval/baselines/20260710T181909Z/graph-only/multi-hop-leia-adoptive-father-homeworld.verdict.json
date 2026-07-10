@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer explicitly connects Leia to her adoptive father Bail Organa to homeworld Alderaan, stating both expected facts with a correct chain and citations covering the subject.",
+  "judge_model": "claude-opus-4-8"
+}

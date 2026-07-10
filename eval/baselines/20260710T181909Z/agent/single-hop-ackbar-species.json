@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-ackbar-species",
+  "category": "single-hop",
+  "question": "What species is Admiral Gial Ackbar?",
+  "answer": "Admiral Gial Ackbar is a **Mon Calamari**, born on the planet Mon Cala. This holds true in both continuities — canon and Legends.",
+  "citations": [
+    {
+      "title": "Gial Ackbar",
+      "name": "Gial Ackbar",
+      "continuity": "canon"
+    },
+    {
+      "title": "Gial Ackbar/Legends",
+      "name": "Gial Ackbar",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "0e21095fc57442bbc88de09898283eef"
+}

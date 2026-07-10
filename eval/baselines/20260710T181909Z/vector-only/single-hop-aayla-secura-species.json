@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-aayla-secura-species",
+  "category": "single-hop",
+  "question": "What species is Aayla Secura?",
+  "answer": "Aayla Secura is a **Twi'lek** — specifically a Rutian Twi'lek (blue-skinned), born on the planet Ryloth. This holds true in both continuities:\n\n- **Canon**: She is described as \"a Force-sensitive Rutian Twi'lek female\" who became a Jedi Master and General during the Clone Wars.\n- **Legends**: She is likewise \"a female Rutian Twi'lek Jedi Master,\" born as Aaylas'ecura, who served the Republic during the Clone Wars.\n\nInterestingly, in a behind-the-scenes note, early concept art for the character depicted her as a fish-like creature before she was finalized as a Twi'lek.",
+  "citations": [
+    {
+      "title": "Aayla Secura/Legends",
+      "name": "Aayla Secura",
+      "continuity": "legends",
+      "section": "Behind the scenes"
+    },
+    {
+      "title": "Aayla Secura",
+      "name": "Aayla Secura",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Aayla Secura's lightsaber",
+      "name": "Aayla Secura's lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "c15e17965ff0f5ca7bff51a415124e4e"
+}

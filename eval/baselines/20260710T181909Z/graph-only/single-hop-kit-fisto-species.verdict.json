@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Nautolan) and cites the relevant pages, with no contradictions.",
+  "judge_model": "claude-opus-4-8"
+}

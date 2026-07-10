@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Aayla Secura is a Twi'lek, matching the expected fact, with consistent continuity handling and no contradicting claims.",
+  "judge_model": "claude-opus-4-8"
+}

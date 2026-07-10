@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer cleanly separates canon and Legends, correctly crediting Obi-Wan Kenobi (with Qui-Gon Jinn) as trainer in both without blending them, and omitting Ki-Adi-Mundi is not a fault under the rubric.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly identifies Yoda as Dooku's Jedi trainer and states his species is the unnamed 'Yoda's species' in both continuities, satisfying every expected fact and the multi-hop chain.",
+  "judge_model": "claude-opus-4-8"
+}

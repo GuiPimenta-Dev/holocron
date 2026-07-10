@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer never states Yoda's species (the second expected fact) and instead insists the species has 'deliberately never been revealed' and 'no species designation is given,' contradicting the expected fact that Yoda is of Yoda's (unnamed but distinct) species \u2014 and it injects an unrequested Sith-master claim, so the multi-hop chain to the species fact is missing/contradicted.",
+  "judge_model": "claude-opus-4-8"
+}

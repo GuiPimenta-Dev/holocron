@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "States both expected facts (father Dathan, Human) and makes the Rey->Dathan->Human chain explicit with correct canon-only continuity; extra clone detail is grounded elaboration, not a contradicting link.",
+  "judge_model": "claude-opus-4-8"
+}

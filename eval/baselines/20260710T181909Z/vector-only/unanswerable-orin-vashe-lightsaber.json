@@ -1,0 +1,57 @@
+{
+  "id": "unanswerable-orin-vashe-lightsaber",
+  "category": "unanswerable",
+  "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+  "answer": "I couldn't find any information on a Jedi Master named \"Orin Vashe\" in the corpus — no entity or article by that name appears in my sources. This character doesn't seem to exist in either the canon or Legends continuity as represented in my available material, so I can't confirm details about them, including their lightsaber's color. It's possible this name is confused with another character, or it may not be part of the Star Wars lore covered by my corpus. If you have more context (e.g., what media they appear in), I'm happy to search further.",
+  "citations": [
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Equipment"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Powers and abilities"
+    },
+    {
+      "title": "Sith lightsaber",
+      "name": "Sith lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Ki-Adi-Mundi's lightsaber",
+      "name": "Ki-Adi-Mundi's lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Sith lightsaber/Legends",
+      "name": "Sith lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Obi-Wan Kenobi's third lightsaber/Legends",
+      "name": "Obi-Wan Kenobi's third lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Curved-hilt lightsaber",
+      "name": "Curved-hilt lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "d3656540a41e0679ea38e1b54a00756a"
+}

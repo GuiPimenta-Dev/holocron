@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-anakin-children",
+  "category": "continuity-conflict",
+  "question": "Who are Anakin Skywalker's children?",
+  "answer": "In both **canon** and **Legends**, Anakin Skywalker's children with Padmé Amidala are the twins:\n\n- **Luke Skywalker** – raised on Tatooine by Owen and Beru Lars, who became a Jedi Knight.\n- **Leia Organa** (Leia Amidala Skywalker) – raised on Alderaan by Bail and Breha Organa, who became a princess, senator, and Rebel/Resistance leader.\n\nPadmé died shortly after giving birth to them, and the twins were separated and hidden to protect them from their father, who had fallen to the dark side as Darth Vader.\n\n(Note: in Legends, Leia's own children — Jacen, Jaina, and Anakin Solo — and Luke's son Ben Skywalker are Anakin's grandchildren, not his direct children.)",
+  "citations": [
+    {
+      "title": "Skywalker family/Legends",
+      "name": "Skywalker family",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Naberrie family",
+      "name": "Naberrie family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Force-sensitive",
+      "name": "Force-sensitive",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Jedi Order/Legends",
+      "name": "Jedi Order",
+      "continuity": "legends",
+      "section": "History of the Jedi Order"
+    }
+  ],
+  "trace_id": "bf5dc93ac8ea54d05fe160d79fe596f7"
+}

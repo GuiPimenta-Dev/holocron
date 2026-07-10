@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Ackbar is a Mon Calamari with acceptable extra detail and both cited pages cover the subject.",
+  "judge_model": "claude-opus-4-8"
+}

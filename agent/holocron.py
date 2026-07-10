@@ -114,10 +114,13 @@ class HolocronAgent:
         # langchain-anthropic 1.4.x drops the thinking field when echoing the
         # assistant turn back after a tool round-trip (API 400). Re-enable once
         # the serialization bug is fixed upstream.
+        # max_retries: tool-loop bursts hit low org TPM limits (429s); the SDK's
+        # exponential backoff needs headroom to ride out the per-minute window.
         self._llm = ChatAnthropic(
             model=model,  # pyright: ignore[reportCallIssue]
             max_tokens=1024,  # pyright: ignore[reportCallIssue]
             thinking={"type": "disabled"},
+            max_retries=8,
         )
         self._callbacks: list[Any] = []
         if traced:

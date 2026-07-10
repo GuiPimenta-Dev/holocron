@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Bail Organa's homeworld is Alderaan in both continuities, matching the expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

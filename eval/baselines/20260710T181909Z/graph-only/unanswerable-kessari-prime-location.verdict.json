@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating the planet isn't in its corpus and asserts no lore facts about Kessari Prime.",
+  "judge_model": "claude-opus-4-8"
+}

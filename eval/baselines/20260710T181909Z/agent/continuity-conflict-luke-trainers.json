@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-luke-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Luke Skywalker?",
+  "answer": "In both continuities, Luke Skywalker was trained primarily by **Obi-Wan Kenobi** and **Yoda**.\n\n- **Canon:** Obi-Wan Kenobi gave him his first lessons in the Force and lightsaber basics, and Yoda later trained him more fully as a Jedi on Dagobah. Luke went on to train his own students, including Ben Solo and Rey Skywalker.\n- **Legends:** Same core mentors — Obi-Wan Kenobi and Yoda — trained him as a Jedi. Interestingly, the graph also lists a TRAINED_BY link to Palpatine in Legends, reflecting Palpatine's brief attempts to seduce/manipulate Luke toward the dark side (notably during and after events like his temptation on the second Death Star), though this was not formal Jedi training in the traditional sense.",
+  "citations": [
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "e0683b133f9b7ec511f4e8e429fa2d97"
+}

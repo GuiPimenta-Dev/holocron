@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact that Bib Fortuna is a Twi'lek and correctly gives the same answer in both continuities, with extra Ryloth detail that doesn't contradict.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts\u2014trainer is Mace Windu and his species is Human\u2014and makes the training chain explicit across both continuities, matching the cited subjects.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "multi-hop-padme-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Padmé Amidala's husband?",
+  "answer": "Padmé Amidala's husband was Anakin Skywalker, and his homeworld was **Tatooine** — this holds true in both **canon** and **Legends** continuities, as both sources confirm he grew up in Mos Espa on Tatooine before leaving with the Jedi.",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Padmé Amidala Naberrie",
+      "name": "Padmé Amidala Naberrie",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "c78d6e7d6dfb3495b19f70eeebe02ea0"
+}

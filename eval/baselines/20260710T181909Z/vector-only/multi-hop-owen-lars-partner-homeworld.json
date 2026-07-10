@@ -1,0 +1,33 @@
+{
+  "id": "multi-hop-owen-lars-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Owen Lars's partner?",
+  "answer": "Owen Lars's wife (partner) was Beru Whitesun Lars. In both canon and Legends, Beru was a native of Tatooine — she grew up as part of a moisture-farming family near Mos Eisley/Anchorhead on that planet, and later married into the Lars family, living with Owen at the Lars Homestead on Tatooine.\n\nSo the homeworld of Owen Lars's partner is **Tatooine**, consistent across both continuities.",
+  "citations": [
+    {
+      "title": "Beru Whitesun Lars",
+      "name": "Beru Whitesun Lars",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Owen Lars/Legends",
+      "name": "Owen Lars",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Beru Whitesun Lars/Legends",
+      "name": "Beru Whitesun Lars",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Beru Whitesun's family",
+      "name": "Beru Whitesun's family",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "809c8e500e9df1123985fbe7c0449985"
+}

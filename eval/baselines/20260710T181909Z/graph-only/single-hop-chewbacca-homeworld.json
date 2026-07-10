@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-chewbacca-homeworld",
+  "category": "single-hop",
+  "question": "What is Chewbacca's homeworld?",
+  "answer": "Chewbacca's homeworld is **Kashyyyk**, in both canon and Legends continuities (he was born there in 200 BBY).",
+  "citations": [
+    {
+      "title": "Chewbacca",
+      "name": "Chewbacca",
+      "continuity": "canon"
+    },
+    {
+      "title": "Chewbacca/Legends",
+      "name": "Chewbacca",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "f0eba4a513106ad8f17626bdc2b6ccc7"
+}

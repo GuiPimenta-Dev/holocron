@@ -1,0 +1,25 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "The infobox properties don't list species directly, so let me check further.Kit Fisto is a **Nautolan** — an amphibious humanoid species from the ocean world Glee Anselm, known for green skin, black eyes, and head-tentacles with sensitive olfactory receptors. This holds true in both continuities:\n\n- **Canon**: Kit Fisto was a Nautolan Jedi Master born on Glee Anselm.\n- **Legends**: Same species and homeworld, with Legends adding detail that his head-tentacles gave him a unique pheromone-sensing ability unmatched by other Jedi species.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends"
+    },
+    {
+      "title": "Nautolan/Legends",
+      "name": "Nautolan",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "59fa0315f93772f238247261c4abaf6f"
+}

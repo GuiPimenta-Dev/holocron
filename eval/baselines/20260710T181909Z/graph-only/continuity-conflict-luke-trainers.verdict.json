@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly distinguishes canon (Obi-Wan, Yoda) from Legends (Obi-Wan, Yoda, Palpatine) without blending them, matching the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

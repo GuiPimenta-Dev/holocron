@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Kashyyyk as Chewbacca's homeworld in both continuities, and the extra detail is supported by cited pages without contradicting the expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer correctly states canon has Luke and Leia and Legends lists only Luke, but then blends in outside lore claiming Leia is 'also traditionally his daughter' in Legends, contradicting the corpus's Legends record of Luke only.",
+  "judge_model": "claude-opus-4-8"
+}

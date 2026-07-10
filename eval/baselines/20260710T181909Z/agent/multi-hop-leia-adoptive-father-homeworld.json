@@ -1,0 +1,43 @@
+{
+  "id": "multi-hop-leia-adoptive-father-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Leia's adoptive father?",
+  "answer": "Leia's adoptive father is Bail Organa, but my lookup returned no data for either entity. Let me try alternate name forms.Leia Organa's adoptive father is **Bail Organa** (also called Bail Prestor Organa), and his — and thus Alderaan's royal family's — homeworld was **Alderaan**, a Core Worlds planet. This holds true in both **canon** and **Legends** continuities: Bail Organa served as Alderaan's senator and viceroy, married Alderaan's queen Breha Organa, and adopted Leia after the death of her birth mother, Padmé Amidala.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Alderaan",
+      "name": "Alderaan",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Alderaan sector",
+      "name": "Alderaan sector",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "0d3f530889a207f2234603cc16dddc99"
+}
