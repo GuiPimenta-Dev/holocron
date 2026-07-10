@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import sys
 from collections.abc import AsyncIterator
+from dataclasses import dataclass
 from typing import Any, Protocol
 
 from langchain_anthropic import ChatAnthropic
@@ -22,6 +23,21 @@ from core.domain import Citation, Continuity
 from retrieval import KnowledgeGraph, VectorIndex
 
 MODEL = "claude-sonnet-5"
+
+TOOL_NAMES = frozenset({"get_entity", "get_relations", "search_chunks", "path_between", "run_cypher"})
+
+
+@dataclass(frozen=True)
+class Toolset:
+    """A named restriction of the agent's tools — the eval's Retrieval Strategy seam.
+
+    The name tags every Langfuse trace (`strategy:<name>`); `tools=None` means
+    all tools (used to tag the unrestricted agent strategy).
+    """
+
+    name: str
+    tools: frozenset[str] | None
+
 
 SYSTEM_PROMPT = """\
 You are Holocron, a Star Wars lore assistant answering strictly from a pinned
@@ -80,7 +96,18 @@ class Citations:
 class HolocronAgent:
     """Streams plain-dict events; the API layer maps them 1:1 onto SSE."""
 
-    def __init__(self, graph: KnowledgeGraph, index: VectorIndex, traced: bool, model: str = MODEL):
+    def __init__(
+        self,
+        graph: KnowledgeGraph,
+        index: VectorIndex,
+        traced: bool,
+        model: str = MODEL,
+        toolset: Toolset | None = None,  # None = all tools, untagged (the production default)
+    ):
+        if toolset and toolset.tools is not None and (unknown := toolset.tools - TOOL_NAMES):
+            raise ValueError(f"unknown tool(s) {sorted(unknown)}; available: {sorted(TOOL_NAMES)}")
+        self._toolset = toolset
+        self._tags = (f"strategy:{toolset.name}",) if toolset else ()
         self._graph = graph
         self._index = index
         # ponytail: thinking disabled — Sonnet 5 defaults to adaptive thinking, but
@@ -119,7 +146,10 @@ class HolocronAgent:
                 ("user", question),
             ]
         }
-        async for ev in graph.astream_events(inputs, config={"callbacks": self._callbacks}, version="v2"):
+        config: dict[str, Any] = {"callbacks": self._callbacks}
+        if self._tags:
+            config["metadata"] = {"langfuse_tags": list(self._tags)}
+        async for ev in graph.astream_events(inputs, config=config, version="v2"):
             kind = ev["event"]
             if kind == "on_chat_model_stream":
                 if text := _text(ev["data"]["chunk"].content):
@@ -174,7 +204,11 @@ class HolocronAgent:
         }
         for wrapper, method in sources.items():
             wrapper.__doc__ = method.__doc__
-        return [lc_tool(w) for w in sources]
+        wanted = self._toolset.tools if self._toolset else None
+        wrappers = [w for w in sources if wanted is None or w.__name__ in wanted]
+        if wanted is not None and (missing := wanted - {w.__name__ for w in wrappers}):
+            raise RuntimeError(f"TOOL_NAMES drifted from the tools bound here; not bound: {sorted(missing)}")
+        return [lc_tool(w) for w in wrappers]
 
     def _build_graph(self, tools: list[Any]) -> Any:
         llm = self._llm.bind_tools(tools)

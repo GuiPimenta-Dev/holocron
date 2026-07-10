@@ -48,8 +48,10 @@ def test_result_requires_done_event():
 
 
 def test_run_dir_shape(tmp_path):
-    writer = RunWriter(runs_root=tmp_path, run_id="20260710T120000Z", strategy="agent", corpus_lock_sha256="deadbeef")
-    writer.write(QuestionResult.from_events(QUESTION, EVENTS))
+    writer = RunWriter(runs_root=tmp_path, run_id="20260710T120000Z", corpus_lock_sha256="deadbeef")
+    result = QuestionResult.from_events(QUESTION, EVENTS)
+    writer.write("vector-only", result)
+    writer.write("agent", result)
     run_dir = writer.finish(category=None)
 
     assert run_dir == tmp_path / "20260710T120000Z"
@@ -62,10 +64,11 @@ def test_run_dir_shape(tmp_path):
         "citations": [{"title": "Kit Fisto", "name": "Kit Fisto", "continuity": "canon"}],
         "trace_id": "abc123",
     }
+    assert (run_dir / "vector-only" / "single-hop-kit-fisto-species.json").exists()
     manifest = json.loads((run_dir / "run.json").read_text())
     assert manifest == {
         "run_id": "20260710T120000Z",
-        "strategies": ["agent"],
+        "strategies": ["agent", "vector-only"],
         "category": None,
         "corpus_lock_sha256": "deadbeef",
         "questions": ["single-hop-kit-fisto-species"],
@@ -74,8 +77,8 @@ def test_run_dir_shape(tmp_path):
 
 def test_manifest_lands_only_on_finish(tmp_path):
     """An interrupted run has no manifest — it can never be reported (spec #11)."""
-    writer = RunWriter(runs_root=tmp_path, run_id="r1", strategy="agent", corpus_lock_sha256="deadbeef")
-    writer.write(QuestionResult.from_events(QUESTION, EVENTS))
+    writer = RunWriter(runs_root=tmp_path, run_id="r1", corpus_lock_sha256="deadbeef")
+    writer.write("agent", QuestionResult.from_events(QUESTION, EVENTS))
     assert not (tmp_path / "r1" / "run.json").exists()
     writer.finish(category=Category.SINGLE_HOP)
     manifest = json.loads((tmp_path / "r1" / "run.json").read_text())

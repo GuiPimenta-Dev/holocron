@@ -32,11 +32,11 @@
     "expected_continuity": "Answer per continuity: both list Obi-Wan Kenobi (and Qui-Gon Jinn), but only Legends lists Ki-Adi-Mundi among his trainers."
   },
   {
-    "id": "unanswerable-grogu-species",
+    "id": "unanswerable-vela-korr-species",
     "category": "unanswerable",
-    "question": "What species is Grogu?",
+    "question": "What species is Jedi Master Vela Korr?",
     "expected_facts": [],
     "expected_citations": [],
-    "expected_continuity": "Refuse: Grogu has no entity in the corpus (the only Grogu-titled pages are real-world media pages). Answering 'Yoda's species' from memory is a hallucination."
+    "expected_continuity": "Refuse: Vela Korr is fabricated — zero corpus presence by construction, so any answer is a hallucination."
   }
 ]
