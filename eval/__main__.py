@@ -48,6 +48,10 @@ def main() -> None:
         "existing verdicts are kept — delete *.verdict.json to re-judge",
     )
     judge.add_argument("--run", help="run id under eval/runs (default: latest completed)")
+    promote = sub.add_parser("promote", help="designate a run as the Baseline (explicit — spec #11)")
+    promote.add_argument("run", help="run id under eval/runs")
+    push = sub.add_parser("push", help="register the Golden Set as a Langfuse dataset and attach run scores to traces")
+    push.add_argument("--run", help="run id under eval/runs (default: latest completed)")
     args = parser.parse_args()
 
     root = Path(__file__).parent
@@ -58,6 +62,15 @@ def main() -> None:
         return
     if args.command == "judge":
         _judge(root, golden, args.run)
+        return
+    if args.command == "promote":
+        from eval.report import BaselineStore
+
+        dest = BaselineStore(root / "baselines").promote(root / "runs" / args.run)
+        print(f"Baseline promoted: {dest}")
+        return
+    if args.command == "push":
+        _push(root, golden, args.run)
         return
 
     import lancedb
@@ -106,17 +119,34 @@ def main() -> None:
 
 
 def _report(root: Path, golden: GoldenSet, run_id: str | None) -> None:
-    from eval.report import PersistedRun, ReportRenderer
+    from eval.report import BaselineStore, PersistedRun, ReportRenderer
 
     run_dir = (root / "runs" / run_id) if run_id else _latest_completed(root / "runs")
     if run_dir is None:
         raise SystemExit("no completed run under eval/runs — run `python -m eval answer` first")
-    baseline_dir = _latest_completed(root / "baselines")
+    baseline_dir = BaselineStore(root / "baselines").latest()
     run = PersistedRun.load(run_dir, golden)
     baseline = PersistedRun.load(baseline_dir, golden) if baseline_dir else None
     text = ReportRenderer().render(run, baseline)
     (run_dir / "report.md").write_text(text)
     print(text)
+
+
+def _push(root: Path, golden: GoldenSet, run_id: str | None) -> None:
+    if not os.environ.get("LANGFUSE_PUBLIC_KEY"):
+        raise SystemExit("LANGFUSE_* keys not set — start Langfuse (docker compose up) and fill .env")
+    from langfuse import get_client
+
+    from eval.report import PersistedRun
+    from eval.sync import DATASET_NAME, LangfuseSync
+
+    run_dir = (root / "runs" / run_id) if run_id else _latest_completed(root / "runs")
+    if run_dir is None:
+        raise SystemExit("no completed run under eval/runs — run `python -m eval answer` first")
+    sync = LangfuseSync(get_client())
+    items = sync.register_golden_set(golden)
+    scores = sync.push_scores(PersistedRun.load(run_dir, golden))
+    print(f"dataset {DATASET_NAME!r}: {items} items upserted; {scores} scores attached to run {run_dir.name}")
 
 
 def _judge(root: Path, golden: GoldenSet, run_id: str | None) -> None:

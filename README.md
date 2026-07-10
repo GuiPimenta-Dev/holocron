@@ -63,9 +63,11 @@ eval harness — never mocked.
 ## Eval
 
 ```sh
-uv run python -m eval answer   # run the three strategies over the golden set (~US$ cents/question)
-uv run python -m eval judge    # grade answers via the local `claude` CLI (free on subscription)
-uv run python -m eval report   # citation check + judge scores vs the Baseline
+uv run python -m eval answer        # run the three strategies over the golden set (~US$ cents/question)
+uv run python -m eval judge         # grade answers via the local `claude` CLI (free on subscription)
+uv run python -m eval report        # citation check + judge scores vs the Baseline
+uv run python -m eval push          # golden set -> Langfuse dataset; scores -> traces
+uv run python -m eval promote <run> # designate a run as the Baseline (explicit)
 ```
 
 The Judge runs through a **logged-in Claude Code CLI** (`claude login`), pinned

@@ -22,8 +22,14 @@ def _write(tmp_path: Path, entries: list[dict]) -> Path:
 
 def test_real_golden_set_loads():
     golden = GoldenSet.load(GOLDEN_PATH)
-    assert len(golden.questions) >= 5
+    assert len(golden.questions) == 30
     assert {q.category for q in golden.questions} == set(Category)
+
+
+def test_golden_set_is_balanced():
+    golden = GoldenSet.load(GOLDEN_PATH)
+    for category in Category:
+        assert 7 <= len(golden.filter(category).questions) <= 8, f"{category} is unbalanced"
 
 
 def test_filter_by_category():
