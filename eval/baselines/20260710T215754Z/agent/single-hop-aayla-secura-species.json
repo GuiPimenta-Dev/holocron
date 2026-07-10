@@ -1,0 +1,25 @@
+{
+  "id": "single-hop-aayla-secura-species",
+  "category": "single-hop",
+  "question": "What species is Aayla Secura?",
+  "answer": "The infobox properties don't list a species field directly, so let me check relations for a HOMEWORLD/SPECIES link.Aayla Secura is a **Twi'lek** — specifically a **Rutian Twi'lek** (blue-skinned variety), in both **canon** and **Legends** continuity. She was born on Ryloth, the Twi'lek homeworld.",
+  "citations": [
+    {
+      "title": "Aayla Secura",
+      "name": "Aayla Secura",
+      "continuity": "canon"
+    },
+    {
+      "title": "Aayla Secura/Legends",
+      "name": "Aayla Secura",
+      "continuity": "legends"
+    },
+    {
+      "title": "Aayla Secura's lightsaber",
+      "name": "Aayla Secura's lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "d07f156c00051eeae04a3e9bd2a57fc5"
+}

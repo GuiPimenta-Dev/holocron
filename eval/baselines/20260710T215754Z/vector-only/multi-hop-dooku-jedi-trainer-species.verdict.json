@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly names Yoda as Dooku's Jedi trainer in both continuities and identifies his species as the unnamed 'Yoda's species', making the multi-hop chain explicit; the extra Thame Cerulian detail is grounded in the cited Dooku/Legends page and does not break or contradict the required chain.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "The corpus only has a Legends entry for Padmé Amidala. In Legends, her homeworld is **Naboo**.",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "2cc2dc4b54afbc801842514583bcbfd6"
+}

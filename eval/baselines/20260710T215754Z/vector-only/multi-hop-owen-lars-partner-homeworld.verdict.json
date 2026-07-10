@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (partner Beru Whitesun Lars, homeworld Tatooine) and makes the multi-hop chain explicit for both continuities.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-battle-of-vorn-tessel",
+  "category": "unanswerable",
+  "question": "Who won the Battle of Vorn Tessel?",
+  "answer": "I found no results mentioning a \"Battle of Vorn Tessel\" in the corpus. I don't have any information on this event — it doesn't appear to be part of the pinned Wookieepedia corpus I can search, so I can't tell you who won it.",
+  "citations": [
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Hutt/Legends",
+      "name": "Hutt",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Jon Vander/Legends",
+      "name": "Jon Vander",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jon Vander",
+      "name": "Jon Vander",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Wilhuff Tarkin",
+      "name": "Wilhuff Tarkin",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Republic Navy",
+      "name": "Republic Navy",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "388ff52744650640012a874626b0659b"
+}

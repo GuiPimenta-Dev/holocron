@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer explicitly states both expected facts and connects them via the correct chain (Depa Billaba trained by Mace Windu, who is Human) in both continuities.",
+  "judge_model": "claude-opus-4-8"
+}

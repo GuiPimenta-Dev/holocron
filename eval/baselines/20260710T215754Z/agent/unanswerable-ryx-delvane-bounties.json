@@ -1,0 +1,87 @@
+{
+  "id": "unanswerable-ryx-delvane-bounties",
+  "category": "unanswerable",
+  "question": "Which bounties did the bounty hunter Ryx Delvane collect?",
+  "answer": "I found no entry for \"Ryx Delvane\" in the corpus, and the search results returned no relevant matches for that name either. Let me double check with a direct relation lookup in case the name is spelled differently.I couldn't find any record of a bounty hunter named \"Ryx Delvane\" in the corpus — neither the entity lookup, relation graph, nor text search returned anything relevant to that name. This subject does not appear to exist in the pinned Wookieepedia corpus I have access to, so I can't report any bounties collected by them.",
+  "citations": [
+    {
+      "title": "Bounty hunter",
+      "name": "Bounty hunter",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Galactic Empire",
+      "name": "Galactic Empire",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Horox Ryyder/Legends",
+      "name": "Horox Ryyder",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "New Republic",
+      "name": "New Republic",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Bossk'wassak'Cradossk",
+      "name": "Bossk'wassak'Cradossk",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Delphidian",
+      "name": "Delphidian",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Eel/Legends",
+      "name": "Eel",
+      "continuity": "legends",
+      "section": "Ambiguous eels and eel-like species"
+    },
+    {
+      "title": "Democracy",
+      "name": "Democracy",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Cornelius Evazan",
+      "name": "Cornelius Evazan",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "R2-D2/Legends",
+      "name": "R2-D2",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi General/Legends",
+      "name": "Jedi General",
+      "continuity": "legends",
+      "section": "Jedi Generals during the Mandalorian Wars"
+    },
+    {
+      "title": "Nimbanel/Legends",
+      "name": "Nimbanel",
+      "continuity": "legends",
+      "section": "Sample Nimbanel names"
+    }
+  ],
+  "trace_id": "fb6bbc914c3e87b40827faa78fb96ceb"
+}

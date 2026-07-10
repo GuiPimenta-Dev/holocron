@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Alderaan as Bail Organa's homeworld in both continuities, matching the expected fact, and cites both the canon and Legends pages.",
+  "judge_model": "claude-opus-4-8"
+}

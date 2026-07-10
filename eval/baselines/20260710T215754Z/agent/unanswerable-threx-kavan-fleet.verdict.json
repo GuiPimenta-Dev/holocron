@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no record of Admiral Threx Kavan exists in the corpus and declines to name any fleet, asserting no lore facts about the fabricated subject.",
+  "judge_model": "claude-opus-4-8"
+}

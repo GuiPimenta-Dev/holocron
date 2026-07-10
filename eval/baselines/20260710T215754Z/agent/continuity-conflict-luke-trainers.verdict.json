@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates the continuities, listing Obi-Wan and Yoda for both while adding Palpatine only under Legends, exactly matching the expected behavior.",
+  "judge_model": "claude-opus-4-8"
+}

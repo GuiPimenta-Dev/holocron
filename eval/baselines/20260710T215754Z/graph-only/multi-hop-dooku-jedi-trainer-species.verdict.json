@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly identifies Yoda as Dooku's trainer via the cited Dooku entries, and faithfully reports that the corpus lacks a named species for Yoda rather than hallucinating one, satisfying the expected chain given the corpus ground truth.",
+  "judge_model": "claude-opus-4-8"
+}

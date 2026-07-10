@@ -1,0 +1,27 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "In both continuities, Dooku was trained by **Yoda**.\n\n- **Canon**: Dooku \"completed his training with Yoda\" to become a Jedi Knight and later Master. Yoda's species is not stated in this snippet, but he is the well-known small green Force-sensitive being referred to on Wookieepedia simply as being of \"Yoda's species\" — an unnamed species.\n- **Legends**: Similarly, Yoda was Dooku's mentor, though his formal Padawan master in Legends was **Thame Cerulian** (a Jedi Knight who took Dooku as Padawan in 89 BBY), while Yoda remained his primary mentor figure.\n\nAs for species: Yoda belongs to **Yoda's species**, an unnamed species in the Star Wars corpus — that is the name recorded for it.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Form II/Legends",
+      "name": "Form II",
+      "continuity": "legends",
+      "section": "Applications"
+    }
+  ],
+  "trace_id": "f40d19fa9b5a41807be5049036ff4897"
+}

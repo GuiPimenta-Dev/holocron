@@ -1,0 +1,39 @@
+{
+  "id": "multi-hop-rey-father-species",
+  "category": "multi-hop",
+  "question": "What species was Rey's father?",
+  "answer": "In canon, Rey's father was **Dathan**, and biologically he was **human** — he was a bioengineered \"Strand-Cast,\" a clone made from the genetic template of Darth Sidious (Palpatine). So while artificially created rather than naturally born, his species was human, the same as his genetic donor, Sidious.",
+  "citations": [
+    {
+      "title": "Rey Skywalker",
+      "name": "Rey Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Miramir",
+      "name": "Miramir",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Cloning",
+      "name": "Cloning",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Dathan",
+      "name": "Dathan",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Parent",
+      "name": "Parent",
+      "continuity": "canon",
+      "section": "Significance"
+    }
+  ],
+  "trace_id": "fed75b9c49bb8c5415638098f1adb93a"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Kashyyyk) and its continuity note is consistent with the expected same-answer-in-both-continuities behavior.",
+  "judge_model": "claude-opus-4-8"
+}

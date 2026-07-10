@@ -1,0 +1,25 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "The infobox doesn't list a species field directly, let me check further.Kit Fisto is a **Nautolan** — in both canon and Legends continuities, he's a Nautolan male from the planet Glee Anselm who became a Jedi Master.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends"
+    },
+    {
+      "title": "Nautolan/Legends",
+      "name": "Nautolan",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "5629f18e38bd2bb534717d42d0c7c502"
+}

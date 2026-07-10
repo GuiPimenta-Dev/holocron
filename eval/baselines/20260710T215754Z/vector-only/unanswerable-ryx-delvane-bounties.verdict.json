@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no record of Ryx Delvane exists in the corpus and asserts no lore facts about the subject, correctly treating the fabricated character as unanswerable.",
+  "judge_model": "claude-opus-4-8"
+}

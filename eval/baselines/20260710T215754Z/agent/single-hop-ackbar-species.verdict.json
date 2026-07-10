@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Ackbar is a Mon Calamari and confirms the same in both continuities, citing both the canon and Legends pages.",
+  "judge_model": "claude-opus-4-8"
+}

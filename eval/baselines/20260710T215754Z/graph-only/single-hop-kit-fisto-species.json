@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "The infobox properties returned don't include a species field directly. Let me check relations for a species link.Kit Fisto is a **Nautolan** — in both canon and Legends continuity.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "bc2a3fcf919c9856f6bd7e97960ff9e4"
+}

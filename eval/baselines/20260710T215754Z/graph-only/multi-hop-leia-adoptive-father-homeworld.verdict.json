@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer explicitly traces Leia -> adoptive father Bail Prestor Organa -> homeworld Alderaan, stating both expected facts and connecting the chain correctly.",
+  "judge_model": "claude-opus-4-8"
+}

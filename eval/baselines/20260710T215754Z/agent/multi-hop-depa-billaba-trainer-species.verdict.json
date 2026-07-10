@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Mace Windu as Depa Billaba's trainer and correctly gives his species as Human in both continuities, stating every expected fact with the chain explicit.",
+  "judge_model": "claude-opus-4-8"
+}

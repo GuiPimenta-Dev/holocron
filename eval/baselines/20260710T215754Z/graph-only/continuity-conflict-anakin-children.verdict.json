@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly distinguishes canon (Luke and Leia) from Legends (only Luke) without blending the continuities, matching the expected behavior.",
+  "judge_model": "claude-opus-4-8"
+}

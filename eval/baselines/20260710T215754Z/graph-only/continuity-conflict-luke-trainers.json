@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-luke-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Luke Skywalker?",
+  "answer": "In canon, Luke Skywalker was trained by **Obi-Wan Kenobi** and **Yoda**.\n\nIn Legends, the corpus lists **Obi-Wan Kenobi**, **Yoda**, and **Palpatine** as having trained Luke Skywalker.",
+  "citations": [
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "75c0ddfb246b2f978accce2030d22a17"
+}

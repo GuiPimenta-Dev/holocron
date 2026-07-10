@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-anakin-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Anakin Skywalker?",
+  "answer": "In both continuities, **Anakin Skywalker** was trained primarily as a Jedi Padawan by **Obi-Wan Kenobi**.\n\n- Kenobi took Anakin as his apprentice after his own Master, **Qui-Gon Jinn**, was killed by Darth Maul on Naboo — fulfilling Jinn's dying wish that Anakin be trained. This holds true in both **canon** and **Legends**.\n- Before that, Qui-Gon Jinn himself had wanted to train Anakin (having discovered him on Tatooine), but in **Legends**, the Jedi High Council initially forbade Qui-Gon from taking him on, and it was only after Qui-Gon's death that Kenobi was permitted to train him.\n- Later, as Anakin grew, **Supreme Chancellor Palpatine** (secretly the Sith Lord **Darth Sidious**) took a personal interest in his development, involving himself in aspects of Anakin's training and grooming him — ultimately turning him into his Sith apprentice, **Darth Vader**.\n\nSo formally, Obi-Wan Kenobi was Anakin's Jedi Master/trainer, while Palpatine/Darth Sidious later became his corrupting mentor and Sith teacher.",
+  "citations": [
+    {
+      "title": "Ki-Adi-Mundi/Legends",
+      "name": "Ki-Adi-Mundi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Obi-Wan Kenobi/Legends",
+      "name": "Obi-Wan Kenobi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Mace Windu",
+      "name": "Mace Windu",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Chosen One/Legends",
+      "name": "Chosen One",
+      "continuity": "legends",
+      "section": "History of the Chosen One"
+    },
+    {
+      "title": "Palpatine/Legends",
+      "name": "Palpatine",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Darth Sidious",
+      "name": "Darth Sidious",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "d6a7d942db93ef01f9e7d76c73e84229"
+}

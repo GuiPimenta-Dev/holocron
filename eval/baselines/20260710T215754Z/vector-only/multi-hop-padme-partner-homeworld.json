@@ -1,0 +1,45 @@
+{
+  "id": "multi-hop-padme-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Padmé Amidala's husband?",
+  "answer": "Padmé Amidala's husband was Anakin Skywalker, and his homeworld was **Tatooine**, the desert planet in the Outer Rim Territories — true in both canon and Legends.",
+  "citations": [
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Tatoo II/Legends",
+      "name": "Tatoo II",
+      "continuity": "legends",
+      "section": "Description"
+    },
+    {
+      "title": "Tatoo I/Legends",
+      "name": "Tatoo I",
+      "continuity": "legends",
+      "section": "Description"
+    },
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Homeworld",
+      "name": "Homeworld",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "5750ff294e46566fa0ec74584d1994ab"
+}

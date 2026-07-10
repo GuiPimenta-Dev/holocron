@@ -1,0 +1,21 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "Padmé Amidala's homeworld is **Naboo**, a Mid Rim world where she was born and raised by her parents, Ruwee and Jobal Naberrie. This holds true in both continuities — **canon** (as Padmé Amidala Naberrie) and **Legends** (as Padmé Amidala).",
+  "citations": [
+    {
+      "title": "Padmé Amidala Naberrie",
+      "name": "Padmé Amidala Naberrie",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    }
+  ],
+  "trace_id": "3c5d0fc0a1a6427ffd4eb73637915b2a"
+}

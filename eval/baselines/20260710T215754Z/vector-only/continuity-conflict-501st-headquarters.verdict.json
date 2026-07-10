@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer separates Legends from canon without blending them and correctly attributes Coruscant to Legends; omitting DS-1 is a missing fact, not a fault or contradiction under the rubric.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (donor Jango Fett, species Human), explicitly connects the clone-to-donor chain, and correctly notes the same answer holds in both continuities.",
+  "judge_model": "claude-opus-4-8"
+}

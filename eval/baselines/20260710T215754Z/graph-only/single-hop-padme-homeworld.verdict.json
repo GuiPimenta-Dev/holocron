@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact that Padm\u00e9 Amidala's homeworld is Naboo, and citing the Legends page is acceptable per the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,57 @@
+{
+  "id": "unanswerable-orin-vashe-lightsaber",
+  "category": "unanswerable",
+  "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+  "answer": "No results found. Let me search the chunk text in case the entity lookup missed it.I don't have any record of a Jedi Master named Orin Vashe in the corpus — searches for that name returned no matching entity or article text. I can't confirm any lightsaber color for this figure; I don't know.",
+  "citations": [
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends",
+      "section": "Powers and abilities"
+    },
+    {
+      "title": "Mace Windu's lightsaber",
+      "name": "Mace Windu's lightsaber",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Sith lightsaber",
+      "name": "Sith lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Dooku's lightsaber",
+      "name": "Dooku's lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Skywalker lightsaber",
+      "name": "Skywalker lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Equipment"
+    },
+    {
+      "title": "Curved-hilt lightsaber",
+      "name": "Curved-hilt lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Obi-Wan Kenobi's third lightsaber/Legends",
+      "name": "Obi-Wan Kenobi's third lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "08f78e13f3393dd18b98dc61a0047bc3"
+}

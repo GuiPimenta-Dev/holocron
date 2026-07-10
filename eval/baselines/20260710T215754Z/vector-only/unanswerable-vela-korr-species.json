@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-vela-korr-species",
+  "category": "unanswerable",
+  "question": "What species is Jedi Master Vela Korr?",
+  "answer": "I couldn't find any entry for a Jedi Master named \"Vela Korr\" in the corpus. Could you double-check the spelling or provide additional context? Based on what's indexed here, there's no record of this character, so I can't confirm their species.",
+  "citations": [
+    {
+      "title": "Yoda's species",
+      "name": "Yoda's species",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Yoda's species/Legends",
+      "name": "Yoda's species",
+      "continuity": "legends",
+      "section": "Known members"
+    },
+    {
+      "title": "Form VII/Legends",
+      "name": "Form VII",
+      "continuity": "legends",
+      "section": "Practitioners"
+    },
+    {
+      "title": "Agen Kolar/Legends",
+      "name": "Agen Kolar",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi High Council/Legends",
+      "name": "Jedi High Council",
+      "continuity": "legends",
+      "section": "Known members"
+    },
+    {
+      "title": "Jar'Kai/Legends",
+      "name": "Jar'Kai",
+      "continuity": "legends",
+      "section": "Applications"
+    }
+  ],
+  "trace_id": "09e28872b918d990a6af80ca7aea45ac"
+}

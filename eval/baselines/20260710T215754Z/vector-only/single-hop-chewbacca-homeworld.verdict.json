@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Chewbacca's homeworld is Kashyyyk with citations covering the relevant pages, and the extra continuity detail does not contradict any expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

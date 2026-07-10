@@ -1,0 +1,39 @@
+{
+  "id": "single-hop-ackbar-species",
+  "category": "single-hop",
+  "question": "What species is Admiral Gial Ackbar?",
+  "answer": "Admiral Gial Ackbar is a **Mon Calamari** — a sentient species native to the planet Mon Cala (also called Dac). This holds true in both canon and Legends continuities: he hailed from Mon Cala and was a prominent Mon Calamari military leader, first as a Rebel Alliance admiral and later in the New Republic/Resistance era.",
+  "citations": [
+    {
+      "title": "Mon Calamari",
+      "name": "Mon Calamari",
+      "continuity": "canon",
+      "section": "Mon Calamari in the galaxy"
+    },
+    {
+      "title": "Mon Calamari/Legends",
+      "name": "Mon Calamari",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Gial Ackbar",
+      "name": "Gial Ackbar",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Gial Ackbar/Legends",
+      "name": "Gial Ackbar",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Galactic Civil War/Legends",
+      "name": "Galactic Civil War",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "89355c292b25109ef684b25465054812"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-bib-fortuna-species",
+  "category": "single-hop",
+  "question": "What species is Bib Fortuna?",
+  "answer": "Bib Fortuna is a **Twi'lek** — a male of that species from Ryloth. This holds true in both continuities: in canon, he served as Jabba Desilijic Tiure's majordomo on Tatooine, and in Legends, he was born to the Una clan on Ryloth before becoming Jabba's majordomo.",
+  "citations": [
+    {
+      "title": "Bib Fortuna/Legends",
+      "name": "Bib Fortuna",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Fortuna family",
+      "name": "Fortuna family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Bib Fortuna",
+      "name": "Bib Fortuna",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "5f16e4918a52453f5a704d3d8929b358"
+}

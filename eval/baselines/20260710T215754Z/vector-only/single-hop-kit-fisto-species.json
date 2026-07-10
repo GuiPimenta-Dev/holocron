@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "Kit Fisto is a **Nautolan** — a Force-sensitive male of that species, confirmed in both canon and Legends continuities. He was born on Glee Anselm (per Legends) and is noted for the Nautolan physical traits of green skin, large black eyes, and head tentacles (tresses) with sensitive olfactory receptors.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kit Fisto's lightsaber/Legends",
+      "name": "Kit Fisto's lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "6b530416ff60eabaff2b2f501078a65a"
+}
