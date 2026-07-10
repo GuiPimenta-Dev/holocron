@@ -37,6 +37,6 @@
     "question": "What species is Grogu?",
     "expected_facts": [],
     "expected_citations": [],
-    "expected_continuity": "Refuse: Grogu is not in the corpus. Answering 'Yoda's species' from memory is a hallucination."
+    "expected_continuity": "Refuse: Grogu has no entity in the corpus (the only Grogu-titled pages are real-world media pages). Answering 'Yoda's species' from memory is a hallucination."
   }
 ]

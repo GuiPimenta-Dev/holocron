@@ -68,3 +68,17 @@ def test_rejects_answerable_without_expectations(tmp_path):
     good["expected_citations"] = []
     with pytest.raises(ValueError, match="expected_citations"):
         GoldenSet.load(_write(tmp_path, entries))
+
+
+def test_rejects_non_list_top_level(tmp_path):
+    path = tmp_path / "golden.json"
+    path.write_text(json.dumps({"questions": _entries()}))
+    with pytest.raises(ValueError, match="list"):
+        GoldenSet.load(path)
+
+
+def test_rejects_string_where_list_expected(tmp_path):
+    entries = _entries()
+    entries[0]["expected_facts"] = "Nautolan"
+    with pytest.raises(ValueError, match="must be a list"):
+        GoldenSet.load(_write(tmp_path, entries))

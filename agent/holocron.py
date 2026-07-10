@@ -136,6 +136,8 @@ class HolocronAgent:
 
     def _trace_id(self) -> str | None:
         """Langfuse trace id of the run that just finished (None when untraced)."""
+        # ponytail: one shared handler — trace_id can mis-attribute if astream runs
+        # concurrently; switch to a per-run handler if the API goes multi-user.
         return self._callbacks[0].last_trace_id if self._callbacks else None
 
     def _bind_tools(self, citations: Citations, restrict: Continuity | None) -> list[Any]:

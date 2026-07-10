@@ -17,7 +17,11 @@ from eval.golden import Category, GoldenQuestion, GoldenSet
 
 
 class Strategy(Protocol):
-    """A Retrieval Strategy: anything speaking the agent's event protocol."""
+    """A Retrieval Strategy: anything speaking the agent's event protocol.
+
+    Same seam as api/app.py's Agent Protocol — a structural type hint that keeps
+    framework imports out of this module, not runtime polymorphism (ADR-0004).
+    """
 
     def astream(self, question: str, continuity: str | None = None) -> AsyncIterator[dict[str, Any]]: ...
 

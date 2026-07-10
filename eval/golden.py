@@ -42,7 +42,10 @@ class GoldenSet:
 
     @classmethod
     def load(cls, path: Path) -> GoldenSet:
-        questions = tuple(_parse_entry(e) for e in json.loads(path.read_text()))
+        entries = json.loads(path.read_text())
+        if not isinstance(entries, list):
+            raise ValueError(f"{path}: golden set must be a JSON list of entries")
+        questions = tuple(_parse_entry(e) for e in entries)
         ids = [q.id for q in questions]
         dupes = {i for i in ids if ids.count(i) > 1}
         if dupes:
@@ -56,10 +59,15 @@ class GoldenSet:
 _FIELDS = ("id", "category", "question", "expected_facts", "expected_citations", "expected_continuity")
 
 
-def _parse_entry(entry: dict[str, Any]) -> GoldenQuestion:
+def _parse_entry(entry: Any) -> GoldenQuestion:
+    if not isinstance(entry, dict):
+        raise ValueError(f"golden entry must be an object, got {type(entry).__name__}")
     missing = [f for f in _FIELDS if f not in entry]
     if missing:
         raise ValueError(f"golden entry {entry.get('id', '?')!r}: missing fields {missing}")
+    for f in ("expected_facts", "expected_citations"):
+        if not isinstance(entry[f], list):
+            raise ValueError(f"golden entry {entry['id']!r}: {f} must be a list")
     try:
         category = Category(entry["category"])
     except ValueError:
