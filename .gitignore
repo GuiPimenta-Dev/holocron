@@ -6,3 +6,6 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .env
+
+# eval/runs/ = per-run answer artifacts — only baselines and the golden set are versioned
+eval/runs/

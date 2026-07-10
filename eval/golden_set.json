@@ -1,0 +1,42 @@
+[
+  {
+    "id": "single-hop-kit-fisto-species",
+    "category": "single-hop",
+    "question": "What species is Kit Fisto?",
+    "expected_facts": ["Nautolan"],
+    "expected_citations": ["Kit Fisto", "Kit Fisto/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "single-hop-padme-homeworld",
+    "category": "single-hop",
+    "question": "What is Padmé Amidala's homeworld?",
+    "expected_facts": ["Naboo"],
+    "expected_citations": ["Padmé Amidala Naberrie", "Padmé Amidala/Legends"],
+    "expected_continuity": "Same answer in both continuities; citing either page is acceptable."
+  },
+  {
+    "id": "multi-hop-boba-fett-donor-species",
+    "category": "multi-hop",
+    "question": "What species was the genetic donor Boba Fett was cloned from?",
+    "expected_facts": ["Jango Fett", "Human"],
+    "expected_citations": ["Boba Fett", "Jango Fett"],
+    "expected_continuity": "Same answer in both continuities: donor Jango Fett, a Human."
+  },
+  {
+    "id": "continuity-conflict-anakin-trainers",
+    "category": "continuity-conflict",
+    "question": "Who trained Anakin Skywalker?",
+    "expected_facts": ["Obi-Wan Kenobi", "Ki-Adi-Mundi"],
+    "expected_citations": ["Anakin Skywalker", "Anakin Skywalker/Legends"],
+    "expected_continuity": "Answer per continuity: both list Obi-Wan Kenobi (and Qui-Gon Jinn), but only Legends lists Ki-Adi-Mundi among his trainers."
+  },
+  {
+    "id": "unanswerable-grogu-species",
+    "category": "unanswerable",
+    "question": "What species is Grogu?",
+    "expected_facts": [],
+    "expected_citations": [],
+    "expected_continuity": "Refuse: Grogu is not in the corpus. Answering 'Yoda's species' from memory is a hallucination."
+  }
+]

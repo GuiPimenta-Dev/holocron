@@ -32,6 +32,9 @@ Boundary rules (non-negotiable):
 - LangGraph/LangChain imports live in `agent/` only; FastAPI in `api/` only.
 - `ingest/` and the serving side (`retrieval/`, `agent/`, `api/`) never import
   each other; they meet at `core/` and the data stores on disk.
+- `eval/` is a composition root (`eval/__main__.py`) that may import the serving
+  side and `core/`; nothing imports `eval/`. The golden set and `eval/baselines/`
+  are versioned; `eval/runs/` artifacts are gitignored.
 - Every chunk and every graph node carries `continuity: canon | legends`.
 - Curated graph edges obey the target-type compatibility matrix in `ingest/graph.py`
   (e.g. TRAINED_BY → Character only). The uncurated edge tail is pruned only with
