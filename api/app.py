@@ -7,7 +7,7 @@ a "type" key. SSE protocol (the phase-3 frontend contract):
     event: tool_call     data: {"name": ..., "args": {...}}
     event: tool_result   data: {"name": ..., "result": ...}
     event: answer_delta  data: {"text": ...}
-    event: done          data: {"citations": [{"title", "name", "continuity"}]}
+    event: done          data: {"citations": [{"title", "name", "continuity"}], "trace_id": ...}
     event: error         data: {"message": ...}
 
 `done` (or `error`) terminates the stream. Errors after headers are sent

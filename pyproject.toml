@@ -31,7 +31,7 @@ target-version = "py312"
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.pyright]
-include = ["core", "retrieval", "ingest", "tests", "agent", "api"]
+include = ["core", "retrieval", "ingest", "tests", "agent", "api", "eval"]
 typeCheckingMode = "standard"
 
 [tool.pytest.ini_options]

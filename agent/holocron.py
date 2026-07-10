@@ -132,7 +132,13 @@ class HolocronAgent:
                     "name": ev["name"],
                     "result": _plain(ev["data"].get("output")),
                 }
-        yield {"type": "done", "citations": citations.as_dicts()}
+        yield {"type": "done", "citations": citations.as_dicts(), "trace_id": self._trace_id()}
+
+    def _trace_id(self) -> str | None:
+        """Langfuse trace id of the run that just finished (None when untraced)."""
+        # ponytail: one shared handler — trace_id can mis-attribute if astream runs
+        # concurrently; switch to a per-run handler if the API goes multi-user.
+        return self._callbacks[0].last_trace_id if self._callbacks else None
 
     def _bind_tools(self, citations: Citations, restrict: Continuity | None) -> list[Any]:
         """Per-request closures over the retrieval layer.
