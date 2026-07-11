@@ -10,7 +10,7 @@ means nothing alone; the delta is the result.
 
 ## Steps
 
-1. **Preflight**: confirm indices exist (LanceDB dir + Neo4j reachable), the
+1. **Preflight**: confirm indices exist (pgvector table + Neo4j reachable), the
    golden set loads, and the `claude` CLI is logged in (the Judge runs through
    it). If any fails, stop and report — don't burn API calls on a broken setup.
 2. **Run**: `uv run python -m eval answer` (all three Retrieval Strategies:

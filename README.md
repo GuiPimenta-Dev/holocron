@@ -75,7 +75,7 @@ ADR-0002), so the raw cache is reproducible from the repository:
 uv run python -m ingest rebuild   # fetch every page at its pinned revision (~15 min)
 uv run python -m ingest parse     # cache -> entities.jsonl + chunks.jsonl (~2 min)
 uv run python -m ingest graph     # entities -> Neo4j (~1 min)
-uv run python -m ingest embed     # chunks -> LanceDB (~10 min, needs an embedding key)
+uv run python -m ingest embed     # chunks -> pgvector (~10 min, needs an embedding key)
 ```
 
 Expected costs: the embed run is one-time ~US$0.20 on OpenAI

@@ -11,10 +11,10 @@ renaming or re-architecting anything.
 core/          neutral leaf both sides may import: domain types (domain.py) and
                the embedding providers (embeddings.py). No framework, no agent.
 ingest/        scrape Wookieepedia (MediaWiki API) → cache wikitext → parse
-               infoboxes → LanceDB index + Neo4j graph. Runs offline.
+               infoboxes → pgvector index + Neo4j graph. Runs offline.
                Corpus pinned by corpus.lock (title, revid) — see ADR-0002.
 retrieval/     serving-side data access: KnowledgeGraph (Neo4j) and VectorIndex
-               (LanceDB). Pure classes over plain data. No LLM, no framework.
+               (pgvector). Pure classes over plain data. No LLM, no framework.
 agent/         LangGraph state graph (ADR-0001): routing node → tools → synthesis.
                Framework imports live here only. Traced via Langfuse callbacks.
 api/           FastAPI serving the agent; POST /ask streams steps + answer via SSE.
@@ -77,7 +77,7 @@ Boundary rules (non-negotiable):
 
 - `uv` for env + deps. `ruff` (lint+format), `pyright` (all tool signatures typed),
   `pytest`. Frontend: `npm` inside `frontend/`.
-- `docker compose up`: Neo4j + Langfuse. Everything runs locally; no deploy.
+- `docker compose up`: Neo4j + Langfuse (its Postgres also hosts the pgvector chunk index). Everything runs locally; no deploy.
 - CI (GitHub Actions) runs lint + pyright + pytest, plus frontend
   eslint + tsc + vitest + build — never the eval.
 

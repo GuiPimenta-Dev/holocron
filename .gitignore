@@ -1,4 +1,4 @@
-# data/ = cached wikitext + LanceDB + Neo4j volume — rebuilt via ingest, never committed
+# data/ = cached wikitext + Neo4j volume — rebuilt via ingest, never committed
 data/
 .venv/
 __pycache__/

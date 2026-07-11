@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 def main() -> None:
     load_dotenv()
 
-    import lancedb
+    import psycopg
     import uvicorn
     from neo4j import GraphDatabase
 
@@ -30,10 +30,10 @@ def main() -> None:
             os.environ.get("NEO4J_PASSWORD", "holocron123"),
         ),
     )
-    chunks = lancedb.connect("data/lancedb").open_table("chunks")
+    pg = psycopg.connect(os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron"))
     agent = HolocronAgent(
         graph=KnowledgeGraph(driver),
-        index=VectorIndex(provider_from_env(dict(os.environ)), chunks),
+        index=VectorIndex(provider_from_env(dict(os.environ)), pg),
         traced=bool(os.environ.get("LANGFUSE_PUBLIC_KEY")),
     )
     try:
@@ -41,6 +41,7 @@ def main() -> None:
         uvicorn.run(create_app(agent, ui_origin), host="127.0.0.1", port=8000)
     finally:
         driver.close()
+        pg.close()
 
 
 if __name__ == "__main__":

@@ -52,6 +52,15 @@ class VoyageEmbeddings:
         return [d["embedding"] for d in data["data"]]
 
 
+def pgvector_literal(vector: list[float]) -> str:
+    """pgvector's text form ('[0.1,0.2,...]') — a plain SQL param + ::vector cast.
+
+    Shared IO helper (CLAUDE.md carve-out): ingest writes it, retrieval queries
+    with it; they meet here instead of importing each other.
+    """
+    return "[" + ",".join(map(str, vector)) + "]"
+
+
 def provider_from_env(env: dict[str, str], retries: int = 2) -> EmbeddingProvider:
     """Pick the provider from the composition root's environment. OpenAI wins ties.
 

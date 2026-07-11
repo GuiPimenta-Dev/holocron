@@ -5,7 +5,7 @@ uv run python -m ingest lock                 pin cache -> corpus.lock (ADR-0002)
 uv run python -m ingest rebuild              corpus.lock -> refetch cache at pinned revids
 uv run python -m ingest parse                cache -> entities.jsonl + chunks.jsonl
 uv run python -m ingest graph                entities -> Neo4j
-uv run python -m ingest embed                chunks -> LanceDB
+uv run python -m ingest embed                chunks -> pgvector
 """
 
 from __future__ import annotations
@@ -138,13 +138,17 @@ def _cmd_graph() -> None:
         driver.close()
 
 
+def _pg_dsn() -> str:
+    return os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron")
+
+
 def _cmd_embed() -> None:
     from core.embeddings import provider_from_env
     from ingest.embed import IndexBuilder
 
-    builder = IndexBuilder(provider_from_env(dict(os.environ), retries=8), "data/lancedb")
+    builder = IndexBuilder(provider_from_env(dict(os.environ), retries=8), _pg_dsn())
     chunks = [json.loads(line) for line in CHUNKS_FILE.read_text().splitlines()]
-    print(f"{builder.build(chunks)} chunks embedded into data/lancedb")
+    print(f"{builder.build(chunks)} chunks embedded into pgvector ({_pg_dsn()})")
 
 
 def main() -> None:

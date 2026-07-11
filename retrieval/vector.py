@@ -1,4 +1,4 @@
-"""Serving-side semantic search over the LanceDB chunk index.
+"""Serving-side semantic search over the pgvector chunk index (ADR-0005).
 
 Boundary rules (CLAUDE.md): domain types in/out, no LLM, no framework. The
 `search` docstring is LLM-facing — the agent routes by reading it (never trim).
@@ -9,15 +9,15 @@ from __future__ import annotations
 from typing import Any
 
 from core.domain import Chunk, Continuity
-from core.embeddings import EmbeddingProvider
+from core.embeddings import EmbeddingProvider, pgvector_literal
 
 
 class VectorIndex:
     """Query-time face of the chunk index; embeds with the same provider as ingest."""
 
-    def __init__(self, embeddings: EmbeddingProvider, table: Any):
+    def __init__(self, embeddings: EmbeddingProvider, conn: Any):
         self._embeddings = embeddings
-        self._table = table  # lancedb table, opened by the composition root
+        self._conn = conn  # psycopg connection, opened by the composition root
 
     def search(self, query: str, continuity: str | None = None, k: int = 8) -> list[Chunk]:
         """Semantic search over the wiki's prose, returning the best-matching text chunks.
@@ -33,17 +33,16 @@ class VectorIndex:
         [{"title": "Order 66", "section": "Introduction", "continuity":
         "canon", "text": "Order 66, also known as..."}, ...]
         """
-        vector = self._embeddings.embed([query])[0]
-        request = self._table.search(vector).limit(max(1, min(int(k), 20)))
-        if parsed := Continuity.parse(continuity):  # LLM-controlled arg: junk never filters
-            request = request.where(f"continuity = '{parsed}'", prefilter=True)
+        vector = pgvector_literal(self._embeddings.embed([query])[0])
+        limit = max(1, min(int(k), 20))
+        parsed = Continuity.parse(continuity)  # LLM-controlled arg: junk never filters
+        where = "WHERE continuity = %(continuity)s" if parsed else ""
+        rows = self._conn.execute(
+            f"SELECT title, name, section, continuity, text FROM chunks {where} "
+            f"ORDER BY embedding <=> %(query)s::vector LIMIT {limit}",
+            {"query": vector, "continuity": str(parsed) if parsed else None},
+        ).fetchall()
         return [
-            Chunk(
-                title=row["title"],
-                name=row["name"],
-                section=row["section"],
-                continuity=Continuity(row["continuity"]),
-                text=row["text"],
-            )
-            for row in request.to_list()
+            Chunk(title=title, name=name, section=section, continuity=Continuity(cont), text=text)
+            for title, name, section, cont, text in rows
         ]
