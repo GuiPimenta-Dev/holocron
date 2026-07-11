@@ -207,9 +207,11 @@ function ContinuityToggle({
           key={o.label}
           className={`cursor-pointer rounded-full px-2.5 py-1 transition-colors duration-150 ${
             value === o.value
-              ? "bg-ink-950 text-parchment"
+              ? o.value
+                ? CONTINUITY_THEME[o.value].chip // selected continuity: its hue, nothing else
+                : "bg-ink-950 text-parchment"
               : "text-parchment-faint hover:text-parchment-dim"
-          } ${o.value ? (value === o.value ? CONTINUITY_THEME[o.value].chip : "") : ""}`}
+          }`}
         >
           <input
             type="radio"

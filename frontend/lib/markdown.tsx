@@ -1,6 +1,7 @@
 // Minimal markdown for agent answers: **bold**, ## headings, - lists, paragraphs.
-// The agent's SYSTEM_PROMPT yields exactly this subset; a full md library would
-// be a dependency for four rules (ponytail: extend when the prompt's output grows).
+// This is the OBSERVED output subset (the SYSTEM_PROMPT doesn't pin a format);
+// anything else renders as literal text, safely. A full md library would be a
+// dependency for four rules (ponytail: extend when observed output grows).
 import type { ReactNode } from "react";
 
 export function Markdown({ text }: { text: string }) {

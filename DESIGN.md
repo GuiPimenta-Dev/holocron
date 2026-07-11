@@ -26,7 +26,9 @@ all accent work — they are data encoding, not decoration (PRODUCT.md principle
 ## Typography
 
 - UI: Geist Sans (already loaded). Instrumentation (tool names, relations, sections): Geist Mono.
-- Scale: 12 / 14 / 16 / 20 / 28 (≈1.3 ratio). Chat body 14; answers max-w-prose (~68ch).
+- Scale: 14 / 16 / 20 (≈1.25) for prose and headings; mono instrumentation runs
+  smaller at 10–11px (breadcrumbs, relation tags, section labels) — instrument
+  text is glanceable, not readable prose. Chat body 14; answers max-w-prose (~68ch).
 - Headings by weight (600) + size, never color alone.
 
 ## Motion
@@ -37,8 +39,9 @@ all accent work — they are data encoding, not decoration (PRODUCT.md principle
 
 ## Components
 
-- **Citation chip**: pill, continuity-tinted bg at ~15% alpha + continuity text; mono for
-  section suffix. Hover: 1px ring in the hue. This pattern is THE continuity affordance.
+- **Citation chip**: pill, continuity-tinted bg at ~15% alpha + continuity text; the
+  section lives in the title tooltip, not inline. Hover: 1px ring in the hue.
+  This pattern is THE continuity affordance.
 - **Tool breadcrumb**: mono 12px, parchment-faint, `→` separators.
 - **Panels**: chat = ink-900; graph canvas = ink-950 (the darkest surface is the sky).
   NodePanel overlays ink-900 with a 1px ink-700 border, no glass blur.
@@ -47,4 +50,4 @@ all accent work — they are data encoding, not decoration (PRODUCT.md principle
 ## Layout
 
 Split-screen: chat 40% (min 24rem), graph 60% — the hero gets the space. Chat column:
-header / scroll / composer, spacing 24px between turns, 8px inside a turn.
+header / scroll / composer, spacing 24px between turns, 6px inside a turn.
