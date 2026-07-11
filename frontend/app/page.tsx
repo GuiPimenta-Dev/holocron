@@ -21,7 +21,8 @@ export default function Home() {
   const [graph, setGraph] = useState<GraphState>(emptyGraph());
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [highlightId, setHighlightId] = useState<string | null>(null);
+  const [highlightId, setHighlightId] = useState<string | null>(null); // chip hover -> graph ring
+  const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null); // graph hover -> chip ring
 
   async function ask(question: string) {
     setBusy(true);
@@ -58,7 +59,7 @@ export default function Home() {
             </p>
           )}
           {turns.map((turn, i) => (
-            <TurnView key={i} turn={turn} onHoverCitation={setHighlightId} />
+            <TurnView key={i} turn={turn} hoveredNodeId={hoveredNodeId} onHoverCitation={setHighlightId} />
           ))}
         </div>
 
@@ -89,7 +90,12 @@ export default function Home() {
       </section>
 
       <section className="w-1/2">
-        <GraphPanel graph={graph} highlightId={highlightId} onReset={() => setGraph(emptyGraph())} />
+        <GraphPanel
+          graph={graph}
+          highlightId={highlightId}
+          onNodeHover={setHoveredNodeId}
+          onReset={() => setGraph(emptyGraph())}
+        />
       </section>
     </main>
   );
@@ -119,9 +125,11 @@ const CONTINUITY_STYLE: Record<Citation["continuity"], string> = {
 
 function TurnView({
   turn,
+  hoveredNodeId,
   onHoverCitation,
 }: {
   turn: Turn;
+  hoveredNodeId: string | null;
   onHoverCitation: (nodeId: string | null) => void;
 }) {
   return (
@@ -145,7 +153,9 @@ function TurnView({
           {turn.citations.map((c) => (
             <li
               key={citationNodeId(c)}
-              className={`cursor-default rounded-full px-2.5 py-0.5 text-xs ring-current hover:ring-1 ${CONTINUITY_STYLE[c.continuity]}`}
+              className={`cursor-default rounded-full px-2.5 py-0.5 text-xs ring-current hover:ring-1 ${
+                hoveredNodeId === citationNodeId(c) ? "ring-2" : ""
+              } ${CONTINUITY_STYLE[c.continuity]}`}
               title={c.section ? `${c.title} · ${c.section}` : c.title}
               onMouseEnter={() => onHoverCitation(citationNodeId(c))}
               onMouseLeave={() => onHoverCitation(null)}

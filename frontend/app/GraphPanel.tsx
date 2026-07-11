@@ -36,10 +36,12 @@ interface PanelLink {
 export function GraphPanel({
   graph,
   highlightId,
+  onNodeHover,
   onReset,
 }: {
   graph: GraphState;
   highlightId: string | null;
+  onNodeHover: (nodeId: string | null) => void;
   onReset: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -106,6 +108,7 @@ export function GraphPanel({
           linkWidth={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2.5 : 1)}
           linkDirectionalParticles={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2 : 0)}
           linkDirectionalParticleSpeed={0.004}
+          onNodeHover={(node) => onNodeHover(node ? placedNode(node).id : null)}
           cooldownTicks={120}
           backgroundColor="rgba(0,0,0,0)"
         />

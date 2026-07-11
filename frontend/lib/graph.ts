@@ -142,7 +142,7 @@ function foldChunks(state: GraphState, result: unknown): GraphState {
     // the owning entity node hosts the satellite — create it if the graph
     // tools never touched it (vector-only questions must not render empty)
     g = upsertNode(g, { id: c.title, name: c.name, type: "Entity", continuity: c.continuity });
-    const satId = `${c.title}#${c.section}`;
+    const satId = citationNodeId(c); // one owner for the "<title>#<section>" scheme
     g = upsertNode(g, {
       id: satId,
       name: c.section,
@@ -151,6 +151,7 @@ function foldChunks(state: GraphState, result: unknown): GraphState {
       kind: "chunk",
       section: c.section,
     });
+    // UI-only tether, not a Neo4j edge — the SCREAMING_SNAKE set is infobox-derived
     g = upsertLink(g, { source: satId, target: c.title, relation: "EXCERPT_OF", onPath: false });
   }
   return g;

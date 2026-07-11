@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseSSE, type AgentEvent } from "./events";
-import { applyEvent, beginTurn, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
+import { applyEvent, beginTurn, citationNodeId, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
 
 async function* chunks(bytes: Uint8Array): AsyncIterable<Uint8Array> {
   yield bytes;
@@ -110,12 +110,14 @@ describe("graph reducer over real streams", () => {
     expect(g.nodes.find((n) => n.id === "Kit Fisto")?.kind).toBe("entity");
   });
 
-  it("citationNodeId maps a done-citation to its graph node", async () => {
-    const { citationNodeId } = await import("./graph");
-    expect(citationNodeId({ title: "Kit Fisto", name: "Kit Fisto", continuity: "canon" })).toBe("Kit Fisto");
-    expect(
-      citationNodeId({ title: "Nautolan/Legends", name: "Nautolan", continuity: "legends", section: "Introduction" }),
-    ).toBe("Nautolan/Legends#Introduction");
+  it("citationNodeId maps every done-citation in the real stream to a graph node", async () => {
+    const events = await loadEvents("ask-stream.sse");
+    const done = events.at(-1);
+    if (done?.type !== "done") throw new Error("fixture must end with done");
+    const g = await reduce("ask-stream.sse");
+    for (const c of done.citations) {
+      expect(g.nodes.some((n) => n.id === citationNodeId(c))).toBe(true);
+    }
   });
 
   it("run_cypher results are ignored (not graphable)", async () => {
