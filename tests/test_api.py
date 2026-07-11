@@ -47,7 +47,7 @@ def parse_sse(body: str) -> list[tuple[str, dict]]:
 
 
 def post_ask(agent, payload):
-    client = TestClient(create_app(agent), raise_server_exceptions=False)
+    client = TestClient(create_app(agent, ui_origin="http://localhost:3000"), raise_server_exceptions=False)
     return client.post("/ask", json=payload)
 
 

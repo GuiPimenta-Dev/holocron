@@ -7,7 +7,7 @@ a "type" key. SSE protocol (the phase-3 frontend contract):
     event: tool_call     data: {"name": ..., "args": {...}}
     event: tool_result   data: {"name": ..., "result": ...}
     event: answer_delta  data: {"text": ...}
-    event: done          data: {"citations": [{"title", "name", "continuity"}], "trace_id": ...}
+    event: done          data: {"citations": [{"title", "name", "continuity", "section"?}], "trace_id": ...}
     event: error         data: {"message": ...}
 
 `done` (or `error`) terminates the stream. Errors after headers are sent
@@ -40,7 +40,7 @@ def _sse(event: dict[str, Any]) -> str:
     return f"event: {event['type']}\ndata: {json.dumps(payload)}\n\n"
 
 
-def create_app(agent: Agent, ui_origin: str = "http://localhost:3000") -> FastAPI:
+def create_app(agent: Agent, ui_origin: str) -> FastAPI:
     app = FastAPI(title="Holocron")
     # Local-only (ADR-0003): the Next.js dev server is the single allowed origin.
     app.add_middleware(

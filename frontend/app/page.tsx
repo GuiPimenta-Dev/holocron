@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { askAgent, type AgentEvent, type Citation } from "@/lib/events";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000";
@@ -18,16 +18,14 @@ export default function Home() {
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const abortRef = useRef<AbortController | null>(null);
 
   async function ask(question: string) {
     setBusy(true);
     setTurns((t) => [...t, { question, answer: "", citations: [], toolCalls: [], pending: true }]);
     const patch = (fn: (turn: Turn) => Turn) =>
       setTurns((t) => [...t.slice(0, -1), fn(t[t.length - 1])]);
-    abortRef.current = new AbortController();
     try {
-      for await (const ev of askAgent(API_BASE, question, null, abortRef.current.signal)) {
+      for await (const ev of askAgent(API_BASE, question)) {
         applyEvent(ev, patch);
       }
     } catch (err) {

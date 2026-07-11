@@ -38,6 +38,8 @@ export async function* parseSSE(chunks: AsyncIterable<Uint8Array>): AsyncGenerat
   }
 }
 
+const EVENT_TYPES = new Set(["tool_call", "tool_result", "answer_delta", "done", "error"]);
+
 function parseFrame(frame: string): AgentEvent | null {
   let type = "";
   let data = "";
@@ -45,7 +47,7 @@ function parseFrame(frame: string): AgentEvent | null {
     if (line.startsWith("event: ")) type = line.slice(7).trim();
     else if (line.startsWith("data: ")) data += line.slice(6);
   }
-  if (!type || !data) return null;
+  if (!EVENT_TYPES.has(type) || !data) return null; // unknown frames (heartbeats, future types) are skipped
   return { type, ...JSON.parse(data) } as AgentEvent;
 }
 
@@ -54,13 +56,11 @@ export async function* askAgent(
   apiBase: string,
   question: string,
   continuity: Continuity | null = null,
-  signal?: AbortSignal,
 ): AsyncGenerator<AgentEvent> {
   const res = await fetch(`${apiBase}/ask`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ question, continuity }),
-    signal,
   });
   if (!res.ok || !res.body) {
     throw new Error(`API error: ${res.status} ${res.statusText}`);
