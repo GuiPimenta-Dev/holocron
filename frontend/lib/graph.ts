@@ -1,0 +1,168 @@
+// Pure reducer: agent events in, graph data out. No React, no rendering —
+// this is the unit-testable core of the live traversal panel (spec #26).
+
+import type { AgentEvent, Continuity } from "./events";
+
+export interface GraphNode {
+  id: string; // wiki title — unique per continuity ("Kit Fisto/Legends")
+  name: string;
+  type: string; // entity type (Character, Celestialbody...); "Entity" when unknown
+  continuity: Continuity;
+  kind: "entity"; // "chunk" satellites arrive with ticket #29
+  lastTurn: number; // dimmed by the renderer when < GraphState.turn
+}
+
+export interface GraphLink {
+  source: string;
+  target: string;
+  relation: string;
+  onPath: boolean; // part of a path_between result — rendered highlighted
+  lastTurn: number;
+}
+
+export interface GraphState {
+  turn: number; // current question number, 1-based
+  nodes: GraphNode[];
+  links: GraphLink[];
+}
+
+export function emptyGraph(): GraphState {
+  return { turn: 0, nodes: [], links: [] };
+}
+
+/** Start a new question: everything existing becomes "previous" (dimmed). */
+export function beginTurn(state: GraphState): GraphState {
+  return { ...state, turn: state.turn + 1 };
+}
+
+/** Fold one agent event into the graph. Non-graph events pass through untouched. */
+export function applyEvent(state: GraphState, event: AgentEvent): GraphState {
+  if (event.type !== "tool_result") return state;
+  switch (event.name) {
+    case "get_entity":
+      return foldEntities(state, event.result);
+    case "get_relations":
+      return foldRelations(state, event.result);
+    case "path_between":
+      return foldPaths(state, event.result);
+    default:
+      return state; // search_chunks (#29) and run_cypher (not graphable) — ignored
+  }
+}
+
+interface EntityResult {
+  title: string;
+  name: string;
+  type: string;
+  continuity: Continuity;
+}
+
+interface RelationResult {
+  relation: string;
+  other_title: string;
+  other_type: string;
+  other_continuity: Continuity;
+}
+
+// the get_relations center entity carries no `type` on the wire (EntityRelations)
+interface RelationsResult {
+  title: string;
+  name: string;
+  continuity: Continuity;
+  outgoing: RelationResult[];
+  incoming: RelationResult[];
+}
+
+interface PathResult {
+  entities: string[];
+  steps: { source: string; relation: string; target: string }[];
+}
+
+function foldEntities(state: GraphState, result: unknown): GraphState {
+  let g = state;
+  for (const e of asArray<EntityResult>(result)) {
+    g = upsertNode(g, { id: e.title, name: e.name, type: e.type, continuity: e.continuity });
+  }
+  return g;
+}
+
+// ponytail: hub entities (Anakin, Tatooine) have up to 50 incoming edges — the
+// full fan is an unreadable hairball on canvas. Outgoing edges are what the
+// agent reasons with for "X of/by Y" questions; incoming get a readability cap.
+// Raise it (or make it a UI control) if a question ever hinges on the tail.
+export const INCOMING_RENDER_CAP = 8;
+
+function foldRelations(state: GraphState, result: unknown): GraphState {
+  let g = state;
+  for (const e of asArray<RelationsResult>(result)) {
+    g = upsertNode(g, { id: e.title, name: e.name, type: "Entity", continuity: e.continuity });
+    for (const rel of e.outgoing ?? []) {
+      g = upsertNode(g, farEnd(rel));
+      g = upsertLink(g, { source: e.title, target: rel.other_title, relation: rel.relation, onPath: false });
+    }
+    for (const rel of (e.incoming ?? []).slice(0, INCOMING_RENDER_CAP)) {
+      g = upsertNode(g, farEnd(rel));
+      g = upsertLink(g, { source: rel.other_title, target: e.title, relation: rel.relation, onPath: false });
+    }
+  }
+  return g;
+}
+
+function foldPaths(state: GraphState, result: unknown): GraphState {
+  let g = state;
+  for (const path of asArray<PathResult>(result)) {
+    for (const title of path.entities ?? []) {
+      g = upsertNode(g, { id: title, name: baseName(title), type: "Entity", continuity: continuityOf(title) });
+    }
+    for (const step of path.steps ?? []) {
+      g = upsertLink(g, { source: step.source, target: step.target, relation: step.relation, onPath: true });
+    }
+  }
+  return g;
+}
+
+function farEnd(rel: RelationResult): Omit<GraphNode, "kind" | "lastTurn"> {
+  return {
+    id: rel.other_title,
+    name: baseName(rel.other_title),
+    type: rel.other_type,
+    continuity: rel.other_continuity,
+  };
+}
+
+function baseName(title: string): string {
+  return title.replace(/\/Legends$/, "");
+}
+
+function continuityOf(title: string): Continuity {
+  return title.endsWith("/Legends") ? "legends" : "canon";
+}
+
+function asArray<T>(result: unknown): T[] {
+  return Array.isArray(result) ? (result as T[]) : [];
+}
+
+function upsertNode(state: GraphState, node: Omit<GraphNode, "kind" | "lastTurn">): GraphState {
+  const existing = state.nodes.find((n) => n.id === node.id);
+  if (existing) {
+    const upgraded: GraphNode = {
+      ...existing,
+      // never downgrade a typed node to the unknown placeholder
+      type: node.type !== "Entity" ? node.type : existing.type,
+      lastTurn: state.turn,
+    };
+    return { ...state, nodes: state.nodes.map((n) => (n.id === node.id ? upgraded : n)) };
+  }
+  return { ...state, nodes: [...state.nodes, { ...node, kind: "entity", lastTurn: state.turn }] };
+}
+
+function upsertLink(state: GraphState, link: Omit<GraphLink, "lastTurn">): GraphState {
+  const key = (l: { source: string; target: string; relation: string }) =>
+    `${l.source}\u001F${l.relation}\u001F${l.target}`;
+  const existing = state.links.find((l) => key(l) === key(link));
+  if (existing) {
+    const updated: GraphLink = { ...existing, onPath: existing.onPath || link.onPath, lastTurn: state.turn };
+    return { ...state, links: state.links.map((l) => (key(l) === key(link) ? updated : l)) };
+  }
+  return { ...state, links: [...state.links, { ...link, lastTurn: state.turn }] };
+}
