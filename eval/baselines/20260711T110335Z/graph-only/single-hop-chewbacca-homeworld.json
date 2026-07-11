@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-chewbacca-homeworld",
+  "category": "single-hop",
+  "question": "What is Chewbacca's homeworld?",
+  "answer": "Chewbacca's homeworld is **Kashyyyk** — this holds true in both continuities: canon (Kashyyyk) and Legends (Kashyyyk/Legends).",
+  "citations": [
+    {
+      "title": "Chewbacca",
+      "name": "Chewbacca",
+      "continuity": "canon"
+    },
+    {
+      "title": "Chewbacca/Legends",
+      "name": "Chewbacca",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "3ae21924f8e780956569b5c99297df71"
+}

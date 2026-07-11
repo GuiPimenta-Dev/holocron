@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The chain to Yoda as Dooku's Jedi master is correct, but the answer treats the placeholder \"Yoda's species\" as an actual recorded species name rather than stating Yoda's (unnamed) species, so the required species fact is fabricated rather than delivered.",
+  "judge_model": "claude-opus-4-8"
+}

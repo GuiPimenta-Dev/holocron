@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates canon (Luminara Unduli and Anakin Skywalker) from Legends (Luminara Unduli only), matching the expected continuity behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

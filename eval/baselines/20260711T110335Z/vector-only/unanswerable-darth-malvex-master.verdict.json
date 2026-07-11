@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating there is no record of Darth Malvex in the corpus and explicitly declines to name a master, asserting no lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

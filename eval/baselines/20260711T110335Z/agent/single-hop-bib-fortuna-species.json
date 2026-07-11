@@ -1,0 +1,25 @@
+{
+  "id": "single-hop-bib-fortuna-species",
+  "category": "single-hop",
+  "question": "What species is Bib Fortuna?",
+  "answer": "The species isn't listed directly in the infobox properties I retrieved. Let me check relations for a SPECIES edge.Bib Fortuna is a **Twi'lek**, hailing from the planet Ryloth. This holds true in both continuities — canon and Legends.",
+  "citations": [
+    {
+      "title": "Bib Fortuna",
+      "name": "Bib Fortuna",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bib Fortuna/Legends",
+      "name": "Bib Fortuna",
+      "continuity": "legends"
+    },
+    {
+      "title": "Fortuna family",
+      "name": "Fortuna family",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "332445df3d0366049214c02a881f3763"
+}

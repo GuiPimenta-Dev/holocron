@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer explicitly refuses, stating no corpus entry for Vela Korr exists and declining to speculate, without asserting any lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

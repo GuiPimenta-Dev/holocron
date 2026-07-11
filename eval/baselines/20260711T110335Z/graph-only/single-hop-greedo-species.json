@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "The properties don't list species directly, so let me check the relations.Greedo is a **Rodian** in both continuities — canon (Rodian) and Legends (Rodian/Legends).",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "a1efe1769efdb171e14dc4acd6642654"
+}

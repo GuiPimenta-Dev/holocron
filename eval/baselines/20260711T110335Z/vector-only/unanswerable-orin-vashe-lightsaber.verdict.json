@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses, stating no corpus entity or chunk matches 'Orin Vashe' and explicitly declining to speculate or invent lore, asserting no facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}

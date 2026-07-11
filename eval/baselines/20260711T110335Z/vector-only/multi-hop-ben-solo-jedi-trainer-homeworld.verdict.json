@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Luke Skywalker as Ben Solo's Jedi Master and correctly connects his homeworld as Tatooine, making the multi-hop chain explicit with no contradicting links.",
+  "judge_model": "claude-opus-4-8"
+}

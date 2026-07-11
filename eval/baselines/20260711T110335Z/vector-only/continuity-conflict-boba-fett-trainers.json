@@ -1,0 +1,33 @@
+{
+  "id": "continuity-conflict-boba-fett-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Boba Fett?",
+  "answer": "In canon: **Jango Fett** trained Boba from a young age — teaching him hand-to-hand combat, marksmanship, piloting (including Slave I), survival skills, and general \"family trade\" bounty hunting techniques. Boba later also apprenticed himself to **Cad Bane**, his father's former protégé, to further hone his skills as a bounty hunter.\n\nIn Legends, the same core fact holds — Boba was likewise trained in combat and martial skills from a young age by his father and genetic donor, Jango Fett.",
+  "citations": [
+    {
+      "title": "Boba Fett",
+      "name": "Boba Fett",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Jango Fett",
+      "name": "Jango Fett",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Boba Fett's armor",
+      "name": "Boba Fett's armor",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "830ed333814fe8eaa85a31119ae5e673"
+}

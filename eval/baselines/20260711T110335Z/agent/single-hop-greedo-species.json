@@ -1,0 +1,31 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "The infobox properties don't list species directly, so let me check the relations and narrative text.Greedo is a **Rodian** — this holds true in both continuities: in canon (from the planet Tatooine, though of Rodian stock) and in Legends (born on Rodia itself, of the Tetsu Clan).",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends"
+    },
+    {
+      "title": "Rodian/Legends",
+      "name": "Rodian",
+      "continuity": "legends",
+      "section": "Biology and appearance"
+    },
+    {
+      "title": "Rodian",
+      "name": "Rodian",
+      "continuity": "canon",
+      "section": "Rodians in the galaxy"
+    }
+  ],
+  "trace_id": "994ad745eb5d3a629a8b6ff171db4c5c"
+}

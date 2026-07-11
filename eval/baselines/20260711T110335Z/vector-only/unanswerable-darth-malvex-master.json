@@ -1,0 +1,51 @@
+{
+  "id": "unanswerable-darth-malvex-master",
+  "category": "unanswerable",
+  "question": "Who was Darth Malvex's Sith master?",
+  "answer": "I don't have any record of a \"Darth Malvex\" in the corpus. My searches turned up no entity or article by that name—only unrelated Sith figures like Darth Malak, Darth Bane, and others. I don't know who Darth Malvex was or who their master might have been; the corpus appears to have nothing on this name.",
+  "citations": [
+    {
+      "title": "Sith/Legends",
+      "name": "Sith",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Jedi",
+      "name": "Jedi",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Darth/Legends",
+      "name": "Darth",
+      "continuity": "legends",
+      "section": "Overview"
+    },
+    {
+      "title": "Order of the Sith Lords",
+      "name": "Order of the Sith Lords",
+      "continuity": "legends",
+      "section": "Members"
+    },
+    {
+      "title": "Sith Master/Legends",
+      "name": "Sith Master",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Darth",
+      "name": "Darth",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Darth Maul/Legends",
+      "name": "Darth Maul",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "8cf72d10b82440a21bbe59d2e198e6e5"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "single-hop-greedo-species",
+  "category": "single-hop",
+  "question": "What species is Greedo?",
+  "answer": "Greedo is a **Rodian** — a green-skinned humanoid species native to the planet Rodia. This holds true in both **canon** and **Legends** continuity.",
+  "citations": [
+    {
+      "title": "Greedo",
+      "name": "Greedo",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Greedo/Legends",
+      "name": "Greedo",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Rodian",
+      "name": "Rodian",
+      "continuity": "canon",
+      "section": "Rodians in the galaxy"
+    },
+    {
+      "title": "Rodian/Legends",
+      "name": "Rodian",
+      "continuity": "legends",
+      "section": "Biology and appearance"
+    }
+  ],
+  "trace_id": "e225d4f1159cce88c3dd21b490cecbc5"
+}

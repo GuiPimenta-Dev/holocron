@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly separates continuities with canon listing the Empire and Alliance, and Legends adding the New Republic, matching the expected behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

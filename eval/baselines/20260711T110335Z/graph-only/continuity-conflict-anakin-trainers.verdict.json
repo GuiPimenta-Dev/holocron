@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer separates canon from Legends and correctly restricts Ki-Adi-Mundi to Legends while listing Obi-Wan and Qui-Gon in both, matching the expected continuity behavior without blending.",
+  "judge_model": "claude-opus-4-8"
+}

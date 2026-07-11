@@ -1,0 +1,33 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "Padmé Amidala's homeworld is **Naboo**, a Mid Rim planet in the Chommell sector. This holds true in both continuities: in canon, she was born Padmé Naberrie on Naboo in 46 BBY and later served as its Queen and Senator; in Legends, she was likewise born on Naboo in 46 BBY and served as Queen of Naboo and Senator for the Chommell sector.",
+  "citations": [
+    {
+      "title": "Padmé Amidala Naberrie",
+      "name": "Padmé Amidala Naberrie",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Naberrie family",
+      "name": "Naberrie family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Naboo",
+      "name": "Naboo",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "622f85ac8ab3736a9c102e68c90a7085"
+}

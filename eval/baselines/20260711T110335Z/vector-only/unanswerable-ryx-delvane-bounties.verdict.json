@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no entry for Ryx Delvane exists in the corpus and that it cannot report any bounties, asserting no lore facts about the fabricated subject.",
+  "judge_model": "claude-opus-4-8"
+}

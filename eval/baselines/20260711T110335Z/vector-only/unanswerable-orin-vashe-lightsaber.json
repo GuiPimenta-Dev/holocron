@@ -1,0 +1,105 @@
+{
+  "id": "unanswerable-orin-vashe-lightsaber",
+  "category": "unanswerable",
+  "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+  "answer": "The corpus has no results on a Jedi Master named \"Orin Vashe\" — I couldn't find any entity or chunk matching that name.I couldn't find any entity or record for a Jedi Master named \"Orin Vashe\" in the corpus — searches for that name and related terms returned no relevant matches. I don't have information on this character; I won't speculate about who they might be or invent lore.",
+  "citations": [
+    {
+      "title": "Mace Windu's lightsaber",
+      "name": "Mace Windu's lightsaber",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Sith lightsaber",
+      "name": "Sith lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Dooku's lightsaber",
+      "name": "Dooku's lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Skywalker lightsaber",
+      "name": "Skywalker lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Equipment"
+    },
+    {
+      "title": "Curved-hilt lightsaber",
+      "name": "Curved-hilt lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Obi-Wan Kenobi's third lightsaber/Legends",
+      "name": "Obi-Wan Kenobi's third lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Yoda's lightsaber",
+      "name": "Yoda's lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Cassian Jeron Andor",
+      "name": "Cassian Jeron Andor",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Quinlan Vos",
+      "name": "Quinlan Vos",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "19 BBY/Legends",
+      "name": "19 BBY",
+      "continuity": "legends",
+      "section": "Deaths"
+    },
+    {
+      "title": "4 ABY",
+      "name": "4 ABY",
+      "continuity": "canon",
+      "section": "Deaths"
+    },
+    {
+      "title": "Quinlan Vos/Legends",
+      "name": "Quinlan Vos",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Form VII/Legends",
+      "name": "Form VII",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi/Legends",
+      "name": "Jedi",
+      "continuity": "legends",
+      "section": "Jedi ranks"
+    }
+  ],
+  "trace_id": "959f641fb50ae15ad19b4aa2bfef35c4"
+}

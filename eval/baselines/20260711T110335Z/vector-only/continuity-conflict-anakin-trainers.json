@@ -1,0 +1,63 @@
+{
+  "id": "continuity-conflict-anakin-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Anakin Skywalker?",
+  "answer": "**In both continuities, Anakin Skywalker's primary trainer was Obi-Wan Kenobi.**\n\n- **Canon**: After the death of Qui-Gon Jinn at the Battle of Naboo, the Jedi Council granted Kenobi permission to train Anakin as his Padawan. Kenobi trained him in lightsaber combat and the ways of the Force, and their bond grew close enough that Kenobi came to see Anakin as a brother.\n\n- **Legends**: Qui-Gon Jinn's dying wish was for Kenobi to train Anakin. The Jedi Council reluctantly agreed, and Anakin was formally placed under Kenobi's tutelage as his Padawan, despite concerns that Kenobi (still young himself) might struggle to manage such a difficult student.\n\nAdditionally, before his formal Jedi training, **Qui-Gon Jinn** was the one who discovered Anakin on Tatooine, believed him to be the Chosen One, and initially sought to train him — but the Jedi Council forbade Jinn from doing so at first, meaning Kenobi became his master only after Jinn's death.",
+  "citations": [
+    {
+      "title": "Ki-Adi-Mundi/Legends",
+      "name": "Ki-Adi-Mundi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Mace Windu",
+      "name": "Mace Windu",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Obi-Wan Kenobi/Legends",
+      "name": "Obi-Wan Kenobi",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Chosen One/Legends",
+      "name": "Chosen One",
+      "continuity": "legends",
+      "section": "History of the Chosen One"
+    },
+    {
+      "title": "Darth Sidious",
+      "name": "Darth Sidious",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Obi-Wan Kenobi",
+      "name": "Obi-Wan Kenobi",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "1dcb49396406323a5291245fe4a53527"
+}

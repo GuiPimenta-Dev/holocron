@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer gets the continuity distinction wrong \u2014 it frames canon-only training around Cad Bane and omits Aurra Sing (expected in both) and Bossk (expected canon-only), contradicting the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

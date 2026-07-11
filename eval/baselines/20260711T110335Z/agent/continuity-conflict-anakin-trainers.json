@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-anakin-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Anakin Skywalker?",
+  "answer": "**In canon:** Anakin Skywalker was trained by **Qui-Gon Jinn**, **Obi-Wan Kenobi**, **Yoda**, and later, as a Sith, by **Darth Sidious**.\n\n**In Legends:** Anakin was trained by **Qui-Gon Jinn**, **Obi-Wan Kenobi**, **Ki-Adi-Mundi**, and **Palpatine** (as his Sith Master).",
+  "citations": [
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "7c727819c3483d3a5dd1d7f208e7e19f"
+}

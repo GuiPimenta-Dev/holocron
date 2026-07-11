@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (father Dathan, Human) and makes the multi-hop chain explicit \u2014 Rey \u2192 her father Dathan \u2192 biologically human \u2014 treating only canon subjects, with the extra Strand-Cast/Sidious detail being grounded and non-faulting.",
+  "judge_model": "claude-opus-4-8"
+}

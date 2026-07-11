@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-bail-organa-homeworld",
+  "category": "single-hop",
+  "question": "What is Bail Organa's homeworld?",
+  "answer": "The tools returned no results for \"Bail Organa.\" Let me try alternate name forms before concluding.Bail Organa's (recorded in the corpus as \"Bail Prestor Organa\") homeworld is **Alderaan** — in both continuities: canon (Alderaan) and Legends (Alderaan/Legends).",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "433a4cd3ad0541f4abede7b9f795a147"
+}

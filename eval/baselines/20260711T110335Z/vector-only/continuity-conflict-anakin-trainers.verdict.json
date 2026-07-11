@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer cleanly separates canon and Legends without blending, correctly crediting Obi-Wan (and Qui-Gon) in both; omitting Ki-Adi-Mundi is not a fault per the rubric.",
+  "judge_model": "claude-opus-4-8"
+}

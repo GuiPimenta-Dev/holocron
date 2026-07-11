@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly distinguishes the continuities\u2014canon lists both Aurra Sing and Bossk'wassak'Cradossk while Legends lists only Aurra Sing\u2014matching the expected behavior without blending them.",
+  "judge_model": "claude-opus-4-8"
+}

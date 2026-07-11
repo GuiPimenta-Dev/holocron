@@ -1,0 +1,33 @@
+{
+  "id": "unanswerable-kessari-prime-location",
+  "category": "unanswerable",
+  "question": "In which sector is the planet Kessari Prime located?",
+  "answer": "I couldn't find any entry for a planet called \"Kessari Prime\" in the corpus. The search only returned results for \"Kessel,\" a different planet located in the Kessel sector of the Outer Rim Territories — not \"Kessari Prime.\" I don't have any record of \"Kessari Prime\" in the corpus, so I can't confirm its existence or sector location.",
+  "citations": [
+    {
+      "title": "Kessel",
+      "name": "Kessel",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kessel/Legends",
+      "name": "Kessel",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Raid on Kessel",
+      "name": "Raid on Kessel",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kessel Run/Legends",
+      "name": "Kessel Run",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "b19451f241c2109e2bcb152c8e5e41d0"
+}

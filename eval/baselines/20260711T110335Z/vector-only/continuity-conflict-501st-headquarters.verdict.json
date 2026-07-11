@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer contradicts the expected behavior by claiming the canon corpus specifies no headquarters, when canon should list Coruscant.",
+  "judge_model": "claude-opus-4-8"
+}

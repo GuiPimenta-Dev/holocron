@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states Kashyyyk as Chewbacca's homeworld and correctly reflects the same answer in both continuities, matching the expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

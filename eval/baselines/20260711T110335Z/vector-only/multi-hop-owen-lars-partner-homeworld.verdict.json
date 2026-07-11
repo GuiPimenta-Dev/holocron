@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Beru as Owen's partner, Tatooine as her homeworld) and makes the partner\u2192Beru\u2192Tatooine chain explicit in both continuities, grounded in the cited pages.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-bib-fortuna-species",
+  "category": "single-hop",
+  "question": "What species is Bib Fortuna?",
+  "answer": "Bib Fortuna is a **Twi'lek**, hailing from the planet Ryloth. This holds true in both continuities — the canon \"Bib Fortuna\" article and the \"Bib Fortuna/Legends\" article both describe him as a male Twi'lek from Ryloth.",
+  "citations": [
+    {
+      "title": "Bib Fortuna/Legends",
+      "name": "Bib Fortuna",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Fortuna family",
+      "name": "Fortuna family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Bib Fortuna",
+      "name": "Bib Fortuna",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "9b2492d52756fe292e3f38f8c3c7f73a"
+}

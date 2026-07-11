@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Naboo) and applies the same answer across both continuities as expected, with extra non-contradicting detail.",
+  "judge_model": "claude-opus-4-8"
+}

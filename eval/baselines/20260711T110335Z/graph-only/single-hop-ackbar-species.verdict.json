@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Mon Calamari for both continuities, matching the expected fact, and its citations cover Ackbar's pages.",
+  "judge_model": "claude-opus-4-8"
+}

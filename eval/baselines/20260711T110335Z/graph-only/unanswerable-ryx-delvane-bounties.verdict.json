@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating the subject has no corpus entry and asserts no lore facts about Ryx Delvane.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,75 @@
+{
+  "id": "unanswerable-threx-kavan-fleet",
+  "category": "unanswerable",
+  "question": "Which fleet did Admiral Threx Kavan command?",
+  "answer": "The corpus has no entry for an \"Admiral Threx Kavan.\" Let me check for alternate spellings or related pages before concluding.I found no record of an \"Admiral Threx Kavan\" anywhere in the corpus — no matching entity, and no mention in related fleet or Imperial Navy prose searches. This name does not appear to exist in the pinned Wookieepedia corpus I have access to, so I can't answer which fleet they commanded.",
+  "citations": [
+    {
+      "title": "Starfighter combat/Legends",
+      "name": "Starfighter combat",
+      "continuity": "legends",
+      "section": "Characteristics of starfighter combat"
+    },
+    {
+      "title": "Death Squadron/Legends",
+      "name": "Death Squadron",
+      "continuity": "legends",
+      "section": "Known officers"
+    },
+    {
+      "title": "Gial Ackbar/Legends",
+      "name": "Gial Ackbar",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Plo Koon/Legends",
+      "name": "Plo Koon",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Galactic Civil War/Legends",
+      "name": "Galactic Civil War",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Flagship/Legends",
+      "name": "Flagship",
+      "continuity": "legends",
+      "section": "Famous flagships in chronological order"
+    },
+    {
+      "title": "Imperial Navy",
+      "name": "Imperial Navy",
+      "continuity": "canon",
+      "section": "Organization"
+    },
+    {
+      "title": "Imperial II-class Star Destroyer",
+      "name": "Imperial II-class Star Destroyer",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Imperial Navy/Legends",
+      "name": "Imperial Navy",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Vice Admiral",
+      "name": "Vice Admiral",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Wilhuff Tarkin",
+      "name": "Wilhuff Tarkin",
+      "continuity": "canon",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "239c927c6eb078604556145f7b15d64c"
+}

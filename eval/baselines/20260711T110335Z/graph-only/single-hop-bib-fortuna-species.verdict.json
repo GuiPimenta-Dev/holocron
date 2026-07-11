@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Bib Fortuna is a Twi'lek in both continuities, matching the expected fact and continuity behavior, with citations covering the subject.",
+  "judge_model": "claude-opus-4-8"
+}

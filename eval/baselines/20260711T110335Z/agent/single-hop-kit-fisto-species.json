@@ -1,0 +1,25 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "The species field isn't listed in the infobox properties I retrieved. Let me check further.Kit Fisto is a **Nautolan** — a green-skinned, amphibious humanoid species from the planet Glee Anselm. This holds true in both **canon** and **Legends** continuities.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends"
+    },
+    {
+      "title": "Nautolan/Legends",
+      "name": "Nautolan",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "0d64a96e8280172420d0023ef5325dcf"
+}

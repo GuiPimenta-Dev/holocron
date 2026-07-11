@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly frames Luke's canon training as Obi-Wan Kenobi and Yoda without listing Palpatine, matching the expected continuity behavior and keeping canon and Legends distinct.",
+  "judge_model": "claude-opus-4-8"
+}

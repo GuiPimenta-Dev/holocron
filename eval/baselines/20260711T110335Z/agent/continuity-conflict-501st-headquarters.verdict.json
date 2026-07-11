@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly distinguishes canon (Coruscant only) from Legends (Coruscant plus the DS-1 Orbital Battle Station) without blending the continuities, matching the expected behavior exactly.",
+  "judge_model": "claude-opus-4-8"
+}

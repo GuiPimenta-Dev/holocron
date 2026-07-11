@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no entity named Orin Vashe exists in the corpus and it cannot answer, without asserting any lore facts about the subject.",
+  "judge_model": "claude-opus-4-8"
+}
