@@ -1,11 +1,7 @@
 "use client";
 
-import type { NodeDetails } from "@/lib/graph";
-
-const CONTINUITY_BADGE: Record<string, string> = {
-  canon: "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200",
-  legends: "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200",
-};
+import { CONTINUITY_THEME } from "@/lib/continuity";
+import { askAboutQuestion, type NodeDetails } from "@/lib/graph";
 
 /** Side panel: everything the stream delivered about one node (decision 3). */
 export function NodePanel({
@@ -14,20 +10,22 @@ export function NodePanel({
   onClose,
 }: {
   details: NodeDetails;
-  onAskAbout: (name: string) => void;
+  onAskAbout: (question: string) => void;
   onClose: () => void;
 }) {
-  const { node, properties, outgoing, incoming } = details;
+  const { node, owner, properties, outgoing, incoming } = details;
+  const isChunk = node.kind === "chunk";
+  const askSubject = owner ?? node;
   return (
     <aside className="absolute inset-y-0 right-0 z-10 flex w-80 flex-col gap-4 overflow-y-auto border-l border-zinc-200 bg-white/95 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95">
       <header className="flex items-start justify-between gap-2">
         <div>
-          <h2 className="font-semibold">{node.name}</h2>
+          <h2 className="font-semibold">{isChunk ? (owner?.name ?? node.name) : node.name}</h2>
           <p className="mt-1 flex flex-wrap gap-1.5 text-xs">
             <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-              {node.kind === "chunk" ? `§ ${node.section}` : node.type}
+              {isChunk ? `excerpt · § ${node.section}` : node.type}
             </span>
-            <span className={`rounded-full px-2 py-0.5 ${CONTINUITY_BADGE[node.continuity]}`}>
+            <span className={`rounded-full px-2 py-0.5 ${CONTINUITY_THEME[node.continuity].chip}`}>
               {node.continuity}
             </span>
           </p>
@@ -40,6 +38,13 @@ export function NodePanel({
           ×
         </button>
       </header>
+
+      {isChunk && (
+        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          A prose excerpt the agent retrieved from the &ldquo;{node.section}&rdquo; section of{" "}
+          <span className="font-medium">{owner?.name ?? "its entity"}</span>.
+        </p>
+      )}
 
       {Object.keys(properties).length > 0 && (
         <section>
@@ -70,10 +75,10 @@ export function NodePanel({
       </p>
 
       <button
-        onClick={() => onAskAbout(node.name)}
+        onClick={() => onAskAbout(askAboutQuestion(details))}
         className="mt-auto rounded-lg bg-zinc-900 px-4 py-2 text-sm text-white dark:bg-zinc-100 dark:text-zinc-900"
       >
-        Ask about {node.name}
+        Ask about {askSubject.name}
       </button>
     </aside>
   );

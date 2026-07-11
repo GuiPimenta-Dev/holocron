@@ -156,9 +156,28 @@ describe("nodeDetails — the side panel's data, from stream-received data only"
     expect(nodeDetails(g, "Grogu")).toBeNull();
   });
 
-  it("properties merge across turns without loss", async () => {
+  it("a later sighting without properties never erases a full infobox", async () => {
     const first = await reduce("ask-stream.sse");
     const again = await reduce("ask-stream.sse", beginTurn(first));
     expect(Object.keys(nodeDetails(again, "Kit Fisto")!.properties).length).toBeGreaterThan(0);
+  });
+
+  it("a chunk satellite resolves its owning entity and asks about it", async () => {
+    const { askAboutQuestion } = await import("./graph");
+    const g = await reduce("ask-stream.sse");
+    const sat = g.nodes.find((n) => n.kind === "chunk")!;
+    const details = nodeDetails(g, sat.id)!;
+    expect(details.owner).not.toBeNull();
+    expect(details.owner!.kind).toBe("entity");
+    const q = askAboutQuestion(details);
+    expect(q).toContain(details.owner!.name);
+    if (details.owner!.continuity === "legends") expect(q).toContain("in Legends");
+  });
+
+  it("askAboutQuestion is continuity-explicit for Legends twins", async () => {
+    const g = await reduce("ask-stream.sse");
+    const { askAboutQuestion } = await import("./graph");
+    expect(askAboutQuestion(nodeDetails(g, "Kit Fisto")!)).toBe("Tell me about Kit Fisto");
+    expect(askAboutQuestion(nodeDetails(g, "Kit Fisto/Legends")!)).toBe("Tell me about Kit Fisto in Legends");
   });
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CONTINUITY_THEME } from "@/lib/continuity";
 import { askAgent, type AgentEvent, type Citation, type Continuity } from "@/lib/events";
 import {
   applyEvent as applyGraphEvent,
@@ -117,8 +118,8 @@ export default function Home() {
         {selectedDetails && (
           <NodePanel
             details={selectedDetails}
-            onAskAbout={(name) => {
-              setInput(`Tell me about ${name}`);
+            onAskAbout={(question) => {
+              setInput(question);
               setSelectedNodeId(null);
             }}
             onClose={() => setSelectedNodeId(null)}
@@ -160,33 +161,35 @@ function ContinuityToggle({
     { label: "canon", value: "canon" },
     { label: "legends", value: "legends" },
   ];
+  // real radio inputs: keyboard/arrow behavior for free, pill look via labels
   return (
-    <div className="flex gap-1 self-start rounded-full bg-zinc-100 p-0.5 text-xs dark:bg-zinc-900" role="radiogroup">
+    <fieldset
+      className="flex gap-1 self-start rounded-full bg-zinc-100 p-0.5 text-xs dark:bg-zinc-900"
+      aria-label="Continuity"
+      disabled={disabled}
+    >
       {options.map((o) => (
-        <button
+        <label
           key={o.label}
-          type="button"
-          role="radio"
-          aria-checked={value === o.value}
-          disabled={disabled}
-          onClick={() => onChange(o.value)}
-          className={`rounded-full px-2.5 py-1 transition-colors ${
+          className={`cursor-pointer rounded-full px-2.5 py-1 transition-colors ${
             value === o.value
               ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
               : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >
+          <input
+            type="radio"
+            name="continuity"
+            className="sr-only"
+            checked={value === o.value}
+            onChange={() => onChange(o.value)}
+          />
           {o.label}
-        </button>
+        </label>
       ))}
-    </div>
+    </fieldset>
   );
 }
-
-const CONTINUITY_STYLE: Record<Citation["continuity"], string> = {
-  canon: "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200",
-  legends: "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200",
-};
 
 function TurnView({
   turn,
@@ -220,7 +223,7 @@ function TurnView({
               key={citationNodeId(c)}
               className={`cursor-default rounded-full px-2.5 py-0.5 text-xs ring-current hover:ring-1 ${
                 hoveredNodeId === citationNodeId(c) ? "ring-2" : ""
-              } ${CONTINUITY_STYLE[c.continuity]}`}
+              } ${CONTINUITY_THEME[c.continuity].chip}`}
               title={c.section ? `${c.title} · ${c.section}` : c.title}
               onMouseEnter={() => onHoverCitation(citationNodeId(c))}
               onMouseLeave={() => onHoverCitation(null)}
