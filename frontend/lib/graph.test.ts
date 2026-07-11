@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseSSE, type AgentEvent } from "./events";
-import { applyEvent, beginTurn, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
+import { applyEvent, beginTurn, citationNodeId, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
 
 async function* chunks(bytes: Uint8Array): AsyncIterable<Uint8Array> {
   yield bytes;
@@ -87,9 +87,41 @@ describe("graph reducer over real streams", () => {
     expect(g.links.some((l) => l.source === "Anakin Skywalker" && l.relation === "TRAINED_BY")).toBe(true);
   });
 
-  it("run_cypher and chunk results are ignored (not graphable yet)", async () => {
+  it("search_chunks results become satellites orbiting their owning entity", async () => {
+    const g = await reduce("ask-stream.sse"); // Kit Fisto stream calls search_chunks
+    const satellites = g.nodes.filter((n) => n.kind === "chunk");
+    expect(satellites.length).toBeGreaterThan(0);
+    const sat = satellites[0];
+    expect(sat.id).toContain("#"); // "<title>#<section>"
+    expect(sat.section).toBeTruthy();
+    // every satellite is tethered to its owning entity node
+    for (const s of satellites) {
+      const tether = g.links.find((l) => l.source === s.id);
+      expect(tether).toBeDefined();
+      expect(g.nodes.some((n) => n.id === tether!.target && n.kind === "entity")).toBe(true);
+    }
+  });
+
+  it("satellites dedupe by title+section and never replace an entity node", async () => {
+    const g = await reduce("ask-stream.sse", beginTurn(await reduce("ask-stream.sse")));
+    const ids = g.nodes.map((n) => n.id);
+    expect(new Set(ids).size).toBe(ids.length); // no duplicates across turns
+    // the owning entity keeps kind "entity" even though chunks share its title
+    expect(g.nodes.find((n) => n.id === "Kit Fisto")?.kind).toBe("entity");
+  });
+
+  it("citationNodeId maps every done-citation in the real stream to a graph node", async () => {
+    const events = await loadEvents("ask-stream.sse");
+    const done = events.at(-1);
+    if (done?.type !== "done") throw new Error("fixture must end with done");
     const g = await reduce("ask-stream.sse");
-    // the Kit Fisto stream also called search_chunks — no satellite nodes in this ticket
-    expect(g.nodes.every((n) => n.kind === "entity")).toBe(true);
+    for (const c of done.citations) {
+      expect(g.nodes.some((n) => n.id === citationNodeId(c))).toBe(true);
+    }
+  });
+
+  it("run_cypher results are ignored (not graphable)", async () => {
+    const g = await reduce("ask-path.sse");
+    expect(g.nodes.every((n) => n.kind === "entity" || n.kind === "chunk")).toBe(true);
   });
 });

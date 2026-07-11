@@ -20,7 +20,9 @@ interface PanelNode {
   name: string;
   type: string;
   continuity: Continuity;
+  kind: "entity" | "chunk";
   dimmed: boolean;
+  highlighted: boolean;
 }
 
 interface PanelLink {
@@ -31,7 +33,17 @@ interface PanelLink {
   dimmed: boolean;
 }
 
-export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () => void }) {
+export function GraphPanel({
+  graph,
+  highlightId,
+  onNodeHover,
+  onReset,
+}: {
+  graph: GraphState;
+  highlightId: string | null;
+  onNodeHover: (nodeId: string | null) => void;
+  onReset: () => void;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -54,7 +66,9 @@ export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () 
         name: n.name,
         type: n.type,
         continuity: n.continuity,
+        kind: n.kind,
         dimmed: n.lastTurn < graph.turn,
+        highlighted: n.id === highlightId,
       })),
       links: graph.links.map<PanelLink>((l) => ({
         source: l.source,
@@ -64,7 +78,7 @@ export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () 
         dimmed: l.lastTurn < graph.turn,
       })),
     }),
-    [graph],
+    [graph, highlightId],
   );
 
   return (
@@ -94,6 +108,7 @@ export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () 
           linkWidth={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2.5 : 1)}
           linkDirectionalParticles={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2 : 0)}
           linkDirectionalParticleSpeed={0.004}
+          onNodeHover={(node) => onNodeHover(node ? placedNode(node).id : null)}
           cooldownTicks={120}
           backgroundColor="rgba(0,0,0,0)"
         />
@@ -124,20 +139,36 @@ function placedNode(n: unknown): PanelNode & { x: number; y: number } {
 
 function drawNode(node: PanelNode & { x: number; y: number }, ctx: CanvasRenderingContext2D, scale: number) {
   const hue = CONTINUITY_HUE[node.continuity] ?? "#71717a";
-  const alpha = node.dimmed ? "44" : "ff";
-  const radius = 5;
+  const alpha = node.dimmed && !node.highlighted ? "44" : "ff";
 
-  ctx.beginPath();
-  ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
-  ctx.fillStyle = `${hue}${alpha}`;
-  ctx.fill();
-  if (!node.dimmed) {
-    ctx.strokeStyle = `${hue}55`;
-    ctx.lineWidth = 3;
+  let radius: number;
+  if (node.kind === "chunk") {
+    // satellites: small squares — a "document", not an entity
+    radius = 3;
+    ctx.fillStyle = `${hue}${alpha}`;
+    ctx.fillRect(node.x - radius, node.y - radius, radius * 2, radius * 2);
+  } else {
+    radius = 5;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = `${hue}${alpha}`;
+    ctx.fill();
+    if (!node.dimmed || node.highlighted) {
+      ctx.strokeStyle = `${hue}55`;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+  }
+
+  if (node.highlighted) {
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, radius + 5, 0, 2 * Math.PI);
+    ctx.strokeStyle = hue;
+    ctx.lineWidth = 2;
     ctx.stroke();
   }
 
-  if (scale > 1.2 || !node.dimmed) {
+  if (node.kind === "entity" && (scale > 1.2 || !node.dimmed)) {
     ctx.font = `${Math.max(10 / scale, 2)}px sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
