@@ -1,164 +1,148 @@
 # Holocron
 
-Star Wars lore agent that decides at runtime between vector search and
-knowledge-graph traversal, with a comparative eval (vector-only vs graph-only vs
-agent) as the project's centerpiece. Vocabulary in [CONTEXT.md](CONTEXT.md),
-decisions in [DECISIONS.md](DECISIONS.md) and [docs/adr/](docs/adr/).
+GraphRAG over Star Wars lore. A LangGraph agent routes each question to
+vector search (pgvector), knowledge-graph traversal (Neo4j), or both — and
+an eval compares the three strategies on the same question set.
 
-![Watch the agent think: the chat streams the answer while the knowledge-graph traversal builds a live constellation](docs/assets/holocron-demo.gif)
+![The chat streams the answer while the knowledge-graph traversal renders as a live constellation](docs/assets/holocron-demo.gif)
 
-*Two questions, two strategies — chosen by the agent, not by config. The
-relational one ("How is Boba Fett connected to the Jedi Order?") routes to
-`path_between` and fans a constellation out of the graph; the narrative one
-("Describe the Nautolan species") routes to `search_chunks` and hangs
-document satellites off the entities it cites. Canon glows blue, Legends
-amber, and the sky accumulates across questions.*
+*Three runs, four questions, different strategies each time. "How is Boba
+Fett connected to the Jedi Order?" routes to graph traversal and renders
+the path it walked; "Describe the Nautolan species" routes to vector
+search and shows retrieved chunks as satellites. "How is Leia Organa
+related to Darth Vader?" has the agent retrying name variants until the
+graph confirms the PARENT edge. "Who did Count Dooku train?" comes back as
+two separate constellations — canon in blue, Legends in amber — one answer
+per continuity.*
 
-## How it works
+## Why two retrieval systems
 
-Every question follows the same loop (a LangGraph state graph, ADR-0001):
+Vector search handles descriptive questions well: embed the question,
+retrieve similar text, synthesize. Two kinds of questions expose its
+limits, and Star Wars lore has plenty of both:
 
-1. **Route** — one LLM call reads the question and picks tools: graph
-   traversal (`get_entity`, `get_relations`, `path_between`) for relational
-   facts, vector search (`search_chunks`) for narrative ones, or both.
-2. **Retrieve** — tools run against Neo4j and pgvector; every result carries
-   a `canon | legends` continuity tag.
-3. **Synthesize** — the model answers strictly from tool results (the corpus
-   outranks its own memory) and streams the answer plus continuity-tagged
-   citations over SSE.
+- **Relational questions.** "How is X connected to Y?" is answered by a
+  path through entities, not by any single passage of text.
+- **Conflicting continuities.** Canon and Legends often disagree.
+  Similarity search retrieves both and tends to blend them into one
+  answer.
 
-The corpus is ~5,900 Wookieepedia pages pinned by revision id in
-[`corpus.lock`](corpus.lock), so every result in this README is reproducible
-bit-for-bit.
+Holocron builds both systems over the same ~5,900 Wookieepedia pages:
 
-## Results
+| | Vector search (RAG) | Graph traversal (GraphRAG) |
+|---|---|---|
+| Store | pgvector — embedded chunks | Neo4j — entities and typed edges |
+| Strength | descriptions, narrative | relations, multi-hop paths |
+| Agent tool | `search_chunks` | `get_entity`, `get_relations`, `path_between` |
 
-Does the agent's runtime choice between vector search and graph traversal beat
-either strategy alone? LLM-Judge pass rate per category (30-question Golden Set,
-run `20260710T215754Z`, corpus.lock `c82411f2`, judge: Opus, rubric pinned;
-deltas vs the first baseline `20260710T181909Z`):
+The agent is a LangGraph state graph: a routing step reads the question
+and picks tools, the tools query the stores, and a synthesis step answers
+only from what they returned. Every chunk, node and edge carries a
+`canon | legends` tag, so conflicting continuities are reported side by
+side rather than merged.
+
+## Eval: RAG vs GraphRAG vs agent
+
+A 30-question golden set, split into four categories, is answered three
+ways — vector-only, graph-only, and the agent — and graded by an LLM judge
+against expected facts:
 
 | Category | vector-only | graph-only | agent |
 |---|---|---|---|
-| single-hop | 100% (8/8) | 100% (8/8) | 100% (8/8) |
-| multi-hop | 87% (7/8) | 100% (8/8) +13pp | 87% (7/8) |
-| **continuity-conflict** | **85% (6/7) +57pp** | **100% (7/7) +29pp** | **100% (7/7) +15pp** |
-| unanswerable (refusal) | 100% (7/7) | 100% (7/7) | 100% (7/7) +15pp |
+| single-hop | 100% | 100% | 100% |
+| multi-hop | 87% | **100%** | 87% |
+| continuity-conflict | 85% | **100%** | **100%** |
+| unanswerable (refusal) | 100% | 100% | 100% |
 
-Two baselines tell the story. The **first run** exposed the failure mode the
-graph exists to prevent — vector-only scored **28%** on continuity-conflict,
-blending canon and Legends into one answer — and its dominant *agent* failure
-was subtler: report the corpus correctly, then "correct" it from the model's
-own memory ("Leia is also traditionally his daughter in Legends"). The **second
-baseline** is the eval loop paying off: three prompt rules derived directly
-from failing traces (the corpus outranks the model's memory — no reconciling
-asides; refuse only after retrying name variants; answer with the corpus's own
-names, even awkward ones like the page "Yoda's species") lifted the agent to
-**29/30** and graph-only to **30/30**, with zero category regressions. The gap
-that remains is retrieval, not prompting: vector-only still misses the one
-continuity-conflict question whose answer lives only in the graph's edges.
+Continuity-conflict is where plain RAG breaks: before prompt tuning,
+vector-only passed 28% of those questions, merging canon and Legends into
+single answers. With continuity encoded as structure, graph traversal
+passes all of them. The vector-only misses that remain are questions whose
+answers exist only as graph edges — retrieval failures, not prompting
+failures.
 
-One full run costs **~US$3 / ~1.5h**: 90 Sonnet answer runs (the only paid
-part; wall time inflated by org-tier rate limits) + 90 free Opus verdicts via
-the `claude` CLI (~25 min). Re-judging is free; single-category iteration
-costs cents.
+## The knowledge graph
 
-Current Baseline: [`20260711T110335Z`](eval/baselines/20260711T110335Z/report.md) —
-the same system on **pgvector** (ADR-0005). The agent held 29/30 with zero
-category change through the vector-store swap; the flips concentrate in
-vector-only's volatile continuity-conflict category, and retrieval diffs show
-0-1 chunk changes at the top-8 margin (analysis in PR #38).
+Wookieepedia infoboxes are structured data embedded in wikitext. Ingestion
+parses them into typed entities and edges:
 
-Full report — every failing question and every baseline-flip with its Langfuse
-trace id — lives in
-[`eval/baselines/20260710T215754Z/report.md`](eval/baselines/20260710T215754Z/report.md);
-open the trace ids in the local Langfuse UI (<http://localhost:3001>) to debug.
-Reproduce with the [eval commands](#eval) below — deltas are always reported
-against the latest Baseline.
+```
+(Boba Fett:Character)-[:TRAINED_BY]->(Aurra Sing:Character)
+(Aurra Sing:Character)-[:MEMBER_OF]->(Jedi Order:Organization)
+```
 
-## Setup
+This is what makes relational questions tractable: "How is Boba Fett
+connected to the Jedi Order?" becomes a short path query instead of a
+similarity search over text that never states the connection.
 
-Prerequisites: Docker, [uv](https://docs.astral.sh/uv/).
+## Tracing
+
+![Langfuse: dashboard, trace list, span tree with the LangGraph state graph, tool spans, and the golden-set dataset](docs/assets/langfuse-tour.gif)
+
+*Every run — from the UI, the API or the eval — is traced in a local
+Langfuse: the span tree next to the rendered LangGraph state graph, the
+exact query each tool issued, token counts and latency per step, and the
+golden set as a versioned dataset with judge scores attached to traces.*
+
+## Running the project
+
+Prerequisites: Docker, [uv](https://docs.astral.sh/uv/), an
+`ANTHROPIC_API_KEY` and an embedding key (OpenAI or Voyage).
 
 ```sh
-docker compose up -d --wait   # Neo4j + Langfuse (one command, no UI clicking)
-cp .env.example .env          # then add your ANTHROPIC_API_KEY (+ an embedding key)
+docker compose up -d --wait
+cp .env.example .env          # add your API keys; everything else works as-is
 uv sync
 ```
 
-The Langfuse project and API keys are pre-provisioned by docker-compose — the
-values in `.env.example` work as-is. UI: <http://localhost:3001>
-(`dev@holocron.local` / `holocron123`). Neo4j browser: <http://localhost:7474>
-(`neo4j` / `holocron123`).
+The compose file brings up the full stack, pre-provisioned:
 
-## Build the knowledge base
+| Service | Role |
+|---|---|
+| Neo4j 5 | knowledge graph |
+| Postgres 17 + pgvector | vector index (also Langfuse's DB) |
+| Langfuse v3 (web + worker) | tracing and eval scores |
+| ClickHouse, MinIO, Redis | Langfuse's internal storage |
 
-The corpus is pinned by [`corpus.lock`](corpus.lock) (page title → revision id,
-ADR-0002), so the raw cache is reproducible from the repository:
+Build the knowledge base — the corpus is pinned to fixed page revisions,
+so the result is reproducible:
 
 ```sh
-uv run python -m ingest rebuild   # fetch every page at its pinned revision (~15 min)
-uv run python -m ingest parse     # cache -> entities.jsonl + chunks.jsonl (~2 min)
-uv run python -m ingest graph     # entities -> Neo4j (~1 min)
-uv run python -m ingest embed     # chunks -> pgvector (~10 min, needs an embedding key)
+uv run python -m ingest rebuild   # fetch the pinned Wookieepedia pages (~15 min)
+uv run python -m ingest parse     # wikitext -> entities + chunks
+uv run python -m ingest graph     # entities -> Neo4j
+uv run python -m ingest embed     # chunks -> pgvector
 ```
 
-Expected costs: the embed run is one-time ~US$0.20 on OpenAI
-(`text-embedding-3-small`) or free within Voyage's quota (`voyage-3-lite`,
-requires a payment method on file for usable rate limits). Questions cost a
-few cents each (Claude Sonnet + one query embedding).
-
-## Ask a question
+Serve the agent and the UI:
 
 ```sh
-uv run python -m agent.smoke      # one traced LLM call — check the Langfuse UI
-uv run python -m api              # serve the agent on :8000
+uv run python -m api                        # FastAPI + SSE on :8000
+cd frontend && npm install && npm run dev   # Next.js UI on :3000
+```
+
+Or ask from the terminal:
+
+```sh
 curl -N localhost:8000/ask -X POST -H 'content-type: application/json' \
      -d '{"question": "What species is Kit Fisto?"}'
 ```
 
-`POST /ask` streams SSE events (`tool_call`, `tool_result`, `answer_delta`,
-`done` with continuity-tagged citations, `error`); every run is traced in
-Langfuse.
+Local consoles: Langfuse at <http://localhost:3001>
+(`dev@holocron.local` / `holocron123`), Neo4j browser at
+<http://localhost:7474> (`neo4j` / `holocron123`).
 
-## Every run is traced (Langfuse)
-
-![A tour of the local Langfuse project: cost dashboard, trace list, span tree with the LangGraph state graph, tool spans, and the golden-set dataset](docs/assets/langfuse-tour.gif)
-
-*Nothing here is a screenshot of someone else's demo — this is the project's
-own local Langfuse (`docker compose up`), and the tour above shows, in order:*
-
-1. **The project dashboard** — every trace, token and dollar across dev and
-   eval runs, plus the eval scores tracked over time (`judge-pass`,
-   `hallucinated`, `citation-pass`).
-2. **The trace list** — one trace per question, from the UI, the API, or the
-   eval harness.
-3. **A full agent trace** — the span tree (route → tools → synthesize) next
-   to the rendered LangGraph state graph, with latency and cost per span.
-4. **A tool span** — the exact `search_chunks` query the agent issued and the
-   chunks it got back; this is the level at which eval failures get debugged.
-5. **A generation span** — model, token counts, time-to-first-token, cost,
-   and the full system prompt.
-6. **The golden set as a Langfuse dataset** — 30 questions across 4
-   categories, versioned in the repo and pushed via `eval push`, so every
-   eval run links its scores back to the traces that produced them.
-
-Eval regressions cite trace ids ([example report](eval/baselines/20260710T215754Z/report.md)) —
-debugging a failing question means opening its trace, not re-running the
-system and hoping.
-
-## Watch it think (web UI)
+## Running the eval
 
 ```sh
-uv run python -m api              # terminal 1: the agent on :8000
-cd frontend && npm install && npm run dev   # terminal 2: the UI on :3000
+uv run python -m eval answer   # three strategies over the golden set
+uv run python -m eval judge    # LLM judge (Opus via the local claude CLI)
+uv run python -m eval report   # scores vs the current baseline
 ```
 
-Chat on the left, the live traversal on the right: ask a relational question
-and watch the graph fan out; ask a narrative one and watch document satellites
-orbit their entities. Click any node for everything the agent retrieved about
-it; the both/canon/legends toggle restricts answers per continuity. Port
-details and test commands in [frontend/README.md](frontend/README.md).
+The judge model is stronger than the system under test and is never
+changed in the same run as a system change; every score links back to its
+trace.
 
 ## Development
 
@@ -166,26 +150,7 @@ details and test commands in [frontend/README.md](frontend/README.md).
 uv run ruff check . && uv run pyright && uv run pytest
 ```
 
-Tool tests run against the real Neo4j (they skip if it's down, and seed an
-empty graph from `tests/fixtures/`). Agent behavior is measured only by the
-eval harness — never mocked.
-
-## Eval
-
-```sh
-uv run python -m eval answer        # run the three strategies over the golden set (~US$ cents/question)
-uv run python -m eval judge         # grade answers via the local `claude` CLI (free on subscription)
-uv run python -m eval report        # citation check + judge scores vs the Baseline
-uv run python -m eval push          # golden set -> Langfuse dataset; scores -> traces
-uv run python -m eval promote <run> # designate a run as the Baseline (explicit)
-```
-
-The Judge runs through a **logged-in Claude Code CLI** (`claude login`), pinned
-to Opus — stronger than the Sonnet system under test, zero marginal cost. The
-eval is local-only and manual; CI never runs it.
-
 ## Attribution
 
-Lore content is sourced from [Wookieepedia](https://starwars.fandom.com/) and
-is available under
-[CC-BY-SA](https://www.fandom.com/licensing).
+Lore content is sourced from [Wookieepedia](https://starwars.fandom.com/)
+and is available under [CC-BY-SA](https://www.fandom.com/licensing).
