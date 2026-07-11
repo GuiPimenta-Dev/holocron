@@ -7,10 +7,29 @@ decisions in [DECISIONS.md](DECISIONS.md) and [docs/adr/](docs/adr/).
 
 ![Watch the agent think: the chat streams the answer while the knowledge-graph traversal builds a live constellation](docs/assets/holocron-demo.gif)
 
-*The split-screen UI: every tool call the agent makes renders live — graph
-lookups become glowing nodes and edges (canon in blue, Legends in amber),
-vector-search hits become document satellites. The sky accumulates across
-questions.*
+*Two questions, two strategies — chosen by the agent, not by config. The
+relational one ("How is Boba Fett connected to the Jedi Order?") routes to
+`path_between` and fans a constellation out of the graph; the narrative one
+("Describe the Nautolan species") routes to `search_chunks` and hangs
+document satellites off the entities it cites. Canon glows blue, Legends
+amber, and the sky accumulates across questions.*
+
+## How it works
+
+Every question follows the same loop (a LangGraph state graph, ADR-0001):
+
+1. **Route** — one LLM call reads the question and picks tools: graph
+   traversal (`get_entity`, `get_relations`, `path_between`) for relational
+   facts, vector search (`search_chunks`) for narrative ones, or both.
+2. **Retrieve** — tools run against Neo4j and pgvector; every result carries
+   a `canon | legends` continuity tag.
+3. **Synthesize** — the model answers strictly from tool results (the corpus
+   outranks its own memory) and streams the answer plus continuity-tagged
+   citations over SSE.
+
+The corpus is ~5,900 Wookieepedia pages pinned by revision id in
+[`corpus.lock`](corpus.lock), so every result in this README is reproducible
+bit-for-bit.
 
 ## Results
 
@@ -101,6 +120,32 @@ curl -N localhost:8000/ask -X POST -H 'content-type: application/json' \
 `POST /ask` streams SSE events (`tool_call`, `tool_result`, `answer_delta`,
 `done` with continuity-tagged citations, `error`); every run is traced in
 Langfuse.
+
+## Every run is traced (Langfuse)
+
+![A tour of the local Langfuse project: cost dashboard, trace list, span tree with the LangGraph state graph, tool spans, and the golden-set dataset](docs/assets/langfuse-tour.gif)
+
+*Nothing here is a screenshot of someone else's demo — this is the project's
+own local Langfuse (`docker compose up`), and the tour above shows, in order:*
+
+1. **The project dashboard** — every trace, token and dollar across dev and
+   eval runs, plus the eval scores tracked over time (`judge-pass`,
+   `hallucinated`, `citation-pass`).
+2. **The trace list** — one trace per question, from the UI, the API, or the
+   eval harness.
+3. **A full agent trace** — the span tree (route → tools → synthesize) next
+   to the rendered LangGraph state graph, with latency and cost per span.
+4. **A tool span** — the exact `search_chunks` query the agent issued and the
+   chunks it got back; this is the level at which eval failures get debugged.
+5. **A generation span** — model, token counts, time-to-first-token, cost,
+   and the full system prompt.
+6. **The golden set as a Langfuse dataset** — 30 questions across 4
+   categories, versioned in the repo and pushed via `eval push`, so every
+   eval run links its scores back to the traces that produced them.
+
+Eval regressions cite trace ids ([example report](eval/baselines/20260710T215754Z/report.md)) —
+debugging a failing question means opening its trace, not re-running the
+system and hoping.
 
 ## Watch it think (web UI)
 
