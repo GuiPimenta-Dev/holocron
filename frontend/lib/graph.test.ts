@@ -4,7 +4,15 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseSSE, type AgentEvent } from "./events";
-import { applyEvent, beginTurn, citationNodeId, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
+import {
+  applyEvent,
+  beginTurn,
+  citationNodeId,
+  emptyGraph,
+  INCOMING_RENDER_CAP,
+  nodeDetails,
+  type GraphState,
+} from "./graph";
 
 async function* chunks(bytes: Uint8Array): AsyncIterable<Uint8Array> {
   yield bytes;
@@ -123,5 +131,34 @@ describe("graph reducer over real streams", () => {
   it("run_cypher results are ignored (not graphable)", async () => {
     const g = await reduce("ask-path.sse");
     expect(g.nodes.every((n) => n.kind === "entity" || n.kind === "chunk")).toBe(true);
+  });
+});
+
+describe("nodeDetails — the side panel's data, from stream-received data only", () => {
+  it("carries get_entity infobox properties", async () => {
+    const g = await reduce("ask-stream.sse"); // Kit Fisto get_entity has properties
+    const details = nodeDetails(g, "Kit Fisto");
+    expect(details).not.toBeNull();
+    expect(details!.node.type).toBe("Character");
+    expect(Object.keys(details!.properties)).toContain("gender");
+  });
+
+  it("collects the node's outgoing and incoming links", async () => {
+    const g = await reduce("ask-relations.sse");
+    const details = nodeDetails(g, "Anakin Skywalker")!;
+    expect(details.outgoing.some((l) => l.relation === "TRAINED_BY" && l.target === "Obi-Wan Kenobi")).toBe(true);
+    expect(details.incoming.length).toBeGreaterThan(0);
+    expect(details.incoming.length).toBeLessThanOrEqual(INCOMING_RENDER_CAP);
+  });
+
+  it("returns null for a node the stream never delivered", async () => {
+    const g = await reduce("ask-stream.sse");
+    expect(nodeDetails(g, "Grogu")).toBeNull();
+  });
+
+  it("properties merge across turns without loss", async () => {
+    const first = await reduce("ask-stream.sse");
+    const again = await reduce("ask-stream.sse", beginTurn(first));
+    expect(Object.keys(nodeDetails(again, "Kit Fisto")!.properties).length).toBeGreaterThan(0);
   });
 });

@@ -37,11 +37,13 @@ export function GraphPanel({
   graph,
   highlightId,
   onNodeHover,
+  onNodeClick,
   onReset,
 }: {
   graph: GraphState;
   highlightId: string | null;
   onNodeHover: (nodeId: string | null) => void;
+  onNodeClick: (nodeId: string) => void;
   onReset: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,7 +110,12 @@ export function GraphPanel({
           linkWidth={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2.5 : 1)}
           linkDirectionalParticles={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2 : 0)}
           linkDirectionalParticleSpeed={0.004}
+          nodeLabel={(node) => {
+            const n = placedNode(node);
+            return `${n.name} · ${n.kind === "chunk" ? `§ ${n.name}` : n.type} · ${n.continuity}`;
+          }}
           onNodeHover={(node) => onNodeHover(node ? placedNode(node).id : null)}
+          onNodeClick={(node) => onNodeClick(placedNode(node).id)}
           cooldownTicks={120}
           backgroundColor="rgba(0,0,0,0)"
         />

@@ -1,9 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { askAgent, type AgentEvent, type Citation } from "@/lib/events";
-import { applyEvent as applyGraphEvent, beginTurn, citationNodeId, emptyGraph, type GraphState } from "@/lib/graph";
+import { askAgent, type AgentEvent, type Citation, type Continuity } from "@/lib/events";
+import {
+  applyEvent as applyGraphEvent,
+  beginTurn,
+  citationNodeId,
+  emptyGraph,
+  nodeDetails,
+  type GraphState,
+} from "@/lib/graph";
 import { GraphPanel } from "./GraphPanel";
+import { NodePanel } from "./NodePanel";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000";
 
@@ -23,6 +31,9 @@ export default function Home() {
   const [busy, setBusy] = useState(false);
   const [highlightId, setHighlightId] = useState<string | null>(null); // chip hover -> graph ring
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null); // graph hover -> chip ring
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null); // click -> side panel
+  const [continuity, setContinuity] = useState<Continuity | null>(null); // 3-state toggle, null = both
+  const selectedDetails = selectedNodeId ? nodeDetails(graph, selectedNodeId) : null;
 
   async function ask(question: string) {
     setBusy(true);
@@ -31,7 +42,7 @@ export default function Home() {
     const patch = (fn: (turn: Turn) => Turn) =>
       setTurns((t) => [...t.slice(0, -1), fn(t[t.length - 1])]);
     try {
-      for await (const ev of askAgent(API_BASE, question)) {
+      for await (const ev of askAgent(API_BASE, question, continuity)) {
         applyEvent(ev, patch);
         setGraph((g) => applyGraphEvent(g, ev));
       }
@@ -64,7 +75,7 @@ export default function Home() {
         </div>
 
         <form
-          className="flex gap-2"
+          className="flex flex-col gap-2"
           onSubmit={(e) => {
             e.preventDefault();
             const q = input.trim();
@@ -73,29 +84,46 @@ export default function Home() {
             void ask(q);
           }}
         >
-          <input
+          <ContinuityToggle value={continuity} onChange={setContinuity} disabled={busy} />
+          <div className="flex gap-2">
+            <input
             className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask the Holocron…"
             disabled={busy}
           />
-          <button
-            className="rounded-lg bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-40 dark:bg-zinc-100 dark:text-zinc-900"
-            disabled={busy || !input.trim()}
-          >
-            Ask
-          </button>
+            <button
+              className="rounded-lg bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-40 dark:bg-zinc-100 dark:text-zinc-900"
+              disabled={busy || !input.trim()}
+            >
+              Ask
+            </button>
+          </div>
         </form>
       </section>
 
-      <section className="w-1/2">
+      <section className="relative w-1/2">
         <GraphPanel
           graph={graph}
           highlightId={highlightId}
           onNodeHover={setHoveredNodeId}
-          onReset={() => setGraph(emptyGraph())}
+          onNodeClick={setSelectedNodeId}
+          onReset={() => {
+            setGraph(emptyGraph());
+            setSelectedNodeId(null);
+          }}
         />
+        {selectedDetails && (
+          <NodePanel
+            details={selectedDetails}
+            onAskAbout={(name) => {
+              setInput(`Tell me about ${name}`);
+              setSelectedNodeId(null);
+            }}
+            onClose={() => setSelectedNodeId(null)}
+          />
+        )}
       </section>
     </main>
   );
@@ -116,6 +144,43 @@ function applyEvent(ev: AgentEvent, patch: (fn: (turn: Turn) => Turn) => void) {
       patch((t) => ({ ...t, error: ev.message, pending: false }));
       break;
   }
+}
+
+function ContinuityToggle({
+  value,
+  onChange,
+  disabled,
+}: {
+  value: Continuity | null;
+  onChange: (v: Continuity | null) => void;
+  disabled: boolean;
+}) {
+  const options: { label: string; value: Continuity | null }[] = [
+    { label: "both", value: null },
+    { label: "canon", value: "canon" },
+    { label: "legends", value: "legends" },
+  ];
+  return (
+    <div className="flex gap-1 self-start rounded-full bg-zinc-100 p-0.5 text-xs dark:bg-zinc-900" role="radiogroup">
+      {options.map((o) => (
+        <button
+          key={o.label}
+          type="button"
+          role="radio"
+          aria-checked={value === o.value}
+          disabled={disabled}
+          onClick={() => onChange(o.value)}
+          className={`rounded-full px-2.5 py-1 transition-colors ${
+            value === o.value
+              ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
+              : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+          }`}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 const CONTINUITY_STYLE: Record<Citation["continuity"], string> = {
