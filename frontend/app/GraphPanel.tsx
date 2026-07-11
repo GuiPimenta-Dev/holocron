@@ -8,8 +8,9 @@ import type { GraphState } from "@/lib/graph";
 // react-force-graph touches window at import time — client-only.
 const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false });
 
-// THE canonical continuity hues — chat chips (page.tsx) use the same pair.
-export const CONTINUITY_HUE: Record<Continuity, string> = {
+// The canonical continuity hues (decision 6). Keep in sync with the Tailwind
+// classes in page.tsx's CONTINUITY_STYLE — same sky/amber families.
+const CONTINUITY_HUE: Record<Continuity, string> = {
   canon: "#0284c7", // sky-600
   legends: "#d97706", // amber-600
 };
@@ -81,17 +82,17 @@ export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () 
           height={size.height}
           graphData={data}
           nodeId="id"
-          nodeCanvasObject={(node, ctx, scale) => drawNode(node as unknown as PanelNode & { x: number; y: number }, ctx, scale)}
+          nodeCanvasObject={(node, ctx, scale) => drawNode(placedNode(node), ctx, scale)}
           nodePointerAreaPaint={(node, color, ctx) => {
-            const n = node as unknown as { x: number; y: number };
+            const n = placedNode(node);
             ctx.fillStyle = color;
             ctx.beginPath();
             ctx.arc(n.x, n.y, 8, 0, 2 * Math.PI);
             ctx.fill();
           }}
-          linkColor={(l) => ((l as unknown as PanelLink).dimmed ? "#3f3f4620" : "#a1a1aa66")}
-          linkWidth={(l) => ((l as unknown as PanelLink).onPath && !(l as unknown as PanelLink).dimmed ? 2.5 : 1)}
-          linkDirectionalParticles={(l) => ((l as unknown as PanelLink).onPath && !(l as unknown as PanelLink).dimmed ? 2 : 0)}
+          linkColor={(l) => (panelLink(l).dimmed ? "#3f3f4620" : "#a1a1aa66")}
+          linkWidth={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2.5 : 1)}
+          linkDirectionalParticles={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2 : 0)}
           linkDirectionalParticleSpeed={0.004}
           cooldownTicks={120}
           backgroundColor="rgba(0,0,0,0)"
@@ -107,6 +108,18 @@ export function GraphPanel({ graph, onReset }: { graph: GraphState; onReset: () 
       )}
     </div>
   );
+}
+
+// next/dynamic erases react-force-graph's generics, so its callbacks hand us
+// loosely-typed objects. Cast once here, not per callback. Note: at runtime
+// force-graph replaces link.source/target strings with node object references —
+// only read PanelLink's own fields (dimmed, onPath, relation) through this.
+function panelLink(l: unknown): PanelLink {
+  return l as PanelLink;
+}
+
+function placedNode(n: unknown): PanelNode & { x: number; y: number } {
+  return n as PanelNode & { x: number; y: number };
 }
 
 function drawNode(node: PanelNode & { x: number; y: number }, ctx: CanvasRenderingContext2D, scale: number) {

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseSSE, type AgentEvent } from "./events";
-import { applyEvent, beginTurn, emptyGraph, type GraphState } from "./graph";
+import { applyEvent, beginTurn, emptyGraph, INCOMING_RENDER_CAP, type GraphState } from "./graph";
 
 async function* chunks(bytes: Uint8Array): AsyncIterable<Uint8Array> {
   yield bytes;
@@ -81,7 +81,7 @@ describe("graph reducer over real streams", () => {
     const g = await reduce("ask-relations.sse"); // Anakin has ~50 incoming per continuity
     for (const title of ["Anakin Skywalker", "Anakin Skywalker/Legends"]) {
       const incoming = g.links.filter((l) => l.target === title);
-      expect(incoming.length).toBeLessThanOrEqual(8);
+      expect(incoming.length).toBeLessThanOrEqual(INCOMING_RENDER_CAP);
     }
     // outgoing survives untouched — it's what relational answers hang on
     expect(g.links.some((l) => l.source === "Anakin Skywalker" && l.relation === "TRAINED_BY")).toBe(true);
