@@ -35,6 +35,10 @@ Boundary rules (non-negotiable):
 - `eval/` is a composition root (`eval/__main__.py`) that may import the serving
   side and `core/`; nothing imports `eval/`. The golden set and `eval/baselines/`
   are versioned; `eval/runs/` artifacts are gitignored.
+- `frontend/` talks to the backend only over HTTP (the SSE protocol in
+  `api/app.py`); it never imports Python and nothing imports it.
+  `frontend/lib/events.ts` mirrors the wire format — change them together.
+  Frontend logic is tested with real captured streams (vitest), never mocks.
 - Every chunk and every graph node carries `continuity: canon | legends`.
 - Curated graph edges obey the target-type compatibility matrix in `ingest/graph.py`
   (e.g. TRAINED_BY → Character only). The uncurated edge tail is pruned only with
@@ -71,7 +75,8 @@ Boundary rules (non-negotiable):
 - `uv` for env + deps. `ruff` (lint+format), `pyright` (all tool signatures typed),
   `pytest`. Frontend: `npm` inside `frontend/`.
 - `docker compose up`: Neo4j + Langfuse. Everything runs locally; no deploy.
-- CI (GitHub Actions) runs lint + pyright + pytest only — never the eval.
+- CI (GitHub Actions) runs lint + pyright + pytest, plus frontend
+  eslint + tsc + vitest + build — never the eval.
 
 ## Testing doctrine
 

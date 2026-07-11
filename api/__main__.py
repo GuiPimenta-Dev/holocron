@@ -37,7 +37,8 @@ def main() -> None:
         traced=bool(os.environ.get("LANGFUSE_PUBLIC_KEY")),
     )
     try:
-        uvicorn.run(create_app(agent), host="127.0.0.1", port=8000)
+        ui_origin = os.environ.get("HOLOCRON_UI_ORIGIN", "http://localhost:3000")
+        uvicorn.run(create_app(agent, ui_origin), host="127.0.0.1", port=8000)
     finally:
         driver.close()
 
