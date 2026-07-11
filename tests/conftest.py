@@ -81,7 +81,7 @@ def vector_index():
 
     dsn = os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron")
     try:
-        conn = psycopg.connect(dsn)
+        conn = psycopg.connect(dsn, autocommit=True)
         if conn.execute("SELECT to_regclass('chunks')").fetchone()[0] is None:  # pyright: ignore[reportOptionalSubscript]
             pytest.skip("pgvector index not built — run `uv run python -m ingest embed`")
     except psycopg.OperationalError:

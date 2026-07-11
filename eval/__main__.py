@@ -91,7 +91,10 @@ def main() -> None:
             os.environ.get("NEO4J_PASSWORD", "holocron123"),
         ),
     )
-    pg = psycopg.connect(os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron"))
+    pg = psycopg.connect(
+        os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron"),
+        autocommit=True,  # read-only serving: no eternal snapshot, errors never poison the connection
+    )
     graph = KnowledgeGraph(driver)
     index = VectorIndex(provider_from_env(dict(os.environ)), pg)
     traced = bool(os.environ.get("LANGFUSE_PUBLIC_KEY"))
