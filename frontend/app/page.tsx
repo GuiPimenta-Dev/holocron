@@ -11,10 +11,19 @@ import {
   nodeDetails,
   type GraphState,
 } from "@/lib/graph";
+import { Markdown } from "@/lib/markdown";
 import { GraphPanel } from "./GraphPanel";
 import { NodePanel } from "./NodePanel";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000";
+
+// Empty-state examples: each one exercises a different retrieval path (PRODUCT.md:
+// the empty state teaches). Order: relational, multi-hop, narrative.
+const EXAMPLES = [
+  "Who trained Anakin Skywalker?",
+  "How is Boba Fett connected to the Jedi Order?",
+  "Describe the Nautolan species",
+];
 
 interface Turn {
   question: string;
@@ -55,28 +64,24 @@ export default function Home() {
   }
 
   return (
-    <main className="flex h-screen font-sans">
-      <section className="flex w-1/2 min-w-[24rem] flex-col gap-6 overflow-y-auto border-r border-zinc-200 px-6 py-8 dark:border-zinc-800">
-        <header>
-          <h1 className="text-2xl font-semibold">Holocron</h1>
-          <p className="text-sm text-zinc-500">
-            Star Wars lore agent — graph traversal + vector search, chosen at runtime
+    <main className="flex h-screen font-sans text-sm">
+      <section className="flex w-2/5 min-w-[24rem] flex-col border-r border-ink-700 bg-ink-900">
+        <header className="border-b border-ink-700 px-6 py-4">
+          <h1 className="text-xl font-semibold tracking-tight">Holocron</h1>
+          <p className="mt-0.5 text-xs text-parchment-faint">
+            A lore agent that chooses between graph traversal and vector search. Watch it think.
           </p>
         </header>
 
-        <div className="flex flex-1 flex-col gap-6">
-          {turns.length === 0 && (
-            <p className="text-sm text-zinc-400">
-              Ask about the lore — try &ldquo;Who trained Anakin Skywalker?&rdquo;
-            </p>
-          )}
+        <div className="flex flex-1 flex-col gap-6 overflow-y-auto px-6 py-6">
+          {turns.length === 0 && <EmptyState onPick={(q) => void ask(q)} busy={busy} />}
           {turns.map((turn, i) => (
             <TurnView key={i} turn={turn} hoveredNodeId={hoveredNodeId} onHoverCitation={setHighlightId} />
           ))}
         </div>
 
         <form
-          className="flex flex-col gap-2"
+          className="flex flex-col gap-2 border-t border-ink-700 px-6 py-4"
           onSubmit={(e) => {
             e.preventDefault();
             const q = input.trim();
@@ -88,14 +93,14 @@ export default function Home() {
           <ContinuityToggle value={continuity} onChange={setContinuity} disabled={busy} />
           <div className="flex gap-2">
             <input
-            className="flex-1 rounded-lg border border-zinc-300 px-4 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask the Holocron…"
-            disabled={busy}
-          />
+              className="flex-1 rounded-lg border border-ink-700 bg-ink-800 px-4 py-2 text-parchment placeholder-parchment-faint outline-none transition-colors duration-150 focus:border-parchment-faint"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask the Holocron…"
+              disabled={busy}
+            />
             <button
-              className="rounded-lg bg-zinc-900 px-4 py-2 text-sm text-white disabled:opacity-40 dark:bg-zinc-100 dark:text-zinc-900"
+              className="rounded-lg bg-parchment px-4 py-2 font-medium text-ink-950 transition-opacity duration-150 disabled:opacity-30"
               disabled={busy || !input.trim()}
             >
               Ask
@@ -104,7 +109,7 @@ export default function Home() {
         </form>
       </section>
 
-      <section className="relative w-1/2">
+      <section className="relative w-3/5 bg-ink-950">
         <GraphPanel
           graph={graph}
           highlightId={highlightId}
@@ -127,6 +132,35 @@ export default function Home() {
         )}
       </section>
     </main>
+  );
+}
+
+function EmptyState({ onPick, busy }: { onPick: (q: string) => void; busy: boolean }) {
+  return (
+    <div className="flex flex-1 flex-col justify-center gap-6">
+      <div>
+        <p className="text-base text-parchment-dim">
+          Every answer comes from a pinned Wookieepedia corpus: a knowledge graph and a vector
+          index. The agent picks its path per question; the sky on the right shows the traversal.
+        </p>
+      </div>
+      <div className="flex flex-col items-start gap-2">
+        <p className="font-mono text-[11px] uppercase tracking-wider text-parchment-faint">
+          Try one
+        </p>
+        {EXAMPLES.map((q) => (
+          <button
+            key={q}
+            type="button"
+            disabled={busy}
+            onClick={() => onPick(q)}
+            className="rounded-lg border border-ink-700 px-3 py-1.5 text-left text-parchment-dim transition-colors duration-150 hover:border-parchment-faint hover:text-parchment"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -161,21 +195,21 @@ function ContinuityToggle({
     { label: "canon", value: "canon" },
     { label: "legends", value: "legends" },
   ];
-  // real radio inputs: keyboard/arrow behavior for free, pill look via labels
+  // real radio inputs: keyboard behavior for free, pill look via labels
   return (
     <fieldset
-      className="flex gap-1 self-start rounded-full bg-zinc-100 p-0.5 text-xs dark:bg-zinc-900"
+      className="flex gap-1 self-start rounded-full bg-ink-800 p-0.5 text-xs"
       aria-label="Continuity"
       disabled={disabled}
     >
       {options.map((o) => (
         <label
           key={o.label}
-          className={`cursor-pointer rounded-full px-2.5 py-1 transition-colors ${
+          className={`cursor-pointer rounded-full px-2.5 py-1 transition-colors duration-150 ${
             value === o.value
-              ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
-              : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
-          }`}
+              ? "bg-ink-950 text-parchment"
+              : "text-parchment-faint hover:text-parchment-dim"
+          } ${o.value ? (value === o.value ? CONTINUITY_THEME[o.value].chip : "") : ""}`}
         >
           <input
             type="radio"
@@ -200,28 +234,37 @@ function TurnView({
   hoveredNodeId: string | null;
   onHoverCitation: (nodeId: string | null) => void;
 }) {
+  const thinking = turn.pending && !turn.answer;
   return (
-    <article className="flex flex-col gap-2">
-      <p className="font-medium">{turn.question}</p>
+    <article className="rise-in flex flex-col gap-1.5">
+      <p className="font-medium text-parchment">{turn.question}</p>
       {turn.toolCalls.length > 0 && (
-        <p className="font-mono text-xs text-zinc-400">{turn.toolCalls.join(" → ")}</p>
+        <p className={`font-mono text-[11px] text-parchment-faint ${thinking ? "streaming-cursor" : ""}`}>
+          {turn.toolCalls.join(" → ")}
+        </p>
+      )}
+      {thinking && turn.toolCalls.length === 0 && (
+        <p className="streaming-cursor font-mono text-[11px] text-parchment-faint">
+          consulting the archive…
+        </p>
       )}
       {turn.error ? (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
-          {turn.error}
-        </p>
+        <div className="rounded-lg border border-error/40 bg-error/10 px-3 py-2 text-error">
+          <p className="font-medium">The archive did not answer.</p>
+          <p className="mt-0.5 font-mono text-[11px] opacity-80">{turn.error}</p>
+        </div>
       ) : (
-        <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-          {turn.answer}
-          {turn.pending && <span className="animate-pulse">▍</span>}
-        </p>
+        <div className="max-w-prose leading-relaxed text-parchment-dim">
+          <Markdown text={turn.answer} />
+          {turn.pending && turn.answer && <span className="streaming-cursor">▍</span>}
+        </div>
       )}
       {turn.citations.length > 0 && (
-        <ul className="flex flex-wrap gap-1.5">
+        <ul className="mt-1 flex flex-wrap gap-1.5">
           {turn.citations.map((c) => (
             <li
               key={citationNodeId(c)}
-              className={`cursor-default rounded-full px-2.5 py-0.5 text-xs ring-current hover:ring-1 ${
+              className={`cursor-default rounded-full px-2.5 py-0.5 text-xs ring-current transition-shadow duration-150 hover:ring-1 ${
                 hoveredNodeId === citationNodeId(c) ? "ring-2" : ""
               } ${CONTINUITY_THEME[c.continuity].chip}`}
               title={c.section ? `${c.title} · ${c.section}` : c.title}

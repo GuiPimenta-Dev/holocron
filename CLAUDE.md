@@ -39,6 +39,9 @@ Boundary rules (non-negotiable):
   `api/app.py`); it never imports Python and nothing imports it.
   `frontend/lib/events.ts` mirrors the wire format — change them together.
   Frontend logic is tested with real captured streams (vitest), never mocks.
+  UI design doctrine lives in PRODUCT.md + DESIGN.md (dark archive theme,
+  continuity hues as the only accents); every screen change goes through the
+  impeccable skill.
 - Every chunk and every graph node carries `continuity: canon | legends`.
 - Curated graph edges obey the target-type compatibility matrix in `ingest/graph.py`
   (e.g. TRAINED_BY → Character only). The uncurated edge tail is pruned only with

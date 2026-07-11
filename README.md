@@ -5,6 +5,13 @@ knowledge-graph traversal, with a comparative eval (vector-only vs graph-only vs
 agent) as the project's centerpiece. Vocabulary in [CONTEXT.md](CONTEXT.md),
 decisions in [DECISIONS.md](DECISIONS.md) and [docs/adr/](docs/adr/).
 
+![Watch the agent think: the chat streams the answer while the knowledge-graph traversal builds a live constellation](docs/assets/holocron-demo.gif)
+
+*The split-screen UI: every tool call the agent makes renders live — graph
+lookups become glowing nodes and edges (canon in blue, Legends in amber),
+vector-search hits become document satellites. The sky accumulates across
+questions.*
+
 ## Results
 
 Does the agent's runtime choice between vector search and graph traversal beat
@@ -88,6 +95,19 @@ curl -N localhost:8000/ask -X POST -H 'content-type: application/json' \
 `POST /ask` streams SSE events (`tool_call`, `tool_result`, `answer_delta`,
 `done` with continuity-tagged citations, `error`); every run is traced in
 Langfuse.
+
+## Watch it think (web UI)
+
+```sh
+uv run python -m api              # terminal 1: the agent on :8000
+cd frontend && npm install && npm run dev   # terminal 2: the UI on :3000
+```
+
+Chat on the left, the live traversal on the right: ask a relational question
+and watch the graph fan out; ask a narrative one and watch document satellites
+orbit their entities. Click any node for everything the agent retrieved about
+it; the both/canon/legends toggle restricts answers per continuity. Port
+details and test commands in [frontend/README.md](frontend/README.md).
 
 ## Development
 
