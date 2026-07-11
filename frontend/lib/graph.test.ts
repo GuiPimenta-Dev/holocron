@@ -87,9 +87,39 @@ describe("graph reducer over real streams", () => {
     expect(g.links.some((l) => l.source === "Anakin Skywalker" && l.relation === "TRAINED_BY")).toBe(true);
   });
 
-  it("run_cypher and chunk results are ignored (not graphable yet)", async () => {
-    const g = await reduce("ask-stream.sse");
-    // the Kit Fisto stream also called search_chunks — no satellite nodes in this ticket
-    expect(g.nodes.every((n) => n.kind === "entity")).toBe(true);
+  it("search_chunks results become satellites orbiting their owning entity", async () => {
+    const g = await reduce("ask-stream.sse"); // Kit Fisto stream calls search_chunks
+    const satellites = g.nodes.filter((n) => n.kind === "chunk");
+    expect(satellites.length).toBeGreaterThan(0);
+    const sat = satellites[0];
+    expect(sat.id).toContain("#"); // "<title>#<section>"
+    expect(sat.section).toBeTruthy();
+    // every satellite is tethered to its owning entity node
+    for (const s of satellites) {
+      const tether = g.links.find((l) => l.source === s.id);
+      expect(tether).toBeDefined();
+      expect(g.nodes.some((n) => n.id === tether!.target && n.kind === "entity")).toBe(true);
+    }
+  });
+
+  it("satellites dedupe by title+section and never replace an entity node", async () => {
+    const g = await reduce("ask-stream.sse", beginTurn(await reduce("ask-stream.sse")));
+    const ids = g.nodes.map((n) => n.id);
+    expect(new Set(ids).size).toBe(ids.length); // no duplicates across turns
+    // the owning entity keeps kind "entity" even though chunks share its title
+    expect(g.nodes.find((n) => n.id === "Kit Fisto")?.kind).toBe("entity");
+  });
+
+  it("citationNodeId maps a done-citation to its graph node", async () => {
+    const { citationNodeId } = await import("./graph");
+    expect(citationNodeId({ title: "Kit Fisto", name: "Kit Fisto", continuity: "canon" })).toBe("Kit Fisto");
+    expect(
+      citationNodeId({ title: "Nautolan/Legends", name: "Nautolan", continuity: "legends", section: "Introduction" }),
+    ).toBe("Nautolan/Legends#Introduction");
+  });
+
+  it("run_cypher results are ignored (not graphable)", async () => {
+    const g = await reduce("ask-path.sse");
+    expect(g.nodes.every((n) => n.kind === "entity" || n.kind === "chunk")).toBe(true);
   });
 });

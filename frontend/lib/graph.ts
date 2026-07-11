@@ -1,14 +1,15 @@
 // Pure reducer: agent events in, graph data out. No React, no rendering —
 // this is the unit-testable core of the live traversal panel (spec #26).
 
-import type { AgentEvent, Continuity } from "./events";
+import type { AgentEvent, Citation, Continuity } from "./events";
 
 export interface GraphNode {
-  id: string; // wiki title — unique per continuity ("Kit Fisto/Legends")
+  id: string; // entities: wiki title; chunk satellites: "<title>#<section>"
   name: string;
   type: string; // entity type (Character, Celestialbody...); "Entity" when unknown
   continuity: Continuity;
-  kind: "entity"; // "chunk" satellites arrive with ticket #29
+  kind: "entity" | "chunk";
+  section?: string; // chunk satellites only
   lastTurn: number; // dimmed by the renderer when < GraphState.turn
 }
 
@@ -45,9 +46,16 @@ export function applyEvent(state: GraphState, event: AgentEvent): GraphState {
       return foldRelations(state, event.result);
     case "path_between":
       return foldPaths(state, event.result);
+    case "search_chunks":
+      return foldChunks(state, event.result);
     default:
-      return state; // search_chunks (#29) and run_cypher (not graphable) — ignored
+      return state; // run_cypher rows are arbitrary — not graphable
   }
+}
+
+/** The graph node a done-event citation points at (chat ↔ graph cross-highlight). */
+export function citationNodeId(citation: Citation): string {
+  return citation.section ? `${citation.title}#${citation.section}` : citation.title;
 }
 
 interface EntityResult {
@@ -76,6 +84,13 @@ interface RelationsResult {
 interface PathResult {
   entities: string[];
   steps: { source: string; relation: string; target: string }[];
+}
+
+interface ChunkResult {
+  title: string;
+  name: string;
+  section: string;
+  continuity: Continuity;
 }
 
 function foldEntities(state: GraphState, result: unknown): GraphState {
@@ -121,6 +136,26 @@ function foldPaths(state: GraphState, result: unknown): GraphState {
   return g;
 }
 
+function foldChunks(state: GraphState, result: unknown): GraphState {
+  let g = state;
+  for (const c of asArray<ChunkResult>(result)) {
+    // the owning entity node hosts the satellite — create it if the graph
+    // tools never touched it (vector-only questions must not render empty)
+    g = upsertNode(g, { id: c.title, name: c.name, type: "Entity", continuity: c.continuity });
+    const satId = `${c.title}#${c.section}`;
+    g = upsertNode(g, {
+      id: satId,
+      name: c.section,
+      type: "Chunk",
+      continuity: c.continuity,
+      kind: "chunk",
+      section: c.section,
+    });
+    g = upsertLink(g, { source: satId, target: c.title, relation: "EXCERPT_OF", onPath: false });
+  }
+  return g;
+}
+
 function farEnd(rel: RelationResult): Omit<GraphNode, "kind" | "lastTurn"> {
   return {
     id: rel.other_title,
@@ -142,18 +177,21 @@ function asArray<T>(result: unknown): T[] {
   return Array.isArray(result) ? (result as T[]) : [];
 }
 
-function upsertNode(state: GraphState, node: Omit<GraphNode, "kind" | "lastTurn">): GraphState {
+function upsertNode(
+  state: GraphState,
+  node: Omit<GraphNode, "kind" | "lastTurn"> & { kind?: GraphNode["kind"]; section?: string },
+): GraphState {
   const existing = state.nodes.find((n) => n.id === node.id);
   if (existing) {
     const upgraded: GraphNode = {
       ...existing,
-      // never downgrade a typed node to the unknown placeholder
+      // never downgrade a typed node to the unknown placeholder; kind is fixed at creation
       type: node.type !== "Entity" ? node.type : existing.type,
       lastTurn: state.turn,
     };
     return { ...state, nodes: state.nodes.map((n) => (n.id === node.id ? upgraded : n)) };
   }
-  return { ...state, nodes: [...state.nodes, { ...node, kind: "entity", lastTurn: state.turn }] };
+  return { ...state, nodes: [...state.nodes, { kind: "entity", ...node, lastTurn: state.turn }] };
 }
 
 function upsertLink(state: GraphState, link: Omit<GraphLink, "lastTurn">): GraphState {
