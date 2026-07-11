@@ -10,6 +10,7 @@ export interface GraphNode {
   continuity: Continuity;
   kind: "entity" | "chunk";
   section?: string; // chunk satellites only
+  properties?: Record<string, string>; // infobox properties, when get_entity delivered them
   lastTurn: number; // dimmed by the renderer when < GraphState.turn
 }
 
@@ -54,8 +55,37 @@ export function applyEvent(state: GraphState, event: AgentEvent): GraphState {
 }
 
 /** The graph node a done-event citation points at (chat ↔ graph cross-highlight). */
-export function citationNodeId(citation: Citation): string {
+export function citationNodeId(citation: Pick<Citation, "title" | "section">): string {
   return citation.section ? `${citation.title}#${citation.section}` : citation.title;
+}
+
+export interface NodeDetails {
+  node: GraphNode;
+  owner: GraphNode | null; // chunk satellites: the entity this excerpt belongs to
+  properties: Record<string, string>;
+  outgoing: GraphLink[];
+  incoming: GraphLink[];
+}
+
+/** Everything the stream has delivered about one node (decision 3: no new endpoints). */
+export function nodeDetails(state: GraphState, nodeId: string): NodeDetails | null {
+  const node = state.nodes.find((n) => n.id === nodeId);
+  if (!node) return null;
+  const tether = node.kind === "chunk" ? state.links.find((l) => l.source === nodeId) : undefined;
+  return {
+    node,
+    owner: tether ? (state.nodes.find((n) => n.id === tether.target) ?? null) : null,
+    properties: node.properties ?? {},
+    outgoing: state.links.filter((l) => l.source === nodeId && l.relation !== "EXCERPT_OF"),
+    incoming: state.links.filter((l) => l.target === nodeId && l.relation !== "EXCERPT_OF"),
+  };
+}
+
+/** The chat question the Ask-about button pre-fills — continuity-explicit for Legends twins. */
+export function askAboutQuestion(details: NodeDetails): string {
+  const subject = details.owner ?? details.node;
+  const suffix = subject.continuity === "legends" ? " in Legends" : "";
+  return `Tell me about ${subject.name}${suffix}`;
 }
 
 interface EntityResult {
@@ -63,6 +93,7 @@ interface EntityResult {
   name: string;
   type: string;
   continuity: Continuity;
+  properties?: Record<string, string>;
 }
 
 interface RelationResult {
@@ -96,7 +127,13 @@ interface ChunkResult {
 function foldEntities(state: GraphState, result: unknown): GraphState {
   let g = state;
   for (const e of asArray<EntityResult>(result)) {
-    g = upsertNode(g, { id: e.title, name: e.name, type: e.type, continuity: e.continuity });
+    g = upsertNode(g, {
+      id: e.title,
+      name: e.name,
+      type: e.type,
+      continuity: e.continuity,
+      properties: e.properties,
+    });
   }
   return g;
 }
@@ -188,6 +225,9 @@ function upsertNode(
       ...existing,
       // never downgrade a typed node to the unknown placeholder; kind is fixed at creation
       type: node.type !== "Entity" ? node.type : existing.type,
+      // last full write wins: get_entity always ships the whole infobox, and a
+      // sighting WITHOUT properties (relations, paths) must not erase a full one
+      properties: node.properties ?? existing.properties,
       lastTurn: state.turn,
     };
     return { ...state, nodes: state.nodes.map((n) => (n.id === node.id ? upgraded : n)) };

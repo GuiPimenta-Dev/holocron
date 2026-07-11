@@ -8,12 +8,7 @@ import type { GraphState } from "@/lib/graph";
 // react-force-graph touches window at import time — client-only.
 const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false });
 
-// The canonical continuity hues (decision 6). Keep in sync with the Tailwind
-// classes in page.tsx's CONTINUITY_STYLE — same sky/amber families.
-const CONTINUITY_HUE: Record<Continuity, string> = {
-  canon: "#0284c7", // sky-600
-  legends: "#d97706", // amber-600
-};
+import { CONTINUITY_THEME } from "@/lib/continuity";
 
 interface PanelNode {
   id: string;
@@ -37,11 +32,13 @@ export function GraphPanel({
   graph,
   highlightId,
   onNodeHover,
+  onNodeClick,
   onReset,
 }: {
   graph: GraphState;
   highlightId: string | null;
   onNodeHover: (nodeId: string | null) => void;
+  onNodeClick: (nodeId: string) => void;
   onReset: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,7 +105,12 @@ export function GraphPanel({
           linkWidth={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2.5 : 1)}
           linkDirectionalParticles={(l) => (panelLink(l).onPath && !panelLink(l).dimmed ? 2 : 0)}
           linkDirectionalParticleSpeed={0.004}
+          nodeLabel={(node) => {
+            const n = placedNode(node);
+            return `${n.name} · ${n.kind === "chunk" ? `§ ${n.name}` : n.type} · ${n.continuity}`;
+          }}
           onNodeHover={(node) => onNodeHover(node ? placedNode(node).id : null)}
+          onNodeClick={(node) => onNodeClick(placedNode(node).id)}
           cooldownTicks={120}
           backgroundColor="rgba(0,0,0,0)"
         />
@@ -138,7 +140,7 @@ function placedNode(n: unknown): PanelNode & { x: number; y: number } {
 }
 
 function drawNode(node: PanelNode & { x: number; y: number }, ctx: CanvasRenderingContext2D, scale: number) {
-  const hue = CONTINUITY_HUE[node.continuity] ?? "#71717a";
+  const hue = CONTINUITY_THEME[node.continuity]?.hex ?? "#71717a";
   const alpha = node.dimmed && !node.highlighted ? "44" : "ff";
 
   let radius: number;
