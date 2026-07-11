@@ -21,6 +21,7 @@ from collections.abc import AsyncIterator
 from typing import Any, Literal, Protocol
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
@@ -39,8 +40,15 @@ def _sse(event: dict[str, Any]) -> str:
     return f"event: {event['type']}\ndata: {json.dumps(payload)}\n\n"
 
 
-def create_app(agent: Agent) -> FastAPI:
+def create_app(agent: Agent, ui_origin: str = "http://localhost:3000") -> FastAPI:
     app = FastAPI(title="Holocron")
+    # Local-only (ADR-0003): the Next.js dev server is the single allowed origin.
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[ui_origin],
+        allow_methods=["POST"],
+        allow_headers=["content-type"],
+    )
 
     @app.post("/ask")
     async def ask(req: AskRequest) -> StreamingResponse:  # pyright: ignore[reportUnusedFunction]
