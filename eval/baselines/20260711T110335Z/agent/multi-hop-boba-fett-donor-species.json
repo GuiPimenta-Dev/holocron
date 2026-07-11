@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-boba-fett-donor-species",
+  "category": "multi-hop",
+  "question": "What species was the genetic donor Boba Fett was cloned from?",
+  "answer": "Boba Fett was cloned from Jango Fett, who was **Human** — in both canon and Legends continuities.",
+  "citations": [
+    {
+      "title": "Jango Fett",
+      "name": "Jango Fett",
+      "continuity": "canon"
+    },
+    {
+      "title": "Jango Fett/Legends",
+      "name": "Jango Fett",
+      "continuity": "legends"
+    },
+    {
+      "title": "Boba Fett",
+      "name": "Boba Fett",
+      "continuity": "canon"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "d4bd271b4036f96160e274276b32db5b"
+}

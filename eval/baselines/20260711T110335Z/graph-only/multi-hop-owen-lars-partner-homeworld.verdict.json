@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names Owen Lars's partner as Beru Whitesun Lars and states her homeworld is Tatooine, completing the multi-hop chain correctly in both continuities as expected.",
+  "judge_model": "claude-opus-4-8"
+}

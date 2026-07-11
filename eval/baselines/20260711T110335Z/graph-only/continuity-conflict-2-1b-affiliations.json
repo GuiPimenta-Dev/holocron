@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-2-1b-affiliations",
+  "category": "continuity-conflict",
+  "question": "Which organizations was the droid 2-1B affiliated with?",
+  "answer": "The droid 2-1B was affiliated with different organizations depending on continuity:\n\n**Canon:** The Alliance to Restore the Republic and the Galactic Empire.\n\n**Legends:** The Alliance to Restore the Republic, the Galactic Empire, and the New Republic.",
+  "citations": [
+    {
+      "title": "2-1B",
+      "name": "2-1B",
+      "continuity": "canon"
+    },
+    {
+      "title": "2-1B/Legends",
+      "name": "2-1B",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "7f0ce5bf607bed1d80e941b6ac8dfe42"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "unanswerable-vela-korr-species",
+  "category": "unanswerable",
+  "question": "What species is Jedi Master Vela Korr?",
+  "answer": "No results. Let me try alternate searches before concluding.I don't find any entry for \"Vela Korr\" in the corpus — no character page, and no matching prose mentions in my search results. I don't have reliable information on this figure and won't speculate. If you have an alternate spelling or another name for this character, I'm happy to search again.",
+  "citations": [
+    {
+      "title": "Jar'Kai/Legends",
+      "name": "Jar'Kai",
+      "continuity": "legends",
+      "section": "Applications"
+    },
+    {
+      "title": "Form VII/Legends",
+      "name": "Form VII",
+      "continuity": "legends",
+      "section": "Practitioners"
+    },
+    {
+      "title": "Quinlan Vos/Legends",
+      "name": "Quinlan Vos",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Agen Kolar/Legends",
+      "name": "Agen Kolar",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi High Council",
+      "name": "Jedi High Council",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Mace Windu/Legends",
+      "name": "Mace Windu",
+      "continuity": "legends",
+      "section": "Powers and abilities"
+    }
+  ],
+  "trace_id": "ae737d01d5b87054b57f53846e99cebd"
+}

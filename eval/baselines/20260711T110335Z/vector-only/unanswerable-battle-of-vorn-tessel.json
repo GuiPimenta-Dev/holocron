@@ -1,0 +1,39 @@
+{
+  "id": "unanswerable-battle-of-vorn-tessel",
+  "category": "unanswerable",
+  "question": "Who won the Battle of Vorn Tessel?",
+  "answer": "I found nothing in the corpus about a \"Battle of Vorn Tessel\" — my search returned only unrelated material (Battle of Yavin, Battle of Scarif, Battle of Dac City, etc.). The corpus doesn't appear to have any entry for this battle, so I can't tell you who won it.",
+  "citations": [
+    {
+      "title": "Jon Vander/Legends",
+      "name": "Jon Vander",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Jon Vander",
+      "name": "Jon Vander",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Wilhuff Tarkin",
+      "name": "Wilhuff Tarkin",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Garven Dreis/Legends",
+      "name": "Garven Dreis",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Starfighter combat/Legends",
+      "name": "Starfighter combat",
+      "continuity": "legends",
+      "section": "Tactics and maneuvers"
+    }
+  ],
+  "trace_id": "7c143703aa097722211b6a845cb01500"
+}

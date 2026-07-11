@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Dathan, human) and makes the Rey -> father Dathan -> Human chain explicit, with extra grounded strandcast detail that is not a fault.",
+  "judge_model": "claude-opus-4-8"
+}

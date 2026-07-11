@@ -1,0 +1,27 @@
+{
+  "id": "single-hop-kit-fisto-species",
+  "category": "single-hop",
+  "question": "What species is Kit Fisto?",
+  "answer": "Kit Fisto is a **Nautolan** — a Force-sensitive male of that species, known for his green skin, large black eyes, and tentacle-like head tresses. This holds true in both **canon** and **Legends** continuity.",
+  "citations": [
+    {
+      "title": "Kit Fisto",
+      "name": "Kit Fisto",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Kit Fisto/Legends",
+      "name": "Kit Fisto",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kit Fisto's lightsaber/Legends",
+      "name": "Kit Fisto's lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    }
+  ],
+  "trace_id": "c7155b5537b1c856c42e6e858a38490c"
+}

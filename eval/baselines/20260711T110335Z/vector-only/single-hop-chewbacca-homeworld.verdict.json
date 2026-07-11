@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states the expected fact (Kashyyyk is Chewbacca's homeworld) with the correct cross-continuity behavior, and the extra detail does not contradict any expected fact.",
+  "judge_model": "claude-opus-4-8"
+}

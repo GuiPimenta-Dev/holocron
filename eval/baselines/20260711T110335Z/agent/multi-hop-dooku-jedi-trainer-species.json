@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-dooku-jedi-trainer-species",
+  "category": "multi-hop",
+  "question": "What species is the Jedi who trained Dooku?",
+  "answer": "Let me find Dooku's master first.Dooku's Jedi master (as distinct from his Sith master) was Yoda in both continuities. Let me get Yoda's species.Yoda's species isn't listed as a property directly — let me check relations for the SPECIES edge.Dooku's Jedi master was Yoda, and the corpus records Yoda's species (in both continuities) simply as **\"Yoda's species\"** — that is the recorded page title/name for his species, with no other designation given.",
+  "citations": [
+    {
+      "title": "Dooku",
+      "name": "Dooku",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dooku/Legends",
+      "name": "Dooku",
+      "continuity": "legends"
+    },
+    {
+      "title": "Yoda",
+      "name": "Yoda",
+      "continuity": "canon"
+    },
+    {
+      "title": "Yoda/Legends",
+      "name": "Yoda",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "7074c28a3205d289aef8b746420dffdc"
+}

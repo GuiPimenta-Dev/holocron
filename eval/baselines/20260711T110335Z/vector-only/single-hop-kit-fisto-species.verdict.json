@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states Nautolan, the sole expected fact, and its continuity note matches the expected both-continuities behavior.",
+  "judge_model": "claude-opus-4-8"
+}

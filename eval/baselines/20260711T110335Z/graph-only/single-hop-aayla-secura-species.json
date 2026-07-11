@@ -1,0 +1,19 @@
+{
+  "id": "single-hop-aayla-secura-species",
+  "category": "single-hop",
+  "question": "What species is Aayla Secura?",
+  "answer": "The infobox properties returned don't list a species field directly. Let me check her relations for a species link.Aayla Secura is a **Twi'lek** — in both canon and Legends continuities.",
+  "citations": [
+    {
+      "title": "Aayla Secura",
+      "name": "Aayla Secura",
+      "continuity": "canon"
+    },
+    {
+      "title": "Aayla Secura/Legends",
+      "name": "Aayla Secura",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "ae3719d7632de4e584c8c852cc107998"
+}

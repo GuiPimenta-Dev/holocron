@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (husband Anakin Skywalker, homeworld Tatooine) and connects them correctly with the same chain in both continuities.",
+  "judge_model": "claude-opus-4-8"
+}

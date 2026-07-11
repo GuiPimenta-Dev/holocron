@@ -1,0 +1,57 @@
+{
+  "id": "multi-hop-padme-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Padmé Amidala's husband?",
+  "answer": "Padmé Amidala's husband was Anakin Skywalker, and his homeworld was **Tatooine** — confirmed in both continuities: canon (\"Tatooine was Skywalker's homeworld\") and Legends (\"Tatooine... most notably being the homeworld of Anakin Skywalker\").",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Padmé Amidala Naberrie",
+      "name": "Padmé Amidala Naberrie",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Tatooine/Legends",
+      "name": "Tatooine",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Anakin Skywalker",
+      "name": "Anakin Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Tatoo I/Legends",
+      "name": "Tatoo I",
+      "continuity": "legends",
+      "section": "Description"
+    },
+    {
+      "title": "Tatoo II/Legends",
+      "name": "Tatoo II",
+      "continuity": "legends",
+      "section": "Description"
+    },
+    {
+      "title": "Tatooine",
+      "name": "Tatooine",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Anakin Skywalker/Legends",
+      "name": "Anakin Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    }
+  ],
+  "trace_id": "be4c4f09761eb0177a5220c089ad5693"
+}

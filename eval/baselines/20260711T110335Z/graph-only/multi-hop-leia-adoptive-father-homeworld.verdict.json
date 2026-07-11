@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer states both expected facts (Bail Organa as adoptive father, Alderaan as homeworld) and makes the Leia -> adoptive father Bail -> Alderaan chain explicit while distinguishing him as the adoptive father.",
+  "judge_model": "claude-opus-4-8"
+}

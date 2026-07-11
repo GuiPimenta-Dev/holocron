@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-barriss-offee-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Barriss Offee?",
+  "answer": "In **canon**, Barriss Offee was trained by both **Luminara Unduli** (her Jedi Master) and **Anakin Skywalker**.\n\nIn **Legends**, she was trained by **Luminara Unduli**.",
+  "citations": [
+    {
+      "title": "Barriss Offee",
+      "name": "Barriss Offee",
+      "continuity": "canon"
+    },
+    {
+      "title": "Barriss Offee/Legends",
+      "name": "Barriss Offee",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "11dc35f14d8ee572473406813781d046"
+}

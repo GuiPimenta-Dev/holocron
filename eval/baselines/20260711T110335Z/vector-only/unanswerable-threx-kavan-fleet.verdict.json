@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating no records of Threx Kavan exist in the corpus and asserts no lore facts about the fabricated subject, so the cited tangential titles don't constitute a substantive claim.",
+  "judge_model": "claude-opus-4-8"
+}

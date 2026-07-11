@@ -1,0 +1,39 @@
+{
+  "id": "unanswerable-darth-malvex-master",
+  "category": "unanswerable",
+  "question": "Who was Darth Malvex's Sith master?",
+  "answer": "No results found. Let me try alternate searches before concluding.I found no entity or relevant records for \"Darth Malvex\" in the corpus. There's no such Sith Lord in the pinned Wookieepedia corpus I have access to, so I can't tell you who trained them. I don't know — the corpus has nothing on Darth Malvex.",
+  "citations": [
+    {
+      "title": "Sith/Legends",
+      "name": "Sith",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Dark side of the Force/Legends",
+      "name": "Dark side of the Force",
+      "continuity": "legends",
+      "section": "Definition"
+    },
+    {
+      "title": "Jedi Order/Legends",
+      "name": "Jedi Order",
+      "continuity": "legends",
+      "section": "History of the Jedi Order"
+    },
+    {
+      "title": "Darth/Legends",
+      "name": "Darth",
+      "continuity": "legends",
+      "section": "Overview"
+    },
+    {
+      "title": "Dathomirian/Legends",
+      "name": "Dathomirian",
+      "continuity": "legends",
+      "section": "Dathomirians in the galaxy"
+    }
+  ],
+  "trace_id": "28e9d97b070a8e9aca1a5f5edd24f101"
+}

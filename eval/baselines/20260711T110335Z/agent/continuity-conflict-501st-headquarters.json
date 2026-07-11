@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-501st-headquarters",
+  "category": "continuity-conflict",
+  "question": "Where was the 501st Legion headquartered?",
+  "answer": "In **canon**, the 501st Legion was headquartered on **Coruscant**.\n\nIn **Legends**, the 501st Legion was headquartered both on **Coruscant** and aboard the **DS-1 Orbital Battle Station** (the first Death Star).",
+  "citations": [
+    {
+      "title": "501st Legion",
+      "name": "501st Legion",
+      "continuity": "canon"
+    },
+    {
+      "title": "501st Legion/Legends",
+      "name": "501st Legion",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "30c15d8321c697507256a0bb741aeaf9"
+}

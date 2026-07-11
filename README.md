@@ -44,6 +44,12 @@ part; wall time inflated by org-tier rate limits) + 90 free Opus verdicts via
 the `claude` CLI (~25 min). Re-judging is free; single-category iteration
 costs cents.
 
+Current Baseline: [`20260711T110335Z`](eval/baselines/20260711T110335Z/report.md) —
+the same system on **pgvector** (ADR-0005). The agent held 29/30 with zero
+category change through the vector-store swap; the flips concentrate in
+vector-only's volatile continuity-conflict category, and retrieval diffs show
+0-1 chunk changes at the top-8 margin (analysis in PR #38).
+
 Full report — every failing question and every baseline-flip with its Langfuse
 trace id — lives in
 [`eval/baselines/20260710T215754Z/report.md`](eval/baselines/20260710T215754Z/report.md);
@@ -75,7 +81,7 @@ ADR-0002), so the raw cache is reproducible from the repository:
 uv run python -m ingest rebuild   # fetch every page at its pinned revision (~15 min)
 uv run python -m ingest parse     # cache -> entities.jsonl + chunks.jsonl (~2 min)
 uv run python -m ingest graph     # entities -> Neo4j (~1 min)
-uv run python -m ingest embed     # chunks -> LanceDB (~10 min, needs an embedding key)
+uv run python -m ingest embed     # chunks -> pgvector (~10 min, needs an embedding key)
 ```
 
 Expected costs: the embed run is one-time ~US$0.20 on OpenAI

@@ -1,0 +1,33 @@
+{
+  "id": "unanswerable-kessari-prime-location",
+  "category": "unanswerable",
+  "question": "In which sector is the planet Kessari Prime located?",
+  "answer": "I couldn't find any entry for a planet called \"Kessari Prime\" in the corpus — searches for both the entity and related text only return results for \"Kessel,\" a different planet. I don't have any record of \"Kessari Prime\" and won't speculate about it.",
+  "citations": [
+    {
+      "title": "Kessel",
+      "name": "Kessel",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kessel/Legends",
+      "name": "Kessel",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Raid on Kessel",
+      "name": "Raid on Kessel",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Kessel Run/Legends",
+      "name": "Kessel Run",
+      "continuity": "legends",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "3cabf5a7cbdfe2101f4e68b94ae557ea"
+}

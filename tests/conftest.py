@@ -1,6 +1,6 @@
 """Shared fixtures — the tests' composition root (ADR-0004).
 
-Retrieval tests run against a real Neo4j + LanceDB (testing doctrine: no
+Retrieval tests run against a real Neo4j + pgvector (testing doctrine: no
 mocks). Locally the full corpus is already loaded — tests assert on entities
 that are both in the corpus and in tests/fixtures. In CI the Neo4j service
 starts empty, so we seed it from the saved wikitext fixtures; the vector tests
@@ -70,16 +70,21 @@ def knowledge_graph(neo4j_driver):
 
 @pytest.fixture(scope="session")
 def vector_index():
-    """A VectorIndex over the real chunk index, or skip when it can't exist."""
+    """A VectorIndex over the real pgvector chunk index, or skip when it can't exist."""
     from core.embeddings import provider_from_env
 
     if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("VOYAGE_API_KEY")):
         pytest.skip("no embedding API key — VectorIndex embeds the query")
-    if not Path("data/lancedb/chunks.lance").exists():
-        pytest.skip("LanceDB index not built — run `uv run python -m ingest embed`")
-    import lancedb
+    import psycopg
 
     from retrieval import VectorIndex
 
-    table = lancedb.connect("data/lancedb").open_table("chunks")
-    return VectorIndex(provider_from_env(dict(os.environ)), table)
+    dsn = os.environ.get("HOLOCRON_PG_DSN", "postgresql://postgres:postgres@localhost:5434/holocron")
+    try:
+        conn = psycopg.connect(dsn, autocommit=True)
+        if conn.execute("SELECT to_regclass('chunks')").fetchone()[0] is None:  # pyright: ignore[reportOptionalSubscript]
+            pytest.skip("pgvector index not built — run `uv run python -m ingest embed`")
+    except psycopg.OperationalError:
+        pytest.skip("Postgres not reachable — start it with `docker compose up -d postgres`")
+    yield VectorIndex(provider_from_env(dict(os.environ)), conn)
+    conn.close()

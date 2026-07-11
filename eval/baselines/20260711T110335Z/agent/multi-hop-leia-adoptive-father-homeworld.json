@@ -1,0 +1,37 @@
+{
+  "id": "multi-hop-leia-adoptive-father-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Leia's adoptive father?",
+  "answer": "Both lookups returned empty. Let me try alternate name forms.Leia's adoptive father is Bail (Prestor) Organa, and in both continuities his homeworld is **Alderaan**.\n\n- **Canon**: Bail Prestor Organa — homeworld Alderaan (he ruled as Viceroy of Alderaan and died there).\n- **Legends**: Bail Prestor Organa — homeworld Alderaan (Prince/First Chairman and Viceroy of Alderaan).",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon"
+    },
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends"
+    },
+    {
+      "title": "Kashyyyk/Legends",
+      "name": "Kashyyyk",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    }
+  ],
+  "trace_id": "21fdcc9a93cb353d718f6f3329e762eb"
+}

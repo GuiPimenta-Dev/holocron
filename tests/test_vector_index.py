@@ -1,4 +1,4 @@
-"""VectorIndex against the real LanceDB index (built from the pinned corpus)."""
+"""VectorIndex against the real pgvector index (built from the pinned corpus)."""
 
 from core.domain import Continuity
 

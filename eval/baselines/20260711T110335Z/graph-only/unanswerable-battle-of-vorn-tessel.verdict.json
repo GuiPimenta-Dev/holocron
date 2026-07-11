@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer checked the corpus, found nothing, and clearly refused to answer without asserting any lore facts about the fabricated battle.",
+  "judge_model": "claude-opus-4-8"
+}

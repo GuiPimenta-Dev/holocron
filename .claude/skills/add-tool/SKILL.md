@@ -12,7 +12,7 @@ A tool is the agent's API. It never lands without a test and eval coverage.
 1. **Justify**: can an existing tool answer this with different arguments? If
    yes, stop — extend or document the existing one instead.
 2. **Write the method** on the owning class in `retrieval/` (`KnowledgeGraph`
-   for Neo4j, `VectorIndex` for LanceDB):
+   for Neo4j, `VectorIndex` for pgvector):
    - Fully typed signature; params and return are `core/domain.py` types +
      primitives (no ORM objects, no framework types). Style per ADR-0004.
    - Docstring written FOR THE LLM: what it does, when to use it vs the other

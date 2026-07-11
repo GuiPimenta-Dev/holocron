@@ -1,0 +1,75 @@
+{
+  "id": "multi-hop-ben-solo-jedi-trainer-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of the Jedi Master who trained Ben Solo?",
+  "answer": "Ben Solo's Jedi Master was his uncle, Luke Skywalker. In canon, Luke Skywalker's homeworld is **Tatooine** — he was raised there by Owen and Beru Lars after being brought as an infant by Obi-Wan Kenobi to live at the Lars homestead.",
+  "citations": [
+    {
+      "title": "Luke Skywalker/Legends",
+      "name": "Luke Skywalker",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Ahch-To",
+      "name": "Ahch-To",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Jedi",
+      "name": "Jedi",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Lars homestead",
+      "name": "Lars homestead",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Lars family",
+      "name": "Lars family",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Jedi Order",
+      "name": "Jedi Order",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Kylo Ren's lightsaber",
+      "name": "Kylo Ren's lightsaber",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Lightsaber combat",
+      "name": "Lightsaber combat",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Destruction of the Jedi Temple",
+      "name": "Destruction of the Jedi Temple",
+      "continuity": "canon",
+      "section": "Prelude"
+    }
+  ],
+  "trace_id": "016ecb09073d53374e2a7d1c604fe760"
+}

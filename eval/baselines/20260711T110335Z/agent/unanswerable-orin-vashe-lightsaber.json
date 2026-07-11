@@ -1,0 +1,57 @@
+{
+  "id": "unanswerable-orin-vashe-lightsaber",
+  "category": "unanswerable",
+  "question": "What color was Jedi Master Orin Vashe's lightsaber?",
+  "answer": "The corpus returned no entity for \"Orin Vashe.\" Let me check further before concluding.I couldn't find any entity or record named \"Orin Vashe\" in the corpus — no character page and no relevant passages in the search results (only unrelated lightsaber articles came up). I don't have any information on a Jedi Master by that name, so I can't answer this from the pinned corpus.",
+  "citations": [
+    {
+      "title": "Mace Windu's lightsaber",
+      "name": "Mace Windu's lightsaber",
+      "continuity": "canon",
+      "section": "Description"
+    },
+    {
+      "title": "Sith lightsaber",
+      "name": "Sith lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Dooku's lightsaber",
+      "name": "Dooku's lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Skywalker lightsaber",
+      "name": "Skywalker lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Ben Solo",
+      "name": "Ben Solo",
+      "continuity": "canon",
+      "section": "Equipment"
+    },
+    {
+      "title": "Curved-hilt lightsaber",
+      "name": "Curved-hilt lightsaber",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Obi-Wan Kenobi's third lightsaber/Legends",
+      "name": "Obi-Wan Kenobi's third lightsaber",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Yoda's lightsaber",
+      "name": "Yoda's lightsaber",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "993e4a3f9253aae22dd76da39c3af683"
+}

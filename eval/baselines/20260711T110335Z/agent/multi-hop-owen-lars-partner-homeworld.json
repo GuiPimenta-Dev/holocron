@@ -1,0 +1,29 @@
+{
+  "id": "multi-hop-owen-lars-partner-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Owen Lars's partner?",
+  "answer": "Owen Lars's partner is Beru Whitesun Lars, in both continuities.Owen Lars's partner is **Beru Whitesun Lars**, and her homeworld is **Tatooine** — true in both canon and Legends continuities.",
+  "citations": [
+    {
+      "title": "Owen Lars",
+      "name": "Owen Lars",
+      "continuity": "canon"
+    },
+    {
+      "title": "Owen Lars/Legends",
+      "name": "Owen Lars",
+      "continuity": "legends"
+    },
+    {
+      "title": "Beru Whitesun Lars",
+      "name": "Beru Whitesun Lars",
+      "continuity": "canon"
+    },
+    {
+      "title": "Beru Whitesun Lars/Legends",
+      "name": "Beru Whitesun Lars",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "f651df0d15c2b9889d477f5ef834908b"
+}

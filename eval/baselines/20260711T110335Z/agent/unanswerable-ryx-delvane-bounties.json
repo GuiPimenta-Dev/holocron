@@ -1,0 +1,51 @@
+{
+  "id": "unanswerable-ryx-delvane-bounties",
+  "category": "unanswerable",
+  "question": "Which bounties did the bounty hunter Ryx Delvane collect?",
+  "answer": "I found no entry for \"Ryx Delvane\" in the corpus, and no search results mention that name either. This doesn't appear to be a subject in the corpus I have access to.\n\nLet me double-check with alternate search approaches before concluding.I have no record of a bounty hunter named \"Ryx Delvane\" in this corpus — `get_entity`, `get_relations`, and `search_chunks` all return nothing for that name. I don't know who this is, and I won't speculate. If you have an alternate spelling or source for this name, I'm happy to search again.",
+  "citations": [
+    {
+      "title": "Bounty hunter",
+      "name": "Bounty hunter",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Galactic Empire",
+      "name": "Galactic Empire",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "New Republic",
+      "name": "New Republic",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Bossk'wassak'Cradossk",
+      "name": "Bossk'wassak'Cradossk",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Bounty hunter/Legends",
+      "name": "Bounty hunter",
+      "continuity": "legends",
+      "section": "Organization"
+    },
+    {
+      "title": "Bounty/Legends",
+      "name": "Bounty",
+      "continuity": "legends",
+      "section": "Introduction"
+    },
+    {
+      "title": "Bounty",
+      "name": "Bounty",
+      "continuity": "canon",
+      "section": "Introduction"
+    }
+  ],
+  "trace_id": "8df917293cef26b699924a57ec523b06"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "multi-hop-rey-father-species",
+  "category": "multi-hop",
+  "question": "What species was Rey's father?",
+  "answer": "In canon, Rey's father was **Dathan**, a human male — specifically a bioengineered \"Strand-Cast\" clone created from the genetic template of Darth Sidious (Emperor Palpatine). As a Strand-Cast clone of a human, Dathan was biologically human, making Rey herself human as well, despite her direct genetic descent from Sidious.",
+  "citations": [
+    {
+      "title": "Miramir",
+      "name": "Miramir",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Junk dealer",
+      "name": "Junk dealer",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Rey Skywalker",
+      "name": "Rey Skywalker",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Dathan",
+      "name": "Dathan",
+      "continuity": "canon",
+      "section": "Biography"
+    },
+    {
+      "title": "Duel on Cloud City",
+      "name": "Duel on Cloud City",
+      "continuity": "canon",
+      "section": "Behind the scenes"
+    }
+  ],
+  "trace_id": "4db75abfd7229ce8d156e01caa9885de"
+}

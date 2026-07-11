@@ -1,0 +1,51 @@
+{
+  "id": "continuity-conflict-anakin-children",
+  "category": "continuity-conflict",
+  "question": "Who are Anakin Skywalker's children?",
+  "answer": "In both canon and Legends, Anakin Skywalker's children with Padmé Amidala are twins **Luke Skywalker** and **Leia Organa** (also known as Leia Amidala Skywalker/Organa Solo), born in 19 BBY.\n\n- **Luke Skywalker** was raised on Tatooine by his aunt and uncle, Owen and Beru Lars.\n- **Leia** was raised on Alderaan by the royal family, Bail and Breha Organa.\n\nNote: In Legends, Leia would go on to have three children of her own with Han Solo (Jaina, Jacen, and Anakin Solo, the latter named for his grandfather), continuing the Skywalker bloodline, though these are Anakin's grandchildren, not his direct children.",
+  "citations": [
+    {
+      "title": "Skywalker family/Legends",
+      "name": "Skywalker family",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Naberrie family",
+      "name": "Naberrie family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Force-sensitive",
+      "name": "Force-sensitive",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Luke Skywalker",
+      "name": "Luke Skywalker",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Jedi Order/Legends",
+      "name": "Jedi Order",
+      "continuity": "legends",
+      "section": "History of the Jedi Order"
+    }
+  ],
+  "trace_id": "c4004b5caa0af50f8710666cb23f0411"
+}

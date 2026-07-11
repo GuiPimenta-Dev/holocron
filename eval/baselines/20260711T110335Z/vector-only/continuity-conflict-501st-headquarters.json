@@ -1,0 +1,21 @@
+{
+  "id": "continuity-conflict-501st-headquarters",
+  "category": "continuity-conflict",
+  "question": "Where was the 501st Legion headquartered?",
+  "answer": "In Legends continuity, the 501st Legion was founded by Supreme Chancellor Palpatine in 22 BBY at a secret location on Coruscant known only to the Chancellor's most trusted advisers, deliberately kept far from the standard clone training center on Kamino.\n\nThe canon corpus doesn't specify a particular headquarters location for the 501st Legion—its records focus instead on its organization, subunits, and service under the Galactic Republic and later the Galactic Empire.",
+  "citations": [
+    {
+      "title": "501st Legion/Legends",
+      "name": "501st Legion",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "501st Legion",
+      "name": "501st Legion",
+      "continuity": "canon",
+      "section": "Description"
+    }
+  ],
+  "trace_id": "a70f4e523b823d0bc3c53b3529d6a885"
+}

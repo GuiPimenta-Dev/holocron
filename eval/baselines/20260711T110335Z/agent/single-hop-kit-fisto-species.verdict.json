@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Kit Fisto is a Nautolan and holds in both continuities, matching all expected facts with acceptable extra detail.",
+  "judge_model": "claude-opus-4-8"
+}

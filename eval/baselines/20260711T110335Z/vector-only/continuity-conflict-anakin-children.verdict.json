@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": true,
+  "reasoning": "The answer blends continuities by asserting both canon and Legends record Luke and Leia, but the corpus's Legends page records only Luke \u2014 a contradiction of the expected continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

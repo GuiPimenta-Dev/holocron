@@ -1,0 +1,19 @@
+{
+  "id": "continuity-conflict-boba-fett-trainers",
+  "category": "continuity-conflict",
+  "question": "Who trained Boba Fett?",
+  "answer": "In canon, Boba Fett was trained by **Aurra Sing** and **Bossk'wassak'Cradossk**.\n\nIn Legends, Boba Fett was trained by **Aurra Sing**.",
+  "citations": [
+    {
+      "title": "Boba Fett",
+      "name": "Boba Fett",
+      "continuity": "canon"
+    },
+    {
+      "title": "Boba Fett/Legends",
+      "name": "Boba Fett",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "2ef250a736aae2932d233fcd4b8e6fee"
+}

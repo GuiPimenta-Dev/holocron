@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses\u2014stating no record of Kessari Prime exists in the corpus and declining to confirm its existence or sector\u2014while only mentioning the unrelated Kessel to explain the near-miss search results, asserting no lore facts about the fabricated subject.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "multi-hop-rey-father-species",
+  "category": "multi-hop",
+  "question": "What species was Rey's father?",
+  "answer": "Rey's father was **Dathan** (a son of Palpatine). Let me confirm his species directly.The corpus entry for Dathan (Rey's father, canon) doesn't list a SPECIES property directly. Let me check his relations for a species link.In canon, Rey's father, **Dathan**, was a **Human**.",
+  "citations": [
+    {
+      "title": "Rey Skywalker",
+      "name": "Rey Skywalker",
+      "continuity": "canon"
+    },
+    {
+      "title": "Dathan",
+      "name": "Dathan",
+      "continuity": "canon"
+    }
+  ],
+  "trace_id": "ba65ff5791f0470cbc554d8caaa2981d"
+}

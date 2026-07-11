@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer explicitly states Luminara Unduli trained Offee in both canon and Legends but omits Anakin Skywalker for canon, and instead of distinguishing continuities it introduces Stass Allie as the canon second trainer \u2014 contradicting the expected behavior that canon lists Anakin Skywalker.",
+  "judge_model": "claude-opus-4-8"
+}

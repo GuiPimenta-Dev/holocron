@@ -1,0 +1,14 @@
+{
+  "id": "single-hop-padme-homeworld",
+  "category": "single-hop",
+  "question": "What is Padmé Amidala's homeworld?",
+  "answer": "Padmé Amidala's homeworld is **Naboo**. This is confirmed in the Legends continuity records; in canon, Padmé Amidala is likewise consistently associated with Naboo throughout the corpus's descriptions of her as queen and senator of that world.",
+  "citations": [
+    {
+      "title": "Padmé Amidala/Legends",
+      "name": "Padmé Amidala",
+      "continuity": "legends"
+    }
+  ],
+  "trace_id": "6b9d5733244718ce4e834d5281ae2229"
+}

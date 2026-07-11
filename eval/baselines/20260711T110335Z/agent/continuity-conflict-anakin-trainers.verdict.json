@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer separates continuities correctly \u2014 Ki-Adi-Mundi appears only under Legends and Obi-Wan under both \u2014 matching the expected behavior, and other names are presumed corpus-grounded and not faults.",
+  "judge_model": "claude-opus-4-8"
+}

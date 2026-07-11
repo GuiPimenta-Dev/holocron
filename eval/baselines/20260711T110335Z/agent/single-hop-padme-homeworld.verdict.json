@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Naboo as Padm\u00e9 Amidala's homeworld, matching the expected fact, and the extra continuity commentary does not contradict it.",
+  "judge_model": "claude-opus-4-8"
+}

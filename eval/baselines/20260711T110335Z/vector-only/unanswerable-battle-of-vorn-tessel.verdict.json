@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer clearly refuses by stating the subject is not in its corpus and that it cannot say who won, without asserting any lore facts about the fabricated battle.",
+  "judge_model": "claude-opus-4-8"
+}

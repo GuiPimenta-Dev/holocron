@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer names the adoptive father Bail Organa and correctly gives his homeworld Alderaan with the full Leia->Bail->Alderaan chain explicit, matching both expected facts.",
+  "judge_model": "claude-opus-4-8"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "multi-hop-leia-adoptive-father-homeworld",
+  "category": "multi-hop",
+  "question": "What is the homeworld of Leia's adoptive father?",
+  "answer": "Leia's adoptive father was Bail Prestor Organa, and his homeworld — in both canon and Legends — was **Alderaan**.",
+  "citations": [
+    {
+      "title": "Bail Prestor Organa/Legends",
+      "name": "Bail Prestor Organa",
+      "continuity": "legends",
+      "section": "Biography"
+    },
+    {
+      "title": "Bail Prestor Organa",
+      "name": "Bail Prestor Organa",
+      "continuity": "canon",
+      "section": "Personality and traits"
+    },
+    {
+      "title": "House of Organa",
+      "name": "House of Organa",
+      "continuity": "canon",
+      "section": "History"
+    },
+    {
+      "title": "House of Organa/Legends",
+      "name": "House of Organa",
+      "continuity": "legends",
+      "section": "History"
+    },
+    {
+      "title": "Leia Skywalker Organa Solo",
+      "name": "Leia Skywalker Organa Solo",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Skywalker family",
+      "name": "Skywalker family",
+      "continuity": "canon",
+      "section": "Introduction"
+    },
+    {
+      "title": "Parent",
+      "name": "Parent",
+      "continuity": "canon",
+      "section": "Adoption"
+    }
+  ],
+  "trace_id": "fcf69e7dd9aa175e2b4304efe3f95561"
+}

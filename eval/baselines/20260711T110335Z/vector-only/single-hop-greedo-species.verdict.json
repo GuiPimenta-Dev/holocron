@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "hallucinated": false,
+  "reasoning": "The answer correctly states Greedo is a Rodian and gives the same answer in both continuities, matching the expected fact and continuity behavior.",
+  "judge_model": "claude-opus-4-8"
+}

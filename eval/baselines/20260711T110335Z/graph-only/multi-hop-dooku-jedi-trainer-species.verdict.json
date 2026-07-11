@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "hallucinated": true,
+  "reasoning": "The answer contradicts itself and ultimately claims Yoda's species is not recorded in the corpus, contradicting the expected fact that it is listed as 'Yoda's species', so the species half of the chain is not correctly stated.",
+  "judge_model": "claude-opus-4-8"
+}
